@@ -17,9 +17,7 @@
     "test:watch": "react-scripts test --env=jsdom",
     "build": "rollup -c",
     "start": "rollup -c -w",
-    "prepare": "npm run build",
-    "predeploy": "cd example && npm install && npm run build",
-    "deploy": "gh-pages -d example/build"
+    "prepare": "npm run build"
   },
   "peerDependencies": {
     "prop-types": "^15.6.2",
@@ -29,7 +27,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
-    "@babel/plugin-external-helpers": "^7.2.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
@@ -48,7 +45,6 @@
     "eslint-plugin-react": "^7.5.1",
     "eslint-plugin-react-hooks": "^1.6.0",
     "eslint-plugin-standard": "^4.0.0",
-    "gh-pages": "^1.2.0",
     "prettier": "^1.15.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

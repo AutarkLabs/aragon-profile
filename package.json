@@ -31,7 +31,6 @@
     "@babel/core": "^7.0.0",
     "@babel/plugin-external-helpers": "^7.2.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
-    "@babel/polyfill": "^7.4.4",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "@svgr/rollup": "^2.4.1",
@@ -59,8 +58,6 @@
     "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-peer-deps-external": "^2.2.0",
-    "rollup-plugin-postcss": "^1.6.2",
-    "rollup-plugin-url": "^1.4.0",
     "styled-components": "^4.2.1"
   },
   "files": [

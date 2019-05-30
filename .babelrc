@@ -1,9 +1,21 @@
 {
   "presets": [
-    ["env", {
-      "modules": false
-    }],
-    "stage-0",
-    "react"
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "useBuiltIns": false
+      }
+    ],
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    [
+      "styled-components",
+      {
+        "displayName": true
+      }
+    ],
+    "@babel/plugin-proposal-class-properties"
   ]
 }

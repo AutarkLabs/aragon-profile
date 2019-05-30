@@ -1,6 +1,6 @@
 {
-  "name": "aragon-profile",
-  "version": "1.0.0",
+  "name": "@openworklabs/aragon-profile",
+  "version": "0.0.1",
   "description": "a single profile component for the Aragon Client",
   "author": "Schwartz10",
   "license": "MIT",

@@ -26,11 +26,11 @@ const Example = () => (
 ## Developing locally
 
 Clone this repo, install dependencies, link, and start: <br />
-`git clone git@github.com:AutarkLabs/aragon-profile.git`
-`cd aragon-profile`
-`npm i`
-`npm link`
-`npm start`
+`git clone git@github.com:AutarkLabs/aragon-profile.git`<br />
+`cd aragon-profile`<br />
+`npm i`<br />
+`npm link`<br />
+`npm start`<br />
 
 After finishing these commands, your `aragon-profile` should be watching files for changes and bundling them.
 
@@ -38,20 +38,18 @@ In a separate repository location, clone the aragon client repo: <br />
 `git clone git@github.com:openworklabs/aragon.git`
 
 Get the development branch of the aragon client repo:<br />
-`cd aragon`
-`git fetch origin dev`
-`git checkout dev`
+`cd aragon`<br />
+`git fetch origin dev`<br />
+`git checkout dev`<br />
 
 install deps:<br />
 `npm i`
 
-Link local dependency
+Link local dependency<br />
 `npm link @openworklabs/aragon-profile`
 
-start the app:
+start the app: <br />
 `npm start:with:profiles`
-
-<br />
 
 Navigate to `http://localhost:3000/` and create an organization on rinkeby. Once on your organization, you have to manually navigate to profiles via the url bar:<br />
 

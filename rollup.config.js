@@ -1,45 +1,43 @@
-import babel from 'rollup-plugin-babel'
-import commonjs from 'rollup-plugin-commonjs'
-import external from 'rollup-plugin-peer-deps-external'
 import resolve from 'rollup-plugin-node-resolve'
+import commonjs from 'rollup-plugin-commonjs'
+import babel from 'rollup-plugin-babel'
 import url from 'rollup-plugin-url'
-import svgr from '@svgr/rollup'
+import filesize from 'rollup-plugin-filesize'
 import json from 'rollup-plugin-json'
-
+import progress from 'rollup-plugin-progress'
 import pkg from './package.json'
 
-const onwarn = warning => {
-  // Silence circular dependency warning for moment package
-  if (warning.code !== 'CIRCULAR_DEPENDENCY') {
-    console.error(`(!) ${warning.message}`)
-  }
-}
+const production = !process.env.ROLLUP_WATCH
 
 export default {
   input: 'src/index.js',
-  onwarn,
   output: [
-    {
-      file: pkg.main,
-      format: 'cjs',
-      sourcemap: true,
-    },
-    {
-      file: pkg.module,
-      format: 'es',
-      sourcemap: true,
-    },
-  ],
-  plugins: [
-    external(),
-    url({ exclude: ['**/*.svg'] }),
-    svgr(),
-    babel({
-      exclude: 'node_modules/**',
-    }),
-    json(),
-    resolve(),
-    commonjs(),
+    { file: pkg.main, format: 'cjs' },
+    { file: pkg.module, format: 'es' },
   ],
   external: ['react', 'react-dom', 'styled-components'],
+  plugins: [
+    progress(),
+    production && filesize(),
+    json(),
+    url({
+      limit: 5 * 1024, // inline files smaller than 5k
+      publicPath: '',
+      include: [
+        '**/*.svg',
+        '**/*.png',
+        '**/*.jpg',
+        '**/*.gif',
+        '**/*.woff',
+        '**/*.woff2',
+      ],
+      emitFiles: true,
+    }),
+    babel({
+      runtimeHelpers: true,
+      exclude: 'node_modules/**',
+    }),
+    resolve(),
+    commonjs({ inclue: 'node_modules/**' }),
+  ],
 }

@@ -15,8 +15,8 @@
   "scripts": {
     "test": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
-    "build": "rollup -c",
-    "start": "rollup -c -w",
+    "build": "node --max-old-space-size=8192 node_modules/rollup/bin/rollup -c rollup.config.js",
+    "start": "node --max-old-space-size=8192 node_modules/rollup/bin/rollup -c rollup.config.js -w",
     "prepare": "npm run build"
   },
   "peerDependencies": {

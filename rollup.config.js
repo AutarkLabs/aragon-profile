@@ -8,8 +8,16 @@ import json from 'rollup-plugin-json'
 
 import pkg from './package.json'
 
+const onwarn = warning => {
+  // Silence circular dependency warning for moment package
+  if (warning.code !== 'CIRCULAR_DEPENDENCY') {
+    console.error(`(!) ${warning.message}`)
+  }
+}
+
 export default {
   input: 'src/index.js',
+  onwarn,
   output: [
     {
       file: pkg.main,

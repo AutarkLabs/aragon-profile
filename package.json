@@ -5,7 +5,7 @@
   "author": "Schwartz10",
   "license": "MIT",
   "repository": "AutarkLabs/aragon-profile",
-  "main": "dist/bundle.js",
+  "main": "./dist/bundle.js",
   "engines": {
     "node": ">=8",
     "npm": ">=5"

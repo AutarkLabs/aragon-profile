@@ -1,10 +1,15 @@
-import JsonSchemaValidator from 'ajv'
-import { isAddress } from 'web3-utils'
+// import JsonSchemaValidator from 'ajv'
+// import { isAddress } from 'web3-utils'
+const isAddress = () => true
 
-export const validator = new JsonSchemaValidator({
-  coerceTypes: true,
-  useDefaults: true,
-})
+// export const validator = new JsonSchemaValidator({
+//   coerceTypes: true,
+//   useDefaults: true,
+// })
+
+const validator = {
+  compile: () => {},
+}
 
 validator.addFormat('address', {
   type: 'string',

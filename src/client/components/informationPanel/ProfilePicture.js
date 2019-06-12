@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import ImageMenu from '../ImageMenu'
 import { useProfile } from '../../hooks'
 
-import defaultImage from '../../assets/profile_avatar.svg'
+import defaultImage from '../../../../assets/profile_avatar.svg'
 
 const ProfilePicture = () => {
   const {

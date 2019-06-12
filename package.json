@@ -5,7 +5,7 @@
   "author": "Schwartz10",
   "license": "MIT",
   "repository": "AutarkLabs/aragon-profile",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
   "engines": {
     "node": ">=8",
     "npm": ">=5"
@@ -14,30 +14,27 @@
     "clean": "rm -rf ./dist",
     "test": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
-    "start": "rollup -c -w",
-    "prepare": "npm run build",
-    "build": "NODE_OPTIONS=--max_old_space_size=8192 rollup -c"
-  },
-  "browserslist": {
-    "development": "> 1%",
-    "production": "> 1%"
+    "build": "./node_modules/.bin/babel src --out-dir dist"
   },
   "peerDependencies": {
     "@aragon/ui": "^0.40.1",
     "prop-types": "^15.6.2",
     "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "styled-components": "^4.2.1"
   },
   "devDependencies": {
-    "3box": "^1.8.5",
+    "3box": "^1.9.0",
     "@aragon/ui": "^0.40.1",
+    "@babel/cli": "^7.4.4",
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
-    "@svgr/rollup": "^2.4.1",
+    "ajv": "^6.10.0",
     "babel-eslint": "^10.0.1",
     "babel-plugin-styled-components": "^1.7.1",
+    "babel-runtime": "^6.26.0",
     "cross-env": "^5.2.0",
     "eslint": "^5.6.0",
     "eslint-config-prettier": "^3.1.0",
@@ -55,17 +52,6 @@
     "prettier": "^1.15.0",
     "react": "^16.8.6",
     "react-dropzone": "^10.1.5",
-    "rollup": "^0.64.1",
-    "rollup-plugin-babel": "^4.3.2",
-    "rollup-plugin-commonjs": "^9.3.4",
-    "rollup-plugin-filesize": "^6.1.0",
-    "rollup-plugin-image": "^1.0.2",
-    "rollup-plugin-json": "^4.0.0",
-    "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-resolve": "^3.4.0",
-    "rollup-plugin-peer-deps-external": "^2.2.0",
-    "rollup-plugin-progress": "^1.1.1",
-    "rollup-plugin-url": "^2.2.1",
     "styled-components": "^4.2.1",
     "uuid": "^3.3.2",
     "web3-utils": "^1.0.0-beta.55"

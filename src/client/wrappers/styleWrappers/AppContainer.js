@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { AppView, AppBar } from '@aragon/ui'
-import logoBackground from '../../assets/logo-background.svg'
+import logoBackground from '../../../../assets/logo-background.svg'
 
 const style = {
   backgroundColor: '#F7FBFD',

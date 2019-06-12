@@ -1,5 +1,5 @@
 import React from 'react'
-import { AnimationLoading } from '../../assets'
+import { AnimationLoading } from '../../components/styled-components'
 
 const UnlockingBox = () => (
   <div

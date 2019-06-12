@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Button, TextInput, DropDown } from '@aragon/ui'
 
 import { EditTextField } from '../readOrEditFields'
-import editImage from '../../assets/pencil-black-tool-interface-symbol.png'
+import editImage from '../../../../assets/pencil-black-tool-interface-symbol.png'
 
 export const AlignRight = styled.div`
   display: flex;
@@ -74,3 +74,13 @@ export const DropDownWithValidation = props => (
 
 DropDownWithValidation.propTypes = { error: PropTypes.string }
 DropDownWithValidation.defaultProps = { error: '' }
+
+export { default as IconPencil } from './IconPencil'
+export { default as IconTrash } from './IconTrash'
+export { default as IconGitHub } from './IconGitHub'
+export { default as IconTwitter } from './IconTwitter'
+export { default as IconEthereum } from './IconEthereum'
+export { default as IconLocation } from './IconLocation'
+export { default as IconVerified } from './IconVerified'
+export { default as AnimationLoading } from './AnimationLoading'
+export { default as IconGlobe } from './IconGlobe'

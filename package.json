@@ -5,7 +5,7 @@
   "author": "Schwartz10",
   "license": "MIT",
   "repository": "AutarkLabs/aragon-profile",
-  "main": "./dist/bundle.js",
+  "main": "./dist/index.js",
   "engines": {
     "node": ">=8",
     "npm": ">=5"
@@ -14,9 +14,7 @@
     "clean": "rm -rf ./dist",
     "test": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
-    "build": "webpack",
-    "start": "webpack",
-    "prepare": "npm run build"
+    "build": "./node_modules/.bin/babel src --out-dir dist"
   },
   "peerDependencies": {
     "@aragon/ui": "^0.40.1",
@@ -26,14 +24,14 @@
     "styled-components": "^4.2.1"
   },
   "devDependencies": {
-    "3box": "^1.8.5",
+    "3box": "^1.9.0",
     "@aragon/ui": "^0.40.1",
+    "@babel/cli": "^7.4.4",
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
-    "babel-loader": "^8.0.6",
     "babel-plugin-styled-components": "^1.7.1",
     "babel-runtime": "^6.26.0",
     "cross-env": "^5.1.4",
@@ -48,7 +46,6 @@
     "eslint-plugin-react": "^7.5.1",
     "eslint-plugin-react-hooks": "^1.6.0",
     "eslint-plugin-standard": "^4.0.0",
-    "file-loader": "^4.0.0",
     "ipfs-http-client": "^32.0.1",
     "lodash.clonedeep": "^4.5.0",
     "moment": "^2.24.0",
@@ -57,10 +54,8 @@
     "react-dom": "^16.8.6",
     "react-dropzone": "^10.1.5",
     "styled-components": "^4.2.1",
-    "url-loader": "^1.1.2",
-    "web3-utils": "^1.0.0-beta.55",
-    "webpack": "^4.33.0",
-    "webpack-cli": "^3.3.2"
+    "uuid": "^3.3.2",
+    "web3-utils": "^1.0.0-beta.55"
   },
   "files": [
     "dist"

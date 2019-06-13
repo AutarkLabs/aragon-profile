@@ -7,14 +7,14 @@
 ## Install
 
 ```bash
-npm install --save aragon-profile
+npm install --save @openworklabs/aragon-profile
 ```
 
 ## Usage
 
 ```jsx
 import React from 'react'
-import Profile from 'aragon-profile'
+import { Profile } from '@openworklabs/aragon-profile'
 
 const Example = () => (
   <Profile onSignatures={onSignatures} ethereumAddress={ethereumAddress} />
@@ -25,14 +25,19 @@ const Example = () => (
 
 ## Developing locally
 
-Clone this repo, install dependencies, link, and start: <br />
+This repo has to be run with https://github.com/openworklabs/aragon
+
+Clone this repo, install dependencies, link, and build: <br />
 `git clone git@github.com:AutarkLabs/aragon-profile.git`<br />
 `cd aragon-profile`<br />
 `npm i`<br />
+`npm run prepare-local-dev`<br />
 `npm link`<br />
-`npm start`<br />
+`npm build`<br />
 
-After finishing these commands, your `aragon-profile` should be watching files for changes and bundling them.
+After finishing these commands, your `aragon-profile` should have a `/dist` directory with the ES5 code.
+
+**NOTE** - anytime you want to see your changes on the aragon-client, you have to re-run `npm run build`
 
 In a separate repository location, clone the aragon client repo: <br />
 `git clone git@github.com:openworklabs/aragon.git`

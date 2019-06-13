@@ -58,10 +58,16 @@ export class Profile {
     this.unlockedBox = null
   }
 
-  getPublic = async () => {
+  _getPublic = async () => {
     const publicProfile = this.boxState.opened
       ? await this.unlockedBox.public.all()
       : await Box.getProfile(this.ethereumAddress)
+
+    return publicProfile
+  }
+
+  getPublic = async () => {
+    const publicProfile = await this._getPublic()
 
     const { github, twitter } = await Box.getVerifiedAccounts(publicProfile)
     return {
@@ -129,7 +135,7 @@ export class Profile {
     if (this.boxState.opened) {
       return this.unlockedBox.isAccountLinked()
     }
-    const publicProfile = await this.getPublic()
+    const publicProfile = await this._getPublic()
     return Object.keys(publicProfile).length > 1
   }
 

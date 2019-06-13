@@ -44,8 +44,6 @@ In a separate repository location, clone the aragon client repo: <br />
 
 Get the development branch of the aragon client repo:<br />
 `cd aragon`<br />
-`git fetch origin dev`<br />
-`git checkout dev`<br />
 
 install deps:<br />
 `npm i`

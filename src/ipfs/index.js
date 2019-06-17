@@ -1,8 +1,5 @@
-const ipfsClient = config => {
-  return {
-    add: () => {},
-  }
-}
+import ipfsClient from 'ipfs-http-client'
+
 const infuraIpfs = ipfsClient({
   host: 'ipfs.infura.io',
   port: '5001',

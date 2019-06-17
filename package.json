@@ -1,6 +1,6 @@
 {
   "name": "@openworklabs/aragon-profile",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "a single profile component for the Aragon Client",
   "author": "Schwartz10",
   "license": "MIT",
@@ -49,6 +49,7 @@
     "eslint-plugin-react": "^7.5.1",
     "eslint-plugin-react-hooks": "^1.6.0",
     "eslint-plugin-standard": "^4.0.0",
+    "ipfs-http-client": "^32.0.1",
     "lodash.clonedeep": "^4.5.0",
     "moment": "^2.24.0",
     "prettier": "^1.15.0",

@@ -51,6 +51,9 @@ install deps:
 Link local dependency
 `npm link @openworklabs/aragon-profile`
 
+Go back for a moment to aragon-profile and run again:
+`npm run prepare-local-dev`
+
 start the app:
 `npm run start:with:profiles`
 

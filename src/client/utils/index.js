@@ -28,9 +28,11 @@ export const reformatNestedFields = forms => {
       copiedForms.educationHistory
     )
   }
-
   if (copiedForms.workHistory) {
     copiedForms.workHistory = assignArbitraryIds(copiedForms.workHistory)
+  }
+  if (copiedForms.organizations) {
+    copiedForms.organizations = assignArbitraryIds(copiedForms.organizations)
   }
   return copiedForms
 }

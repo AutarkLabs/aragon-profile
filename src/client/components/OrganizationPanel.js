@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import CardWrapper from '../wrappers/styleWrappers/CardWrapper'
 import { useProfile } from '../hooks'
 import { ModalContext } from '../wrappers/modal'
-import EducationHistoryTile from './EducationHistoryTile'
+import OrganizationTile from './OrganizationTile'
 import { open, removeItem } from '../stateManagers/modal'
 import { Text, theme } from '@aragon/ui'
 import styled from 'styled-components'
@@ -16,7 +16,7 @@ const OrganizationPanel = () => {
   const cardProps = {
     title: 'Organizations',
     addMore: organizationsNotEmpty
-      ? () => dispatchModal(open('organizations'))
+      ? () => dispatchModal(open('organization'))
       : null,
     addSeparators: true,
     viewMode,
@@ -26,9 +26,9 @@ const OrganizationPanel = () => {
     <CardWrapper {...cardProps}>
       {organizationsNotEmpty ? (
         Object.keys(organizations).map(id => (
-          <EducationHistoryTile
+          <OrganizationTile
             key={id}
-            educationHistoryData={organizations[id]}
+            organizationData={organizations[id]}
             removeItem={() => dispatchModal(removeItem(id, 'organization'))}
           />
         ))

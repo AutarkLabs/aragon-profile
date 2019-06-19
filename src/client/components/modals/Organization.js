@@ -42,7 +42,7 @@ const Organization = ({
           onChange={e =>
             onChange(e.target.value, 'organizations', organizationId, 'address')
           }
-          placeholder="Example: governance.aragonid.eth"
+          placeholder="Example: 0xb4124cEB3451635DAcedd11767f004d8a28c6eE7"
           error={validationErrors['organization']}
         />
       </Field>

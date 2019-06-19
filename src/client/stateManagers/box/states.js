@@ -45,6 +45,7 @@ export const fetchingPublicProfile = () => ({
     description: '',
     workHistory: {},
     educationHistory: {},
+    organizations: {},
   },
   changed: [],
   // to display image loading status

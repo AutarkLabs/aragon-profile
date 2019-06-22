@@ -4,15 +4,27 @@ import { Card, Text, theme } from '@aragon/ui'
 import styled from 'styled-components'
 
 const CardWrapper = ({ children, title, addMore, addSeparators, viewMode }) => (
-  <div style={{ width: '100%' }}>
+  <div
+    css={`
+      width: 100%;
+    `}
+  >
     {title && (
-      <Text style={{ padding: '7px 0' }} size="xlarge">
+      <Text
+        css={`
+          padding: 7px 0;
+        `}
+        size="xlarge"
+      >
         {title}
       </Text>
     )}
     {addMore && !viewMode && (
       <Text
-        style={{ paddingLeft: '13px', cursor: 'pointer' }}
+        css={`
+          padding-left: 13px;
+          cursor: pointer;
+        `}
         size="small"
         color={theme.accent}
         onClick={() => addMore()}

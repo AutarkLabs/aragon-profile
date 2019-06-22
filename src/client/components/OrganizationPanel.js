@@ -29,7 +29,7 @@ const OrganizationPanel = () => {
           <OrganizationTile
             key={id}
             organizationData={organizations[id]}
-            removeItem={() => dispatchModal(removeItem(id, 'organization'))}
+            removeItem={() => dispatchModal(removeItem(id, 'organizations'))}
           />
         ))
       ) : (

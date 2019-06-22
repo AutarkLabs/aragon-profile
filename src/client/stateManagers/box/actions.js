@@ -135,7 +135,7 @@ export const requestedCheckMembership = ethereumAddress => ({
   },
 })
 
-export const requestedCheckMembershipClean  = ethereumAddress => ({
+export const requestedCheckMembershipClean = ethereumAddress => ({
   type: REQUEST_CHECK_MEMBERSHIP_CLEAN,
   meta: {
     ethereumAddress,

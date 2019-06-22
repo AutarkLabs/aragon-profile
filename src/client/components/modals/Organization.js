@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react'
 import { Field, Text, Button, theme } from '@aragon/ui'
-import { ensResolve } from '@aragon/wrapper'
 import PropTypes from 'prop-types'
 import { ModalWrapper, DisplayErrors } from './ModalWrapper'
 import { validateDAOAddress } from '../../utils/validation'
@@ -45,15 +44,12 @@ const Organization = ({
     ? { error: `Error checking membership: ${error.message}` }
     : {}
 
-  const resolveEnsDomain = async (domain, opts) => {
-    try {
-      return await ensResolve(domain, opts)
-    } catch (err) {
-      if (err.message === 'ENS name not defined.') {
-        return ''
-      }
-      throw err
-    }
+  const resolveEnsDomain = address => {
+    if (address === 'dune.aragonid.eth')
+      return '0xb4124cEB3451635DAcedd11767f004d8a28c6eE7'
+    if (address === 'test.aragonid.eth')
+      return '0xb4124cEB3451635DAcedd11767f004d8a28c6eE7'
+    return ''
   }
 
   const fakeIsMember = async (ethereumAddress, address) => {
@@ -71,11 +67,11 @@ const Organization = ({
         if (result) {
           dispatch(requestedCheckMembershipSuccess(ethereumAddress))
           saveProfile(ethereumAddress)
-          //dispatchModal(close())
-          //dispatch(requestedCheckMembershipClean(ethereumAddress))
+          dispatchModal(close())
+          dispatch(requestedCheckMembershipClean(ethereumAddress))
           return true
         } else {
-          throw new Error("I'm sorry Dave")
+          throw new Error('Error checking membership')
         }
       })
       .catch(err => {
@@ -92,7 +88,8 @@ const Organization = ({
     let address = getFormValue('organizations', organizationId, 'address')
 
     if (address.endsWith('.eth')) {
-      console.log(resolveEnsDomain(address))
+      address = resolveEnsDomain(address)
+      if (!address) errors['organization'] = 'Could not resolve ENS address'
     } else if (!validateDAOAddress(address))
       errors['organization'] = 'Please provide valid DAO address'
 
@@ -103,6 +100,12 @@ const Organization = ({
     }
   }
 
+  const shortAddress = organizationId => {
+    let address = getFormValue('organizations', organizationId, 'address')
+    if (address.endsWith('.eth')) return address
+    return address.slice(0, 6) + '…' + address.slice(-4)
+  }
+  
   const CheckWrapper = styled.div`
     height: 146px;
     display: flex;
@@ -120,7 +123,7 @@ const Organization = ({
         <AnimationLoadingCircle />
         <Text size="xxlarge">
           Validating your membership to{' '}
-          {getFormValue('organizations', organizationId, 'address')}...
+          {shortAddress(organizationId)}...
         </Text>
       </CheckWrapper>
     </ModalWrapper>
@@ -131,7 +134,7 @@ const Organization = ({
       <CheckWrapper>
         <AddOrganizationSuccess />
         <Text size="xxlarge">
-          We found {getFormValue('organizations', organizationId, 'address')}{' '}
+          We found {shortAddress(organizationId)}{' '}
           and confirmed you are a member
         </Text>
       </CheckWrapper>
@@ -152,7 +155,7 @@ const Organization = ({
         >
           <Text.Block size="xxlarge">
             We could not verify your membership to{' '}
-            {getFormValue('organizations', organizationId, 'address')}
+            {shortAddress(organizationId)}
           </Text.Block>
 
           <Text.Block

@@ -12,6 +12,8 @@ const RemoveItem = ({ itemType, onRemove, removingError }) => {
   if (itemType === 'workHistory') title = 'Delete work history record'
   else if (itemType === 'educationHistory')
     title = 'Delete education history record'
+  else if (itemType === 'organizations')
+    title = 'Delete organization membership record'
   else title = 'Delete data'
 
   return (

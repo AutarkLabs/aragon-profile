@@ -13,6 +13,7 @@
   "scripts": {
     "build": "./node_modules/.bin/babel src --out-dir dist",
     "clean": "rm -rf ./dist",
+    "lint": "eslint ./src",
     "prepare": "npm run build",
     "prepare-local-dev": "cd ./node_modules && rm -rf react && rm -rf react-dom && rm -rf styled-components && rm -rf @aragon/ui && cd ../",
     "test": "cross-env CI=1 react-scripts test --env=jsdom",

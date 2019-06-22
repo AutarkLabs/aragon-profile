@@ -1,6 +1,6 @@
 {
   "name": "@openworklabs/aragon-profile",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "a single profile component for the Aragon Client",
   "author": "Schwartz10",
   "license": "MIT",
@@ -55,5 +55,8 @@
     "eslint-plugin-react-hooks": "^1.6.0",
     "eslint-plugin-standard": "^4.0.0",
     "prettier": "^1.15.0"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

@@ -17,7 +17,12 @@ const RemoveItem = ({ itemType, onRemove, removingError }) => {
   return (
     <ModalWrapper title={title}>
       <DisplayErrors errors={removingError} />
-      <Text size="large" style={{ margin: '20px 0 26px 0' }}>
+      <Text
+        size="large"
+        css={`
+          margin: 20px 0 26px 0;
+        `}
+      >
         Are you sure you want to delete it?
       </Text>
       <ButtonsRow>
@@ -27,7 +32,9 @@ const RemoveItem = ({ itemType, onRemove, removingError }) => {
         <Button
           compact
           mode="strong"
-          style={{ background: theme.negative }}
+          css={`
+            background: ${theme.negative};
+          `}
           onClick={onRemove}
         >
           Delete

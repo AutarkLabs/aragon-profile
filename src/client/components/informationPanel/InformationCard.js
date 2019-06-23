@@ -56,13 +56,20 @@ const InformationCard = () => {
 
   const RenderName = ({ name }) =>
     name ? (
-      <Text.Block size="xxlarge" style={{ fontWeight: '700' }}>
+      <Text.Block
+        size="xxlarge"
+        css={`
+          font-weight: 700;
+        `}
+      >
         {name}
       </Text.Block>
     ) : (
       <Center>
         <Text
-          style={{ cursor: 'pointer' }}
+          css={`
+            cursor: pointer;
+          `}
           size="large"
           color={theme.accent}
           onClick={() => dispatchModal(open('basicInformation'))}
@@ -80,7 +87,9 @@ const InformationCard = () => {
     ) : (
       <Center>
         <Text.Block
-          style={{ cursor: 'pointer' }}
+          css={`
+            cursor: pointer;
+          `}
           size="large"
           color={theme.accent}
           onClick={() => dispatchModal(open('basicInformation'))}
@@ -101,7 +110,9 @@ const InformationCard = () => {
         </Text>
       ) : (
         <Text
-          style={{ cursor: 'pointer' }}
+          css={`
+            cursor: pointer;
+          `}
           color={theme.accent}
           onClick={() => dispatchModal(open('basicInformation'))}
         >
@@ -115,11 +126,18 @@ const InformationCard = () => {
 
   const RenderEmpty = () => (
     <Center height="130px">
-      <Text.Block style={{ textAlign: 'center' }} size="xlarge">
+      <Text.Block
+        css={`
+          text-align: center;
+        `}
+        size="xlarge"
+      >
         You have no name, bio or location
       </Text.Block>
       <Text
-        style={{ cursor: 'pointer' }}
+        css={`
+          cursor: pointer;
+        `}
         size="small"
         color={theme.accent}
         onClick={() => dispatchModal(open('basicInformation'))}
@@ -142,7 +160,9 @@ const InformationCard = () => {
           <Button
             compact
             mode="outline"
-            style={{ position: 'relative' }}
+            css={`
+              position: relative;
+            `}
             onClick={() => setPopover('github')}
           >
             Verify my GitHub account
@@ -168,7 +188,9 @@ const InformationCard = () => {
           <Button
             compact
             mode="outline"
-            style={{ position: 'relative' }}
+            css={`
+              position: relative;
+            `}
             onClick={() => setPopover('twitter')}
           >
             Verify my Twitter account

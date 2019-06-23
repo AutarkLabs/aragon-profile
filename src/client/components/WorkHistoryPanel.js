@@ -36,7 +36,9 @@ const WorkHistoryPanel = () => {
           <Text size="xlarge">You have no work history</Text>
           {!viewMode && (
             <Text
-              style={{ cursor: 'pointer' }}
+              css={`
+                cursor: pointer;
+              `}
               size="small"
               color={theme.accent}
               onClick={() => dispatchModal(open('workHistory'))}

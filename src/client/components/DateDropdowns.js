@@ -16,9 +16,19 @@ const DateDropdowns = ({
   error,
 }) => (
   <Fragment>
-    <Label style={{ margin: 0 }}>Start Date</Label>
+    <Label
+      css={`
+        margin: 0;
+      `}
+    >
+      Start Date
+    </Label>
     <DateDropDowns>
-      <div style={{ width: '48%' }}>
+      <div
+        css={`
+          width: 48%;
+        `}
+      >
         <DropDownWithValidation
           wide
           items={months}
@@ -29,7 +39,11 @@ const DateDropdowns = ({
           error={error}
         />
       </div>
-      <div style={{ width: '48%' }}>
+      <div
+        css={`
+          width: 48%;
+        `}
+      >
         <DropDownWithValidation
           wide
           items={years}
@@ -42,11 +56,26 @@ const DateDropdowns = ({
       </div>
     </DateDropDowns>
 
-    <Label style={{ margin: 0 }}>End Date</Label>
-    <div style={{ display: 'flex', height: '40px' }}>
+    <Label
+      css={`
+        margin: 0;
+      `}
+    >
+      End Date
+    </Label>
+    <div
+      css={`
+        display: flex;
+        height: 40px;
+      `}
+    >
       {!current && (
         <DateDropDowns>
-          <div style={{ width: '48%' }}>
+          <div
+            css={`
+              width: 48%;
+            `}
+          >
             <DropDownWithValidation
               wide
               items={months}
@@ -57,7 +86,11 @@ const DateDropdowns = ({
               error={error}
             />
           </div>
-          <div style={{ width: '48%' }}>
+          <div
+            css={`
+              width: 48%;
+            `}
+          >
             <DropDownWithValidation
               wide
               items={years}
@@ -70,7 +103,12 @@ const DateDropdowns = ({
           </div>
         </DateDropDowns>
       )}
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div
+        css={`
+          display: flex;
+          align-items: center;
+        `}
+      >
         <Checkbox
           checked={current}
           onChange={index => dispatchDateChange({ type: 'setCurrent', index })}

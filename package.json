@@ -1,6 +1,6 @@
 {
   "name": "@openworklabs/aragon-profile",
-  "version": "0.1.4",
+  "version": "0.1.7",
   "description": "a single profile component for the Aragon Client",
   "author": "Schwartz10",
   "license": "MIT",
@@ -13,8 +13,7 @@
   "scripts": {
     "build": "./node_modules/.bin/babel src --out-dir dist",
     "clean": "rm -rf ./dist",
-    "lint": "eslint ./src",
-    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
     "prepare-local-dev": "cd ./node_modules && rm -rf react && rm -rf react-dom && rm -rf styled-components && rm -rf @aragon/ui && cd ../",
     "test": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom"
@@ -26,19 +25,24 @@
     "react-dom": "^16.8.6",
     "styled-components": "^4.2.1"
   },
-  "devDependencies": {
+  "dependencies": {
     "3box": "^1.9.0",
-    "@aragon/ui": "^0.40.1",
+    "ajv": "^6.10.0",
+    "ipfs-http-client": "^32.0.1",
+    "lodash.clonedeep": "^4.5.0",
+    "moment": "^2.24.0",
+    "react-dropzone": "^10.1.5",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
-    "ajv": "^6.10.0",
     "babel-eslint": "^10.0.1",
     "babel-plugin-styled-components": "^1.7.1",
     "babel-runtime": "^6.26.0",
-    "cross-env": "^5.2.0",
     "eslint": "^5.6.0",
     "eslint-config-prettier": "^3.1.0",
     "eslint-config-standard": "^12.0.0",
@@ -50,17 +54,11 @@
     "eslint-plugin-react": "^7.5.1",
     "eslint-plugin-react-hooks": "^1.6.0",
     "eslint-plugin-standard": "^4.0.0",
-    "ipfs-http-client": "^32.0.1",
-    "lodash.clonedeep": "^4.5.0",
-    "moment": "^2.24.0",
-    "prettier": "^1.15.0",
-    "react": "^16.8.6",
-    "react-dropzone": "^10.1.5",
-    "styled-components": "^4.2.1",
-    "uuid": "^3.3.2",
-    "web3-utils": "^1.0.0-beta.55"
+    "prettier": "^1.15.0"
   },
   "files": [
-    "dist"
+    "dist",
+    "src",
+    "assets"
   ]
 }

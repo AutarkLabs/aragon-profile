@@ -9,15 +9,27 @@ import { displayStartEndDates } from '../utils'
 const WorkHistoryTile = ({ workHistoryData, openModal, removeItem }) => (
   <SingleWorkItem>
     <Details>
-      <Text.Block size="large" style={{ fontWeight: '700' }}>
+      <Text.Block
+        size="large"
+        css={`
+          font-weight: 700;
+        `}
+      >
         {workHistoryData.workPlace}
       </Text.Block>
-      <Text.Block size="normal" style={{ fontWeight: '600' }}>
+      <Text.Block
+        size="normal"
+        css={`
+          font-weight: 600;
+        `}
+      >
         {workHistoryData.jobTitle}
         <Text
           size="xsmall"
           color={theme.textTertiary}
-          style={{ marginLeft: '13px' }}
+          css={`
+            margin-left: 13px;
+          `}
         >
           {displayStartEndDates(workHistoryData)}
         </Text>

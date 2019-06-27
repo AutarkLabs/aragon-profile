@@ -3,18 +3,28 @@ import { AnimationLoading } from '../../components/styled-components'
 
 const LoadingPublicProfile = () => (
   <div
-    style={{
-      marginTop: '40px',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-    }}
+    css={`
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    `}
   >
-    <div style={{ textAlign: 'center' }}>
+    <div
+      css={`
+        text-align: center;
+      `}
+    >
       <AnimationLoading />
     </div>
 
-    <div style={{ marginTop: '13px' }}>Loading public profile</div>
+    <div
+      css={`
+        margin-top: 13px;
+      `}
+    >
+      Loading public profile
+    </div>
   </div>
 )
 

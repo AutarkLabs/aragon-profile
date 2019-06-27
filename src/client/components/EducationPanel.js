@@ -38,7 +38,9 @@ const EducationPanel = () => {
           <Text size="xlarge">You have no education</Text>
           {!viewMode && (
             <Text
-              style={{ cursor: 'pointer' }}
+              css={`
+                cursor: pointer;
+              `}
               size="small"
               color={theme.accent}
               onClick={() => dispatchModal(open('educationHistory'))}

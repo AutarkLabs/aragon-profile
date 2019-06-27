@@ -31,7 +31,15 @@ const Profile = () => (
               <EducationPanel />
             </LeftColumn>
             <RightColumn>
+              {/*
+                For future reference: this will be re-enabled
+                when it is possible to confirm membership in external DAOs.
+
+                What is left in place: modal allowing to add membership record,
+                events and all state-related code, incomplete styling for DAOs
+                Membership Panel.
               <OrganizationPanel />
+              */}
               <WorkHistoryPanel />
             </RightColumn>
           </DoubleColumn>

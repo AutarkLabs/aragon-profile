@@ -44,14 +44,6 @@ const Organization = ({
     ? { error: `Error checking membership: ${error.message}` }
     : {}
 
-  const resolveEnsDomain = address => {
-    if (address === 'dune.aragonid.eth')
-      return '0xb4124cEB3451635DAcedd11767f004d8a28c6eE7'
-    if (address === 'test.aragonid.eth')
-      return '0xb4124cEB3451635DAcedd11767f004d8a28c6eE7'
-    return ''
-  }
-
   const fakeIsMember = async (ethereumAddress, address) => {
     let promise = new Promise((resolve, reject) => {
       setTimeout(() => resolve(Math.random() >= 0.5), 5000)
@@ -83,13 +75,25 @@ const Organization = ({
       })
   }
 
+  /*
+
+For future reference: ENS resolution can come directly from the Wrapper:
+
+  address = wrapper.resolveAddressIdentity('dune.aragonid.eth').then(...)
+
+Similarly isMember is accessible via:
+
+  membershipCOnfirmed = wrapper.checkMember('0xb4124cEB3451635DAcedd11767f004d8a28c6eE7')
+
+  */
+
   const validateAndSave = () => {
     const errors = {}
     let address = getFormValue('organizations', organizationId, 'address')
 
     if (address.endsWith('.eth')) {
-      address = resolveEnsDomain(address)
-      if (!address) errors['organization'] = 'Could not resolve ENS address'
+      // address = resolveEnsDomain(address)
+      // if (!address) errors['organization'] = 'Could not resolve ENS address'
     } else if (!validateDAOAddress(address))
       errors['organization'] = 'Please provide valid DAO address'
 
@@ -105,7 +109,7 @@ const Organization = ({
     if (address.endsWith('.eth')) return address
     return address.slice(0, 6) + '…' + address.slice(-4)
   }
-  
+
   const CheckWrapper = styled.div`
     height: 146px;
     display: flex;
@@ -122,8 +126,7 @@ const Organization = ({
       <CheckWrapper>
         <AnimationLoadingCircle />
         <Text size="xxlarge">
-          Validating your membership to{' '}
-          {shortAddress(organizationId)}...
+          Validating your membership to {shortAddress(organizationId)}...
         </Text>
       </CheckWrapper>
     </ModalWrapper>
@@ -134,8 +137,7 @@ const Organization = ({
       <CheckWrapper>
         <AddOrganizationSuccess />
         <Text size="xxlarge">
-          We found {shortAddress(organizationId)}{' '}
-          and confirmed you are a member
+          We found {shortAddress(organizationId)} and confirmed you are a member
         </Text>
       </CheckWrapper>
     </ModalWrapper>

@@ -1,20 +1,23 @@
 import dayjs from 'dayjs'
 import uuidv1 from 'uuid/v1'
-import { isAddress } from 'web3-utils'
+// import { isAddress } from 'web3-utils'
+const isAddress = _ => true
 
 /* TIME HELPERS */
-export const toUnix = date => dayjs(date, 'YYYY-MM-DD').unix()
+export const toUnix = (date: string) => dayjs(date, 'YYYY-MM-DD').unix()
 
-export const unixToCalendar = unix => dayjs.unix(unix).format('YYYY-MM-DD')
-export const yearFromUnix = unix => dayjs.unix(unix).format('YYYY')
-export const monthFromUnix = unix => dayjs.unix(unix).format('MM')
-export const unixToTileDate = unix => dayjs.unix(unix).format('MMM YYYY')
+export const yearFromUnix = (unix: number) => dayjs.unix(unix).format('YYYY')
+export const monthFromUnix = (unix: number) => dayjs.unix(unix).format('MM')
+export const unixToCalendar = (unix: number) =>
+  dayjs.unix(unix).format('YYYY-MM-DD')
+export const unixToTileDate = (unix: number) =>
+  dayjs.unix(unix).format('MMM YYYY')
 
 export const todayInUnix = () => dayjs().unix()
 
 /* FORM HELPERS */
 
-const assignArbitraryIds = fieldArray => {
+const assignArbitraryIds = (fieldArray: any[]) => {
   const returnObj = {}
   fieldArray.forEach(field => (returnObj[uuidv1()] = field))
   return returnObj
@@ -54,7 +57,7 @@ export const months = [
 
 export const currentYear = yearFromUnix(todayInUnix())
 export const years = Array.apply(0, Array(74)).map((_x, index) =>
-  index === 0 ? 'Year' : (currentYear - index + 1).toString()
+  index === 0 ? 'Year' : (Number(currentYear) - index + 1).toString()
 )
 
 export const displayStartEndDates = data => {
@@ -103,11 +106,10 @@ export const shortDAOAddress = (address = '') => {
   return address.slice(0, 6) + '…' + address.slice(-4)
 }
 
-export const fakeIsMember = async (ethereumAddress, address) => {
-  let promise = new Promise((resolve, reject) => {
+export const fakeIsMember = async () => {
+  return new Promise(resolve => {
     setTimeout(() => resolve(Math.random() >= 0.99), 2000)
   })
-  return promise
 }
 
 export * from './login'

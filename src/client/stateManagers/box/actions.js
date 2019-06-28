@@ -25,7 +25,7 @@ import {
   REQUESTED_PROFILE_OPEN_SUCCESS,
   REQUESTED_PROFILE_OPEN_FAILURE,
   REQUEST_CHECK_MEMBERSHIP,
-  REQUEST_CHECK_MEMBERSHIP_CLEAN,
+  REQUEST_CHECK_MEMBERSHIP_RESET,
   REQUEST_CHECK_MEMBERSHIP_SUCCESS,
   REQUEST_CHECK_MEMBERSHIP_ERROR,
 } from './actionTypes'
@@ -135,8 +135,8 @@ export const requestedCheckMembership = ethereumAddress => ({
   },
 })
 
-export const requestedCheckMembershipClean = ethereumAddress => ({
-  type: REQUEST_CHECK_MEMBERSHIP_CLEAN,
+export const requestedCheckMembershipReset = ethereumAddress => ({
+  type: REQUEST_CHECK_MEMBERSHIP_RESET,
   meta: {
     ethereumAddress,
   },

@@ -184,7 +184,7 @@ export const requestedCheckMembership = state => ({
   checkedMembershipError: false,
 })
 
-export const requestedCheckMembershipClean = state => ({
+export const requestedCheckMembershipReset = state => ({
   ...state,
   checkingMembership: false,
   checkedMembershipSuccess: false,

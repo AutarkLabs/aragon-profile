@@ -25,7 +25,7 @@ import {
   REQUESTED_PROFILE_OPEN_SUCCESS,
   REQUESTED_PROFILE_OPEN_FAILURE,
   REQUEST_CHECK_MEMBERSHIP,
-  REQUEST_CHECK_MEMBERSHIP_CLEAN,
+  REQUEST_CHECK_MEMBERSHIP_RESET,
   REQUEST_CHECK_MEMBERSHIP_SUCCESS,
   REQUEST_CHECK_MEMBERSHIP_ERROR,
 } from './actionTypes'
@@ -57,7 +57,7 @@ import {
   requestProfileOpenSuccess,
   requestProfileOpenError,
   requestedCheckMembership,
-  requestedCheckMembershipClean,
+  requestedCheckMembershipReset,
   requestedCheckMembershipSuccess,
   requestedCheckMembershipError,
 } from './states'
@@ -185,10 +185,10 @@ const boxReducer = (prevState, action) => {
       logStateUpdate(action, prevState, nextState)
       return nextState
     }
-    case REQUEST_CHECK_MEMBERSHIP_CLEAN: {
+    case REQUEST_CHECK_MEMBERSHIP_RESET: {
       const nextState = { ...prevState }
       const ethereumAddress = action.meta.ethereumAddress
-      nextState[ethereumAddress] = requestedCheckMembershipClean(
+      nextState[ethereumAddress] = requestedCheckMembershipReset(
         prevState[ethereumAddress]
       )
       logStateUpdate(action, prevState, nextState)

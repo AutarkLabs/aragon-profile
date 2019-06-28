@@ -3,6 +3,7 @@ import { Field, Text, Button, theme } from '@aragon/ui'
 import PropTypes from 'prop-types'
 import { ModalWrapper, DisplayErrors } from './ModalWrapper'
 import { validateDAOAddress } from '../../utils/validation'
+import { shortDAOAddress, fakeIsMember } from '../../utils'
 import { BoxContext } from '../../wrappers/box'
 import { ModalContext } from '../../wrappers/modal'
 import { close } from '../../stateManagers/modal'
@@ -10,16 +11,110 @@ import { isEmpty } from 'lodash'
 import styled from 'styled-components'
 import {
   requestedCheckMembership,
-  requestedCheckMembershipClean,
+  requestedCheckMembershipReset,
   requestedCheckMembershipSuccess,
   requestedCheckMembershipError,
 } from '../../stateManagers/box'
 import {
   TextInputWithValidation,
   AnimationLoadingCircle,
-  AddOrganizationSuccess,
-  AddOrganizationError,
+  IconSuccess,
+  IconError,
 } from '../../components/styled-components'
+
+const CheckWrapper = styled.div`
+  height: 146px;
+  display: flex;
+  align-items: center;
+  padding-bottom: 13px;
+  > :first-child {
+    margin-left: 10px;
+    margin-right: 30px;
+  }
+`
+
+const BackToPreviousScreen = ({ ethereumAddress, dispatch }) => (
+  <Text.Block
+    css={`
+      text-align: right;
+      margin-bottom: 0px;
+      text-decoration: underline;
+      cursor: pointer;
+      vertical-align: text-bottom;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    `}
+    color={theme.accent}
+    onClick={() => dispatch(requestedCheckMembershipReset(ethereumAddress))}
+  >
+    Back to previous screen
+  </Text.Block>
+)
+
+BackToPreviousScreen.propTypes = {
+  ethereumAddress: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
+}
+
+const CheckInfo = ({
+  type,
+  ethereumAddress,
+  address,
+  dispatch,
+  linkBack = false,
+}) => {
+  const checkInfoIcon = {
+    started: AnimationLoadingCircle,
+    success: IconSuccess,
+    error: IconError,
+  }
+  const checkInfoText = {
+    started: `Validating your membership to ${shortDAOAddress(address)}...`,
+    success: `We found ${shortDAOAddress(
+      address
+    )} and confirmed you are a member`,
+    error: `We could not verify your membership to ${shortDAOAddress(address)}`,
+  }
+
+  return (
+    <ModalWrapper>
+      <CheckWrapper>
+        {checkInfoIcon[type]()}
+        <div
+          css={`
+            height: 100%;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+          `}
+        >
+          <Text.Block size="xxlarge">{checkInfoText[type]}</Text.Block>
+
+          {linkBack && (
+            <BackToPreviousScreen
+              dispatch={dispatch}
+              ethereumAddress={ethereumAddress}
+            />
+          )}
+        </div>
+      </CheckWrapper>
+    </ModalWrapper>
+  )
+}
+
+CheckInfo.propTypes = {
+  type: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
+  ethereumAddress: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  linkBack: PropTypes.bool.isRequired,
+}
+
+CheckInfo.defaultProps = {
+  linkBack: false,
+}
 
 const Organization = ({
   ethereumAddress,
@@ -40,39 +135,26 @@ const Organization = ({
     error,
   } = boxes[ethereumAddress]
 
-  const checkMembershipError = boxes[ethereumAddress].checkedMembershipError
+  const checkMembershipError = checkedMembershipError
     ? { error: `Error checking membership: ${error.message}` }
     : {}
 
-  const fakeIsMember = async (ethereumAddress, address) => {
-    let promise = new Promise((resolve, reject) => {
-      setTimeout(() => resolve(Math.random() >= 0.5), 5000)
-    })
-    return promise
-  }
-
-  const checkMembershipAndSave = (ethereumAddress, address) => {
+  const checkMembershipAndSave = async (ethereumAddress, address) => {
     dispatch(requestedCheckMembership(ethereumAddress))
 
-    fakeIsMember(ethereumAddress, address)
-      .then(result => {
-        if (result) {
-          dispatch(requestedCheckMembershipSuccess(ethereumAddress))
-          saveProfile(ethereumAddress)
-          dispatchModal(close())
-          dispatch(requestedCheckMembershipClean(ethereumAddress))
-          return true
-        } else {
-          throw new Error('Error checking membership')
-        }
-      })
-      .catch(err => {
-        dispatch(
-          requestedCheckMembershipError(ethereumAddress, {
-            message: err,
-          })
-        )
-      })
+    try {
+      const result = await fakeIsMember(ethereumAddress, address)
+      if (result) {
+        dispatch(requestedCheckMembershipSuccess(ethereumAddress))
+        saveProfile(ethereumAddress)
+        dispatchModal(close())
+        dispatch(requestedCheckMembershipReset(ethereumAddress))
+        return true
+      } else throw new Error({ message: 'Cannot confirm membership' })
+    } catch (error) {
+      dispatch(requestedCheckMembershipError(ethereumAddress, error))
+      return false
+    }
   }
 
   /*
@@ -104,98 +186,21 @@ Similarly isMember is accessible via:
     }
   }
 
-  const shortAddress = organizationId => {
-    let address = getFormValue('organizations', organizationId, 'address')
-    if (address.endsWith('.eth')) return address
-    return address.slice(0, 6) + '…' + address.slice(-4)
+  const address = getFormValue('organizations', organizationId, 'address')
+
+  const checkInfoProps = {
+    address,
+    ethereumAddress,
+    dispatch,
   }
 
-  const CheckWrapper = styled.div`
-    height: 146px;
-    display: flex;
-    align-items: center;
-    padding-bottom: 13px;
-    > :first-child {
-      margin-left: 10px;
-      margin-right: 30px;
-    }
-  `
-
-  const CheckStarted = () => (
-    <ModalWrapper>
-      <CheckWrapper>
-        <AnimationLoadingCircle />
-        <Text size="xxlarge">
-          Validating your membership to {shortAddress(organizationId)}...
-        </Text>
-      </CheckWrapper>
-    </ModalWrapper>
-  )
-
-  const CheckSuccess = address => (
-    <ModalWrapper>
-      <CheckWrapper>
-        <AddOrganizationSuccess />
-        <Text size="xxlarge">
-          We found {shortAddress(organizationId)} and confirmed you are a member
-        </Text>
-      </CheckWrapper>
-    </ModalWrapper>
-  )
-
-  const CheckError = () => (
-    <ModalWrapper>
-      <CheckWrapper>
-        <AddOrganizationError />
-        <div
-          css={`
-            height: 100%;
-            position: relative;
-            display: flex;
-            align-items: center;
-          `}
-        >
-          <Text.Block size="xxlarge">
-            We could not verify your membership to{' '}
-            {shortAddress(organizationId)}
-          </Text.Block>
-
-          <Text.Block
-            css={`
-              text-align: right;
-              margin-bottom: 0px;
-              text-decoration: underline;
-              cursor: pointer;
-              vertical-align: text-bottom;
-              position: absolute;
-              bottom: 0;
-              right: 0;
-            `}
-            color={theme.accent}
-            onClick={() =>
-              dispatch(requestedCheckMembershipClean(ethereumAddress))
-            }
-          >
-            Back to previous screen
-          </Text.Block>
-        </div>
-      </CheckWrapper>
-    </ModalWrapper>
-  )
-
-  if (
-    checkingMembership ||
-    checkedMembershipSuccess ||
-    checkedMembershipError
-  ) {
-    return (
-      <React.Fragment>
-        {checkingMembership && <CheckStarted />}
-        {checkedMembershipSuccess && <CheckSuccess />}
-        {checkedMembershipError && <CheckError />}
-      </React.Fragment>
-    )
-  } else {
+  if (checkingMembership)
+    return <CheckInfo type="started" {...checkInfoProps} />
+  else if (checkedMembershipSuccess)
+    return <CheckInfo type="success" {...checkInfoProps} />
+  else if (checkedMembershipError)
+    return <CheckInfo type="error" linkBack {...checkInfoProps} />
+  else {
     return (
       <ModalWrapper title="Add Organization">
         <DisplayErrors
@@ -212,7 +217,7 @@ Similarly isMember is accessible via:
         <Field>
           <TextInputWithValidation
             wide
-            value={getFormValue('organizations', organizationId, 'address')}
+            value={address}
             onChange={e =>
               onChange(
                 e.target.value,

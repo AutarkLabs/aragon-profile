@@ -11,7 +11,7 @@ const OrganizationTile = ({ organizationData, removeItem }) => (
       <Text.Block size="large">{organizationData.address}</Text.Block>
     </div>
     <Icons>
-      <Button onClick={() => removeItem()}>
+      <Button onClick={removeItem}>
         <IconTrash width="16px" height="16px" color={theme.accent} />
       </Button>
     </Icons>

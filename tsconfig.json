@@ -17,5 +17,9 @@
     "sourceMap": true,
     "strict": true,
     "target": "esnext"
-  }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }

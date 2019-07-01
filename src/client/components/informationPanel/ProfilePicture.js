@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 
 import ImageMenu from '../ImageMenu'
 import { useProfile } from '../../hooks'
+import { ipfsAddress } from '../../../ipfs'
 
 import defaultImage from '../../../../assets/profile_avatar.svg'
 
@@ -53,7 +54,7 @@ const Container = styled.div`
   ${props =>
     props.imageCid
       ? css`
-          background-image: url(https://ipfs.infura.io/ipfs/${props.imageCid});
+          background-image: url(https://${ipfsAddress}/ipfs/${props.imageCid});
           background-size: 100%;
           background-color: white;
         `

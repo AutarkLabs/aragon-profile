@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import ImageMenu from './ImageMenu'
 import { useProfile } from '../hooks'
+import { ipfsAddress } from '../../ipfs'
 
 const CoverImage = () => {
   const {
@@ -37,7 +38,7 @@ const CoverImage = () => {
 }
 
 const getBackground = props =>
-  `url(https://ipfs.infura.io/ipfs/${props.imageCid})`
+  `url(https://${ipfsAddress}/ipfs/${props.imageCid})`
 
 const CoverBase = styled.div`
   width: 100%;

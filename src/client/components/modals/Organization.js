@@ -157,26 +157,11 @@ const Organization = ({
     }
   }
 
-  /*
-
-For future reference: ENS resolution can come directly from the Wrapper:
-
-  address = wrapper.resolveAddressIdentity('dune.aragonid.eth').then(...)
-
-Similarly isMember is accessible via:
-
-  membershipCOnfirmed = wrapper.checkMember('0xb4124cEB3451635DAcedd11767f004d8a28c6eE7')
-
-  */
-
   const validateAndSave = () => {
     const errors = {}
     let address = getFormValue('organizations', organizationId, 'address')
 
-    if (address.endsWith('.eth')) {
-      // address = resolveEnsDomain(address)
-      // if (!address) errors['organization'] = 'Could not resolve ENS address'
-    } else if (!validateDAOAddress(address))
+    if (!validateDAOAddress(address))
       errors['organization'] = 'Please provide valid DAO address'
 
     if (isEmpty(errors)) {

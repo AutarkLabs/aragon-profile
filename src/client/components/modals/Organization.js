@@ -9,6 +9,7 @@ import { ModalContext } from '../../wrappers/modal'
 import { close } from '../../stateManagers/modal'
 import { isEmpty } from 'lodash'
 import styled from 'styled-components'
+import { useProfileStates } from '../../hooks'
 import {
   requestedCheckMembership,
   requestedCheckMembershipReset,
@@ -125,15 +126,14 @@ const Organization = ({
   savingError,
 }) => {
   const [validationErrors, setValidationErrors] = useState({})
-  const { boxes, dispatch } = useContext(BoxContext)
+  const { dispatch } = useContext(BoxContext)
   const { dispatchModal } = useContext(ModalContext)
-
-  let {
+  const {
     checkingMembership,
     checkedMembershipSuccess,
     checkedMembershipError,
     error,
-  } = boxes[ethereumAddress]
+  } = useProfileStates()
 
   const checkMembershipError = checkedMembershipError
     ? { error: `Error checking membership: ${error.message}` }

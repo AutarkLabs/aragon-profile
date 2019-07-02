@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Text, Card, theme, Button, SafeLink, IconClose } from '@aragon/ui'
+import { Text, Card, theme, Button, SafeLink, IconClose, DropDown } from '@aragon/ui'
 
 import { ModalContext } from '../../wrappers/modal'
 import { useProfile } from '../../hooks'
@@ -229,6 +229,9 @@ const InformationCard = () => {
               <RenderLocation location={location} />
             </Fragment>
           )}
+          <DDT
+              items={['months','years','cent']}/>
+
           <RenderWebsite website={website} />
           <Separator />
           <RenderTwitter twitter={twitter} />
@@ -256,6 +259,16 @@ const InformationCard = () => {
     </StyledCard>
   )
 }
+
+
+const DDT = styled(DropDown)`
+border: 5px solid red !important;
+margin: 103px 0 !important;
+> * {
+  border: 5px solid yellow;
+}
+
+`
 
 const StyledCard = styled(Card).attrs({ width: '100%', height: 'auto' })`
   padding: 16px;

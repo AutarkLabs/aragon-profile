@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Checkbox } from '@aragon/ui'
-import { Label, DropDownWithValidation, DropDownWithValidationX} from './styled-components'
+import { Label, DropDownWithValidation } from './styled-components'
 import { years, months } from '../utils'
 
 const DateDropdowns = ({
@@ -29,7 +29,7 @@ const DateDropdowns = ({
           width: 48%;
         `}
       >
-        <DropDownWithValidationX
+        <DropDownWithValidation
           wide
           items={months}
           active={indexStartMonth}
@@ -44,7 +44,7 @@ const DateDropdowns = ({
           width: 48%;
         `}
       >
-        <DropDownWithValidationX
+        <DropDownWithValidation
           wide
           items={years}
           active={indexStartYear}

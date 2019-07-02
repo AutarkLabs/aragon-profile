@@ -28,7 +28,7 @@ const WorkHistoryTile = ({ workHistoryData, openModal, removeItem }) => (
           color={theme.textTertiary}
           css={`
             margin-left: 13px;
-            font-size: 15px;
+            font-size: 12px;
           `}
         >
           {displayStartEndDates(workHistoryData)}

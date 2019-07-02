@@ -33,7 +33,13 @@ const WorkHistoryPanel = () => {
         ))
       ) : (
         <Center>
-          <Text size="xlarge">You have no work history</Text>
+          <Text
+            css={`
+              font-size: 15px;
+            `}
+          >
+            You have no work history
+          </Text>
           {!viewMode && (
             <Text
               css={`

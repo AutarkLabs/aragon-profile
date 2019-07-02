@@ -13,14 +13,33 @@ const EducationHistoryTile = ({
 }) => (
   <SingleEducationItem>
     <div>
-      <Text.Block size="large">{educationHistoryData.organization}</Text.Block>
-      <Text.Block size="normal">
+      <Text.Block
+        css={`
+          font-size: 16px;
+          line-height: 1.8;
+          font-weight: bold;
+        `}
+      >
+        {educationHistoryData.organization}
+      </Text.Block>
+      <Text.Block
+        css={`
+          font-size: 15px;
+          line-height: 1.8;
+        `}
+      >
         {educationHistoryData.degree}
         {educationHistoryData.fieldOfStudy
           ? ', ' + educationHistoryData.fieldOfStudy
           : ''}
       </Text.Block>
-      <Dates>{displayStartEndDates(educationHistoryData)}</Dates>
+      <Dates
+        css={`
+          font-size: 12px;
+        `}
+      >
+        {displayStartEndDates(educationHistoryData)}
+      </Dates>
     </div>
     <Icons>
       <Button onClick={() => openModal()}>

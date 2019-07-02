@@ -35,7 +35,13 @@ const EducationPanel = () => {
         ))
       ) : (
         <Center>
-          <Text size="xlarge">You have no education</Text>
+          <Text
+            css={`
+              font-size: 15px;
+            `}
+          >
+            You have no education
+          </Text>
           {!viewMode && (
             <Text
               css={`

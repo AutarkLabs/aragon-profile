@@ -65,9 +65,33 @@ export const ErrorBar = styled.div`
   background-color: red;
 `
 
+
+const DDT = styled(DropDown)`
+margin-left: 20px;
+width: 20px;
+border: 5px solid red;
+text-transform: lowercase;
+font-variant: small-caps;
+&& {
+  5px solid green;
+  text-transform: lowercase;
+  font-variant: small-caps;
+    }
+
+
+`
+
 export const DropDownWithValidation = props => (
   <Fragment>
-    <DropDown {...props} />
+    <DDT {...props}/>
+    {props.error && <ErrorBar />}
+  </Fragment>
+)
+
+export const DropDownWithValidationX = props => (
+  <Fragment>
+    TESST
+    <DDT {...props} />
     {props.error && <ErrorBar />}
   </Fragment>
 )

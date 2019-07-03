@@ -10,7 +10,7 @@ import {
   IconVerified,
 } from '../styled-components'
 
-const PopoverCard = ({ social, setPopover }) => {
+const VerifySocial = ({ social, setPopover }) => {
   return (
     <VerifyCard>
       <Text.Block size="xlarge">Verify my {social}</Text.Block>
@@ -34,16 +34,12 @@ const PopoverCard = ({ social, setPopover }) => {
   )
 }
 
-PopoverCard.propTypes = {
-  social: PropTypes.string,
+VerifySocial.propTypes = {
+  social: PropTypes.string.isRequired,
   setPopover: PropTypes.func.isRequired,
 }
 
-export const RenderGitHub = ({
-  github: { username },
-  activePopover,
-  setPopover,
-}) => (
+export const GitHub = ({ github: { username }, activePopover, setPopover }) => (
   <Social>
     <IconGitHub width="13px" height="13px" color={theme.textTertiary} />
     {username ? (
@@ -56,28 +52,26 @@ export const RenderGitHub = ({
         <Button
           compact
           mode="outline"
-          css={`
-            position: relative;
-          `}
+          css="position: relative"
           onClick={() => setPopover('github')}
         >
           Verify my GitHub account
         </Button>
         {activePopover === 'github' && (
-          <PopoverCard social="GitHub" setPopover={setPopover} />
+          <VerifySocial social="GitHub" setPopover={setPopover} />
         )}
       </div>
     )}
   </Social>
 )
 
-RenderGitHub.propTypes = {
+GitHub.propTypes = {
   github: PropTypes.object.isRequired,
   activePopover: PropTypes.string.isRequired,
   setPopover: PropTypes.func.isRequired,
 }
 
-export const RenderTwitter = ({
+export const Twitter = ({
   twitter: { username },
   activePopover,
   setPopover,
@@ -94,23 +88,21 @@ export const RenderTwitter = ({
         <Button
           compact
           mode="outline"
-          css={`
-            position: relative;
-          `}
+          css="position: relative"
           onClick={() => setPopover('twitter')}
         >
           Verify my Twitter account
         </Button>
 
         {activePopover === 'twitter' && (
-          <PopoverCard social="Twitter" setPopover={setPopover} />
+          <VerifySocial social="Twitter" setPopover={setPopover} />
         )}
       </div>
     )}
   </Social>
 )
 
-RenderTwitter.propTypes = {
+Twitter.propTypes = {
   twitter: PropTypes.object,
   activePopover: PropTypes.string.isRequired,
   setPopover: PropTypes.func.isRequired,

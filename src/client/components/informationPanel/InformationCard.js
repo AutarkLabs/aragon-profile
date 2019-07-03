@@ -7,14 +7,8 @@ import { useProfile } from '../../hooks'
 import { open } from '../../stateManagers/modal'
 import { Social, IconPencil, IconEthereum } from '../styled-components'
 
-import { RenderGitHub, RenderTwitter } from './InformationSocials'
-import {
-  RenderName,
-  RenderDescription,
-  RenderLocation,
-  RenderWebsite,
-  RenderEmpty,
-} from './InformationItems'
+import { GitHub, Twitter } from './SocialInfo'
+import { Name, Description, Location, Website, Empty } from './BasicInfo'
 
 const InformationCard = () => {
   const {
@@ -42,28 +36,25 @@ const InformationCard = () => {
       <div>
         <Details>
           {!(name || description || location) ? (
-            <RenderEmpty handleOpenEdit={handleOpenEdit} />
+            <Empty handleOpenEdit={handleOpenEdit} />
           ) : (
             <Fragment>
-              <RenderName name={name} handleOpenEdit={handleOpenEdit} />
-              <RenderDescription
+              <Name name={name} handleOpenEdit={handleOpenEdit} />
+              <Description
                 description={description}
                 handleOpenEdit={handleOpenEdit}
               />
-              <RenderLocation
-                location={location}
-                handleOpenEdit={handleOpenEdit}
-              />
+              <Location location={location} handleOpenEdit={handleOpenEdit} />
             </Fragment>
           )}
-          <RenderWebsite website={website} />
+          <Website website={website} />
           <Separator />
-          <RenderTwitter
+          <Twitter
             twitter={twitter}
             activePopover={activePopover}
             setPopover={setPopover}
           />
-          <RenderGitHub
+          <GitHub
             github={github}
             activePopover={activePopover}
             setPopover={setPopover}

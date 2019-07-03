@@ -146,36 +146,42 @@ const UserInfoModal = ({ ethereumAddress, onSignatures }) => {
 
   return (
     <Modal visible={!!modal.type} padding="0">
-      {modal.type === 'basicInformation' && (
-        <BasicInformationModal {...modalsCommonProps} />
-      )}
+      <div
+        css={`
+          position: relative;
+        `}
+      >
+        {modal.type === 'basicInformation' && (
+          <BasicInformationModal {...modalsCommonProps} />
+        )}
 
-      {modal.type === 'educationHistory' && (
-        <EducationHistoryModal
-          educationHistoryId={modal.id || key}
-          {...modalsCommonProps}
-        />
-      )}
+        {modal.type === 'educationHistory' && (
+          <EducationHistoryModal
+            educationHistoryId={modal.id || key}
+            {...modalsCommonProps}
+          />
+        )}
 
-      {modal.type === 'workHistory' && (
-        <WorkHistoryModal
-          workHistoryId={modal.id || key}
-          {...modalsCommonProps}
-        />
-      )}
-      {modal.type === 'removeItem' && (
-        <RemoveItem
-          itemType={modal.itemType}
-          onRemove={removeItem}
-          removingError={removingError}
-        />
-      )}
-      {modal.type === '3boxState' && (
-        <BoxState
-          messageSigning={boxes[ethereumAddress].messageSigning}
-          signaturesRequired={modal.sigsRequired}
-        />
-      )}
+        {modal.type === 'workHistory' && (
+          <WorkHistoryModal
+            workHistoryId={modal.id || key}
+            {...modalsCommonProps}
+          />
+        )}
+        {modal.type === 'removeItem' && (
+          <RemoveItem
+            itemType={modal.itemType}
+            onRemove={removeItem}
+            removingError={removingError}
+          />
+        )}
+        {modal.type === '3boxState' && (
+          <BoxState
+            messageSigning={boxes[ethereumAddress].messageSigning}
+            signaturesRequired={modal.sigsRequired}
+          />
+        )}
+      </div>
     </Modal>
   )
 }

@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Button, TextInput, DropDown } from '@aragon/ui'
-
-import { EditTextField } from '../readOrEditFields'
+import { Button, TextInput } from '@aragon/ui'
+import { DateDropDown, EditTextField } from '../readOrEditFields'
 import editImage from '../../../../assets/pencil-black-tool-interface-symbol.png'
 
 export const AlignRight = styled.div`
@@ -67,7 +66,7 @@ export const ErrorBar = styled.div`
 
 export const DropDownWithValidation = props => (
   <Fragment>
-    <DropDown {...props} />
+    <DateDropDown {...props} />
     {props.error && <ErrorBar />}
   </Fragment>
 )

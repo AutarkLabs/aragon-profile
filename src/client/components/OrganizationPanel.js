@@ -4,7 +4,7 @@ import { useProfile } from '../hooks'
 import { ModalContext } from '../wrappers/modal'
 import OrganizationTile from './OrganizationTile'
 import { open, removeItem } from '../stateManagers/modal'
-import { Text, theme } from '@aragon/ui'
+import { Text, theme, Button } from '@aragon/ui'
 import styled from 'styled-components'
 
 const OrganizationPanel = () => {
@@ -36,16 +36,15 @@ const OrganizationPanel = () => {
         <Center>
           <Text size="xlarge">You have no organizations</Text>
           {!viewMode && (
-            <Text
-              css={`
-                cursor: pointer;
-              `}
+            <Button
+              compact
               size="small"
-              color={theme.accent}
               onClick={() => dispatchModal(open('organization'))}
             >
-              Add organisation
-            </Text>
+              <Text color={theme.accent} size="small">
+                Add organisation
+              </Text>
+            </Button>
           )}
         </Center>
       )}

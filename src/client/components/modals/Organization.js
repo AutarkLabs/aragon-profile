@@ -58,30 +58,26 @@ BackToPreviousScreen.propTypes = {
   dispatch: PropTypes.func.isRequired,
 }
 
-const CheckInfo = ({
-  type,
-  ethereumAddress,
-  address,
-  dispatch,
-  linkBack = false,
-}) => {
-  const checkInfoIcon = {
-    started: AnimationLoadingCircle,
-    success: IconSuccess,
-    error: IconError,
-  }
-  const checkInfoText = {
-    started: `Validating your membership to ${shortDAOAddress(address)}...`,
-    success: `We found ${shortDAOAddress(
-      address
-    )} and confirmed you are a member`,
-    error: `We could not verify your membership to ${shortDAOAddress(address)}`,
-  }
+const checkInfoIcon = {
+  started: AnimationLoadingCircle,
+  success: IconSuccess,
+  error: IconError,
+}
 
+const checkInfoText = address => ({
+  started: `Validating your membership to ${shortDAOAddress(address)}...`,
+  success: `We found ${shortDAOAddress(
+    address
+  )} and confirmed you are a member`,
+  error: `We could not verify your membership to ${shortDAOAddress(address)}`,
+})
+
+const CheckInfo = ({ type, ethereumAddress, address, dispatch, linkBack }) => {
+  const Icon = checkInfoIcon[type]
   return (
     <ModalWrapper>
       <CheckWrapper>
-        {checkInfoIcon[type]()}
+        <Icon />
         <div
           css={`
             height: 100%;
@@ -91,7 +87,7 @@ const CheckInfo = ({
             align-items: center;
           `}
         >
-          <Text.Block size="xxlarge">{checkInfoText[type]}</Text.Block>
+          <Text.Block size="xxlarge">{checkInfoText(address)[type]}</Text.Block>
 
           {linkBack && (
             <BackToPreviousScreen

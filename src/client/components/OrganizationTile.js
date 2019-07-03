@@ -7,9 +7,7 @@ import { IconTrash } from './styled-components'
 
 const OrganizationTile = ({ organizationData, removeItem }) => (
   <OrganizationItem>
-    <div>
-      <Text.Block size="large">{organizationData.address}</Text.Block>
-    </div>
+    <Text.Block size="large">{organizationData.address}</Text.Block>
     <Icons>
       <Button onClick={removeItem}>
         <IconTrash width="16px" height="16px" color={theme.accent} />

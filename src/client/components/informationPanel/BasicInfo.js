@@ -51,9 +51,11 @@ export const Location = ({ location, handleOpenEdit }) => (
         {location}
       </Text>
     ) : (
-      <Button compact size="small" onClick={handleOpenEdit} css="width: 80px">
-        <Text color={theme.accent}>Add location</Text>
-      </Button>
+      <div>
+        <Button compact size="tiny" onClick={handleOpenEdit} css="padding: 0">
+          <Text color={theme.accent}>Add location</Text>
+        </Button>
+      </div>
     )}
   </Social>
 )
@@ -80,7 +82,7 @@ export const Empty = handleOpenEdit => (
     <Text.Block css="text-align: center" size="xlarge">
       You have no name, bio or location
     </Text.Block>
-    <Button onClick={handleOpenEdit}>
+    <Button onClick={handleOpenEdit} css="padding: 0">
       <Text size="small" color={theme.accent}>
         Add basic information
       </Text>

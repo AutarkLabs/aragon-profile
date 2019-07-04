@@ -1,7 +1,8 @@
-import React, { useContext, useCallback } from 'react'
+import React, { useState, useContext, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useDropzone } from 'react-dropzone'
+import ClickOutHandler from 'react-onclickout'
 import { ipfsGateway } from '../../ipfs'
 import { removeItem } from '../stateManagers/modal'
 import { BoxContext } from '../wrappers/box'
@@ -28,6 +29,8 @@ const ImageMenu = ({
   imageTitle,
   onSignatures,
 }) => {
+  const [activeImageMenu, toggleImageMenu] = useState('')
+
   const { boxes, dispatch } = useContext(BoxContext)
   const { dispatchModal } = useContext(ModalContext)
   const { dragState } = useContext(DragContext)
@@ -102,29 +105,46 @@ const ImageMenu = ({
     imageExists &&
     boxes[ethereumAddress].publicProfile[imageTag][0].contentUrl['/']
 
+  const handleToggleMenu = imageTag => {
+    imageTag === activeImageMenu
+      ? toggleImageMenu('')
+      : toggleImageMenu(imageTag)
+  }
+
   return (
-    <ImageMenuStyled
-      top={top}
-      right={right}
-      dragging={dragState.dragging}
-      {...getRootProps({
-        className: 'dropzone',
-        isDragActive,
-        isDragAccept,
-        isDragReject,
-        imageCid,
-      })}
-    >
-      {' '}
-      <div>Update {imageTitle} photo</div>
-      <input {...getInputProps({ disabled: false })} />
-      <div onClick={open}>Upload new image</div>
-      {imageExists && (
-        <div onClick={() => dispatchModal(removeItem(imageCid, imageTag))}>
-          Delete
+    <ClickOutHandler onClickOut={() => toggleImageMenu('')}>
+      <ImageMenuStyled
+        top={top}
+        right={right}
+        dragging={dragState.dragging}
+        active={imageTag === activeImageMenu}
+        {...getRootProps({
+          className: 'dropzone',
+          isDragActive,
+          isDragAccept,
+          isDragReject,
+          imageCid,
+        })}
+      >
+        <div onClick={() => handleToggleMenu(imageTag)}>
+          Update {imageTitle} photo
         </div>
-      )}
-    </ImageMenuStyled>
+
+        {activeImageMenu === imageTag && (
+          <React.Fragment>
+            <input {...getInputProps({ disabled: false })} />
+            <div onClick={open}>Upload new image</div>
+            {imageExists && (
+              <div
+                onClick={() => dispatchModal(removeItem(imageCid, imageTag))}
+              >
+                Delete
+              </div>
+            )}
+          </React.Fragment>
+        )}
+      </ImageMenuStyled>
+    </ClickOutHandler>
   )
 }
 
@@ -139,71 +159,63 @@ ImageMenu.propTypes = {
 }
 
 const getBorder = props => {
-  let color
+  if (props.isDragAccept) return `2px #00e676 dashed;`
+  if (props.isDragReject) return `2px #ff1744 dashed;`
+  if (props.isDragActive) return `2px #2196f3 dashed;`
+  if (props.dragging) return `2px #446fe9 dashed;`
 
-  if (props.isDragAccept) color = '#00e676'
-  else if (props.isDragReject) color = '#ff1744'
-  else if (props.isDragActive) color = '#2196f3'
-  else if (props.dragging) color = '#446fe9'
-  if (color) return `2px ${color} dashed`
-  else return '2px white solid'
+  return `1px solid rgba(209, 209, 209, ${getBackgroundAlpha(props)});`
 }
 
 const isVisible = props =>
   props.isDragAccept ||
   props.isDragReject ||
   props.isDragActive ||
-  props.dragging
+  props.dragging ||
+  props.active
 
-const getVisibility = props => {
-  if (isVisible(props)) return 'visible'
-  else return 'hidden'
-}
-const getOpacity = props => {
-  if (isVisible(props)) return '0.8'
-  else return '0'
-}
+const getVisibility = props => (isVisible(props) ? 'visible' : 'hidden')
+
+const getBackgroundAlpha = props => (isVisible(props) ? '0.75' : '0')
 
 const ImageMenuStyled = styled.div`
   .imageHover:hover & {
     visibility: visible;
-    transition: visibility 0.3s linear, opacity 0.3s linear;
-    visibility: visible;
-    opacity: 0.8;
+    transition: all 0.3s linear;
+    background-color: rgba(255, 255, 255, 0.75);
+    color: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(209, 209, 209, 0.75);
   }
-  border: ${props => getBorder(props)};
-  border-radius: 3px;
-  font-size: 12px;
-  transition: visibility 0.3s linear, opacity 0.3s linear;
+
   visibility: ${props => getVisibility(props)};
-  opacity: ${props => getOpacity(props)};
+  transition: all 0.3s linear;
+
+  background-color: rgba(255, 255, 255, ${props => getBackgroundAlpha(props)});
+  color: rgba(0, 0, 0, ${props => getBackgroundAlpha(props)});
+  border: ${props => getBorder(props)};
+
+  border-radius: 2px;
+  font-size: 12px;
   width: 156px;
   z-index: 1;
   position: absolute;
   top: ${({ top }) => `${top}px`};
   right: ${({ right }) => `${right}px`};
-  padding: 1px;
-  background: white;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.03);
+
+  > * {
+    padding: 7px 12px;
+  }
   > :first-child {
-    background: #d1d1d1;
-    opacity: 0.6;
     font-weight: bold;
     font-size: 13px;
   }
+  > :not(:first-child) :hover {
+    background: #eee;
+    cursor: pointer;
+  }
   > :not(:first-child) {
-    background: white;
-    opacity: 0.9;
-    :hover {
-      opacity: 1;
-      background: #eee;
-      cursor: pointer;
-    }
-  }
-  > :not(:last-child) {
-    margin-bottom: 1px;
-  }
-  > * {
-    padding: 7px 12px;
+    background: #fff;
   }
 `
 

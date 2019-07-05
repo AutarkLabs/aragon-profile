@@ -49,6 +49,8 @@ export const TextInputWithValidation = styled(TextInput)`
 
 export const TextMultilineWithValidation = styled(TextInput.Multiline)`
   border-color: ${props => (props.error ? 'red' : 'default')};
+  padding: 10px 10px;
+  height: 80px;
 `
 
 export const Label = styled.div`

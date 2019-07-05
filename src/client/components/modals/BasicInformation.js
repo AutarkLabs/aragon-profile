@@ -2,7 +2,11 @@ import React, { useState } from 'react'
 import { Button, TextInput } from '@aragon/ui'
 import PropTypes from 'prop-types'
 import { ModalWrapper, TwoColumnsRow, DisplayErrors } from './ModalWrapper'
-import { Label, TextInputWithValidation } from '../styled-components'
+import {
+  Label,
+  TextInputWithValidation,
+  TextMultilineWithValidation,
+} from '../styled-components'
 import { validateName, validateWebsite } from '../../utils/validation'
 
 const BasicInformation = ({
@@ -53,11 +57,7 @@ const BasicInformation = ({
 
       <div>
         <Label>Bio</Label>
-        <TextInput.Multiline
-          css={`
-            height: 80px;
-            padding: 5px 10px;
-          `}
+        <TextMultilineWithValidation
           wide
           value={getFormValue('description')}
           onChange={e => onChange(e.target.value, 'description')}

@@ -52,9 +52,9 @@ export const Location = ({ location, handleOpenEdit }) => (
       </Text>
     ) : (
       <div>
-        <Button compact size="tiny" onClick={handleOpenEdit} css="padding: 0">
-          <Text color={theme.accent}>Add location</Text>
-        </Button>
+        <Link.Button size="tiny" onClick={handleOpenEdit}>
+          Add location
+        </Link.Button>
       </div>
     )}
   </Social>

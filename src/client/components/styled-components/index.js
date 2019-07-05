@@ -20,16 +20,25 @@ export const Social = styled.div`
     flex: 1;
   }
 `
-export const Link = styled(SafeLink).attrs({
-  target: '_blank',
-})`
-  color: ${theme.accent};
-  text-decoration: none;
-  &:hover,
-  &:focus {
-    text-decoration: underline;
-  }
-`
+
+const linkStyles = {
+  color: theme.accent,
+  'text-decoration': 'none',
+  '&:hover, &:focus': {
+    'text-decoration': 'underline',
+  },
+}
+
+export const Link = styled(SafeLink).attrs({ target: '_blank' })(linkStyles)
+
+// a Button styled to look like a Link
+Link.Button = styled(Button).attrs({
+  mode: 'text',
+})({
+  ...linkStyles,
+  padding: 0,
+})
+
 export const EditIcon = styled.img.attrs({ src: editImage })`
   width: 25px;
 `

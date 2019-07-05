@@ -9,6 +9,7 @@ export const fetchingPublicProfile = () => ({
   loadingPublicProf: true,
   loadedPublicProf: false,
   loadedPublicProfSuccess: false,
+  noPublicProfileFound: false,
   // for tracking https://projects.invisionapp.com/d/main#/console/17511474/363488290/preview
   savingProfile: false,
   savedProfile: false,
@@ -71,6 +72,15 @@ export const fetchedPublicProfileErr = (state, error) => ({
   loadingPublicProf: false,
   loadedPublicProf: true,
   loadedPublicProfSuccess: true,
+  error,
+})
+
+export const noPublicProfileFound = (state, error) => ({
+  ...state,
+  loadingPublicProf: false,
+  loadedPublicProf: false,
+  loadedPublicProfSuccess: false,
+  noPublicProfileFound: true,
   error,
 })
 

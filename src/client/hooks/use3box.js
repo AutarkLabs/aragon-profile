@@ -10,6 +10,7 @@ import {
   requestedProfileUnlock,
   profileUnlockSuccess,
   profileUnlockFailure,
+  noPublicProfileFound,
 } from '../stateManagers/box'
 
 const use3Box = (account, onSignatures) => {
@@ -36,7 +37,11 @@ const use3Box = (account, onSignatures) => {
         try {
           const profile = new Profile(account, onSignatures)
           const publicProfile = await profile.getPublic()
-          dispatch(fetchedPublicProfile(account, publicProfile))
+          if (Object.keys(publicProfile).length > 0) {
+            dispatch(fetchedPublicProfile(account, publicProfile))
+          } else {
+            dispatch(noPublicProfileFound(account))
+          }
           unlockIfLoggedIn(profile)
         } catch (error) {
           dispatch(fetchedPublicProfileError(account, error))

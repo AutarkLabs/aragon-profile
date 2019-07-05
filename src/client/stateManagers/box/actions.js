@@ -2,6 +2,7 @@ import {
   FETCHING_PUBLIC_PROFILE,
   FETCHED_PUBLIC_PROFILE_SUCCESS,
   FETCHED_PUBLIC_PROFILE_ERROR,
+  NO_PUBLIC_PROFILE_FOUND,
   REQUESTED_PROFILE_UNLOCK,
   PROFILE_UNLOCK_SUCCESS,
   PROFILE_UNLOCK_FAILURE,
@@ -50,6 +51,14 @@ export const fetchedPublicProfileError = (ethereumAddress, error) => ({
   },
   payload: {},
   error,
+})
+
+export const noPublicProfileFound = ethereumAddress => ({
+  type: NO_PUBLIC_PROFILE_FOUND,
+  meta: {
+    ethereumAddress,
+  },
+  payload: {},
 })
 
 export const requestedProfileUnlock = (ethereumAddress, hasBox) => ({

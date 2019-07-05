@@ -95,4 +95,6 @@ export const isViewMode = (connectedAccount, queryParams) => {
   }
 }
 
+export const assetsPath = asset => asset.replace(/.*\//, '/')
+
 export * from './login'

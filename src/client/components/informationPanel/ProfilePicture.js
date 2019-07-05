@@ -26,7 +26,7 @@ const ProfilePicture = () => {
         <ImageMenu
           ethereumAddress={ethereumAddress}
           top={topMenuPos}
-          right={-6}
+          right={-12}
           imageExists={!!hasImage}
           imageTag="image"
           imageTitle="Profile"

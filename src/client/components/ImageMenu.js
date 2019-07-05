@@ -10,6 +10,7 @@ import { ModalContext } from '../wrappers/modal'
 import { DragContext } from '../wrappers/drag'
 import { image } from '../../modules/things'
 import { unlockAndCreateBoxIfRequired } from '../utils'
+import { IconCamera } from './styled-components'
 
 import {
   uploadingImage,
@@ -126,16 +127,23 @@ const ImageMenu = ({
           imageCid,
         })}
       >
-        <div onClick={() => handleToggleMenu(imageTag)}>
+        <div
+          css="padding: 8px 8px 6px 8px"
+          onClick={() => handleToggleMenu(imageTag)}
+        >
+          <IconCamera width="16px" height="16px" css="margin-right: 8px" />
           Update {imageTitle} photo
         </div>
 
         {activeImageMenu === imageTag && (
           <React.Fragment>
             <input {...getInputProps({ disabled: false })} />
-            <div onClick={open}>Upload new image</div>
+            <div css="padding: 8px 12px 6px 12px" onClick={open}>
+              Upload new image
+            </div>
             {imageExists && (
               <div
+                css="padding: 6px 12px 8px 12px"
                 onClick={() => dispatchModal(removeItem(imageCid, imageTag))}
               >
                 Delete
@@ -176,15 +184,15 @@ const isVisible = props =>
 
 const getVisibility = props => (isVisible(props) ? 'visible' : 'hidden')
 
-const getBackgroundAlpha = props => (isVisible(props) ? '0.75' : '0')
+const getBackgroundAlpha = props => (isVisible(props) ? '0.8' : '0')
 
 const ImageMenuStyled = styled.div`
   .imageHover:hover & {
     visibility: visible;
     transition: all 0.3s linear;
-    background-color: rgba(255, 255, 255, 0.75);
-    color: rgba(0, 0, 0, 0.75);
-    border: 1px solid rgba(209, 209, 209, 0.75);
+    background-color: rgba(255, 255, 255, 0.8);
+    color: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(209, 209, 209, 0.8);
   }
 
   visibility: ${props => getVisibility(props)};
@@ -196,19 +204,17 @@ const ImageMenuStyled = styled.div`
 
   border-radius: 2px;
   font-size: 12px;
-  width: 156px;
+  width: 170px;
   z-index: 1;
   position: absolute;
   top: ${({ top }) => `${top}px`};
   right: ${({ right }) => `${right}px`};
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.03);
 
-  > * {
-    padding: 7px 12px;
-  }
   > :first-child {
     font-weight: bold;
     font-size: 13px;
+    display: flex;
   }
   > :not(:first-child) :hover {
     background: #eee;

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Viewport } from '@aragon/ui'
 
 import InformationPanel from './informationPanel'
-import OrganizationPanel from './OrganizationPanel'
+// import OrganizationPanel from './OrganizationPanel'
 import EducationPanel from './EducationPanel'
 import WorkHistoryPanel from './WorkHistoryPanel'
 import CoverImage from './CoverImage'
@@ -20,7 +20,9 @@ const Profile = () => (
         below(640) ? (
           <SingleColumn>
             <InformationPanel />
+            {/*
             <OrganizationPanel />
+            */}
             <WorkHistoryPanel />
             <EducationPanel />
           </SingleColumn>

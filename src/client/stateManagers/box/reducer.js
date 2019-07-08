@@ -25,6 +25,10 @@ import {
   REQUESTED_PROFILE_OPEN,
   REQUESTED_PROFILE_OPEN_SUCCESS,
   REQUESTED_PROFILE_OPEN_FAILURE,
+  REQUEST_CHECK_MEMBERSHIP,
+  REQUEST_CHECK_MEMBERSHIP_RESET,
+  REQUEST_CHECK_MEMBERSHIP_SUCCESS,
+  REQUEST_CHECK_MEMBERSHIP_ERROR,
 } from './actionTypes'
 
 import {
@@ -54,6 +58,10 @@ import {
   requestProfileOpen,
   requestProfileOpenSuccess,
   requestProfileOpenError,
+  requestedCheckMembership,
+  requestedCheckMembershipReset,
+  requestedCheckMembershipSuccess,
+  requestedCheckMembershipError,
 } from './states'
 
 const logStateUpdate = (action, prevState, nextState) => {
@@ -179,6 +187,44 @@ const boxReducer = (prevState, action) => {
       logStateUpdate(action, prevState, nextState)
       return nextState
     }
+    case REQUEST_CHECK_MEMBERSHIP: {
+      const nextState = { ...prevState }
+      const ethereumAddress = action.meta.ethereumAddress
+      nextState[ethereumAddress] = requestedCheckMembership(
+        prevState[ethereumAddress]
+      )
+      logStateUpdate(action, prevState, nextState)
+      return nextState
+    }
+    case REQUEST_CHECK_MEMBERSHIP_RESET: {
+      const nextState = { ...prevState }
+      const ethereumAddress = action.meta.ethereumAddress
+      nextState[ethereumAddress] = requestedCheckMembershipReset(
+        prevState[ethereumAddress]
+      )
+      logStateUpdate(action, prevState, nextState)
+      return nextState
+    }
+    case REQUEST_CHECK_MEMBERSHIP_SUCCESS: {
+      const nextState = { ...prevState }
+      const ethereumAddress = action.meta.ethereumAddress
+      nextState[ethereumAddress] = requestedCheckMembershipSuccess(
+        prevState[ethereumAddress]
+      )
+      logStateUpdate(action, prevState, nextState)
+      return nextState
+    }
+    case REQUEST_CHECK_MEMBERSHIP_ERROR: {
+      const nextState = { ...prevState }
+      const ethereumAddress = action.meta.ethereumAddress
+      nextState[ethereumAddress] = requestedCheckMembershipError(
+        prevState[ethereumAddress],
+        action.error
+      )
+      logStateUpdate(action, prevState, nextState)
+      return nextState
+    }
+
     case REQUESTED_PROFILE_SAVE: {
       const nextState = { ...prevState }
       const ethereumAddress = action.meta.ethereumAddress

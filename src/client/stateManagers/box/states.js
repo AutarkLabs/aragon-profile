@@ -46,12 +46,16 @@ export const fetchingPublicProfile = () => ({
     description: '',
     workHistory: {},
     educationHistory: {},
+    organizations: {},
   },
   changed: [],
   // to display image loading status
   uploadingImage: false,
   uploadedImageSuccess: false,
   uploadedImage: false,
+  checkingMembership: false,
+  checkedMembershipSuccess: false,
+  checkedMembershipError: false,
 })
 
 export const fetchedPublicProfileSuccess = (state, profile) => {
@@ -181,6 +185,35 @@ export const uploadedImageError = (state, error) => ({
   uploadedImageSuccess: false,
   uploadedImage: true,
   image_error: error,
+})
+
+export const requestedCheckMembership = state => ({
+  ...state,
+  checkingMembership: true,
+  checkedMembershipSuccess: false,
+  checkedMembershipError: false,
+})
+
+export const requestedCheckMembershipReset = state => ({
+  ...state,
+  checkingMembership: false,
+  checkedMembershipSuccess: false,
+  checkedMembershipError: false,
+})
+
+export const requestedCheckMembershipSuccess = state => ({
+  ...state,
+  checkingMembership: false,
+  checkedMembershipSuccess: true,
+  checkedMembershipError: false,
+})
+
+export const requestedCheckMembershipError = (state, error) => ({
+  ...state,
+  checkingMembership: false,
+  checkedMembershipSuccess: false,
+  checkedMembershipError: true,
+  error,
 })
 
 export const requestedSaveProfile = state => ({

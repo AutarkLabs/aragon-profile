@@ -25,6 +25,10 @@ import {
   REQUESTED_PROFILE_OPEN,
   REQUESTED_PROFILE_OPEN_SUCCESS,
   REQUESTED_PROFILE_OPEN_FAILURE,
+  REQUEST_CHECK_MEMBERSHIP,
+  REQUEST_CHECK_MEMBERSHIP_RESET,
+  REQUEST_CHECK_MEMBERSHIP_SUCCESS,
+  REQUEST_CHECK_MEMBERSHIP_ERROR,
 } from './actionTypes'
 
 export const fetchingProfile = ethereumAddress => ({
@@ -127,6 +131,38 @@ export const uploadedImage = (ethereumAddress, imageTag, imageContentHash) => ({
 
 export const uploadedImageFailure = (ethereumAddress, error) => ({
   type: UPLOADED_IMAGE_FAILURE,
+  meta: {
+    ethereumAddress,
+  },
+  error,
+})
+
+export const requestedCheckMembership = ethereumAddress => ({
+  type: REQUEST_CHECK_MEMBERSHIP,
+  meta: {
+    ethereumAddress,
+  },
+})
+
+export const requestedCheckMembershipReset = ethereumAddress => ({
+  type: REQUEST_CHECK_MEMBERSHIP_RESET,
+  meta: {
+    ethereumAddress,
+  },
+})
+
+export const requestedCheckMembershipSuccess = (ethereumAddress, token) => ({
+  type: REQUEST_CHECK_MEMBERSHIP_SUCCESS,
+  meta: {
+    ethereumAddress,
+  },
+  payload: {
+    token,
+  },
+})
+
+export const requestedCheckMembershipError = (ethereumAddress, error) => ({
+  type: REQUEST_CHECK_MEMBERSHIP_ERROR,
   meta: {
     ethereumAddress,
   },

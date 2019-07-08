@@ -23,10 +23,10 @@ const EducationHistoryTile = ({
       <Dates>{displayStartEndDates(educationHistoryData)}</Dates>
     </div>
     <Icons>
-      <Button onClick={() => openModal()}>
+      <Button onClick={openModal}>
         <IconPencil width="16px" height="16px" color={theme.accent} />
       </Button>
-      <Button onClick={() => removeItem()}>
+      <Button onClick={removeItem}>
         <IconTrash width="16px" height="16px" color={theme.accent} />
       </Button>
     </Icons>

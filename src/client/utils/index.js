@@ -28,9 +28,11 @@ export const reformatNestedFields = forms => {
       copiedForms.educationHistory
     )
   }
-
   if (copiedForms.workHistory) {
     copiedForms.workHistory = assignArbitraryIds(copiedForms.workHistory)
+  }
+  if (copiedForms.organizations) {
+    copiedForms.organizations = assignArbitraryIds(copiedForms.organizations)
   }
   return copiedForms
 }
@@ -93,6 +95,18 @@ export const isViewMode = (connectedAccount, queryParams) => {
   if (!isAddress(queryParams[0])) {
     return true
   }
+}
+
+export const shortDAOAddress = (address = '') => {
+  if (address.endsWith('.eth')) return address
+  return address.slice(0, 6) + '…' + address.slice(-4)
+}
+
+export const fakeIsMember = async (ethereumAddress, address) => {
+  let promise = new Promise((resolve, reject) => {
+    setTimeout(() => resolve(Math.random() >= 0.99), 2000)
+  })
+  return promise
 }
 
 export * from './login'

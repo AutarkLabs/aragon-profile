@@ -22,6 +22,7 @@ const use3Box = (account, onSignatures) => {
       if (isLoggedIn) {
         dispatch(requestedProfileUnlock(account))
         try {
+throw new Error('really weird error occurred')
           await profile.unlockAndSync()
           dispatch(profileUnlockSuccess(account, profile))
         } catch (error) {

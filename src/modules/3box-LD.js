@@ -94,7 +94,8 @@ export const handleImage = publicProfile => {
 
   const cid = isProperlyTyped && publicProfile.image[0].contentUrl['/']
   const isIPLD = isIPFS.cid(cid)
-
+throw new Error('weird error 2')
+  
   if (isIPLD) {
     delete publicProfile.image
     return { ...publicProfile, image: schemaDotOrgImage(cid) }

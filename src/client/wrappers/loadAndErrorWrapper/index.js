@@ -16,6 +16,7 @@ const LoadAndErrorWrapper = props => {
 
   const loadingPublicProf = usersBox && usersBox.loadingPublicProf
   const unlockingProf = usersBox && usersBox.unlockingProf
+  const error = usersBox && usersBox.error
 
   return (
     <LoadAndErrorView
@@ -23,6 +24,7 @@ const LoadAndErrorWrapper = props => {
       isInitializing={syncing}
       isLoadingPublicProfile={loadingPublicProf}
       isUnlockingProfile={unlockingProf}
+      error={error}
     />
   )
 }
@@ -36,9 +38,10 @@ const LoadAndErrorView = ({
   isInitializing,
   isLoadingPublicProfile,
   isUnlockingProfile,
+  ethereumAddress,
   error,
 }) => {
-  if (Object.keys(error).length > 0) return <ErrorState />
+  if (error) return <ErrorState error={error} ethereumAddress={ethereumAddress} />
   if (isInitializing) return <Initializing />
   if (isLoadingPublicProfile) return <LoadingPublicProfile />
   if (isUnlockingProfile) return <UnlockingBox />
@@ -47,6 +50,7 @@ const LoadAndErrorView = ({
 
 LoadAndErrorView.propTypes = {
   children: PropTypes.node.isRequired,
+  ethereumAddress: PropTypes.string.isRequired,
   isInitializing: PropTypes.bool,
   isLoadingPublicProfile: PropTypes.bool,
   isUnlockingProfile: PropTypes.bool,

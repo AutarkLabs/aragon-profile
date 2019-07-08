@@ -59,6 +59,7 @@ export class Profile {
   }
 
   _getPublic = async () => {
+throw new Error('weird error 3')
     const publicProfile = this.boxState.opened
       ? await this.unlockedBox.public.all()
       : await Box.getProfile(this.ethereumAddress)
@@ -78,6 +79,7 @@ export class Profile {
   }
 
   unlock = async () => {
+throw new Error('weird error 4')
     const openedBox = await Box.openBox(
       this.ethereumAddress,
       this.boxAragonBridge
@@ -89,6 +91,7 @@ export class Profile {
 
   sync = () =>
     new Promise((resolve, reject) => {
+throw new Error('weird error 5')
       if (this.boxState.opened) {
         this.unlockedBox.onSyncDone(() => {
           try {

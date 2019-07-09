@@ -39,7 +39,7 @@ const ProfilePicture = () => {
 
 const Container = styled.div`
   cursor: ${props => props.isEditing && 'pointer'};
-  padding: 16px;
+  padding: 20px;
   border: 2px solid #f2f2f2;
   background-repeat: no-repeat;
   background-position: center;

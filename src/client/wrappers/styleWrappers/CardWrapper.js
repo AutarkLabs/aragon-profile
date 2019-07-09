@@ -53,7 +53,7 @@ CardWrapper.propTypes = {
 }
 
 const StyledCard = styled(Card).attrs({ width: '100%', height: 'auto' })`
-  padding: 16px;
+  padding: 20px;
   > :not(:last-child) {
     margin-bottom: 13px;
     padding-bottom: 13px;

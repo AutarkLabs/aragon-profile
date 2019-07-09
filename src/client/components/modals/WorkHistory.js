@@ -96,9 +96,6 @@ const WorkHistory = ({
       <div>
         <Label>Description</Label>
         <TextMultilineWithValidation
-          css={`
-            height: 80px;
-          `}
           wide
           value={getFormValue('workHistory', workHistoryId, 'description')}
           onChange={e =>

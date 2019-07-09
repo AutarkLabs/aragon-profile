@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Button, TextInput, DropDown } from '@aragon/ui'
+import { Button, TextInput, DropDown, SafeLink, theme } from '@aragon/ui'
 
 import { EditTextField } from '../readOrEditFields'
 import editImage from '../../../../assets/pencil-black-tool-interface-symbol.png'
@@ -12,6 +12,32 @@ export const AlignRight = styled.div`
   align-items: flex-end;
   cursor: pointer;
 `
+export const Social = styled.div`
+  display: flex;
+  align-items: center;
+  > :nth-child(2) {
+    margin-left: 8px;
+    flex: 1;
+  }
+`
+
+const linkStyles = {
+  color: theme.accent,
+  'text-decoration': 'none',
+  '&:hover, &:focus': {
+    'text-decoration': 'underline',
+  },
+}
+
+export const Link = styled(SafeLink).attrs({ target: '_blank' })(linkStyles)
+
+// a Button styled to look like a Link
+Link.Button = styled(Button).attrs({
+  mode: 'text',
+})({
+  ...linkStyles,
+  padding: 0,
+})
 
 export const EditIcon = styled.img.attrs({ src: editImage })`
   width: 25px;
@@ -49,6 +75,8 @@ export const TextInputWithValidation = styled(TextInput)`
 
 export const TextMultilineWithValidation = styled(TextInput.Multiline)`
   border-color: ${props => (props.error ? 'red' : 'default')};
+  padding: 10px 10px;
+  height: 80px;
 `
 
 export const Label = styled.div`
@@ -85,3 +113,7 @@ export { default as IconVerified } from './IconVerified'
 export { default as AnimationLoading } from './AnimationLoading'
 export { default as IconGlobe } from './IconGlobe'
 export { default as IconCamera } from './IconCamera'
+export { default as AnimationLoadingCircle } from './AnimationLoadingCircle'
+export { default as IconSuccess } from './IconSuccess'
+export { default as IconError } from './IconError'
+

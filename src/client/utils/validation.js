@@ -11,6 +11,11 @@ validator.addFormat('address', {
   validate: isAddress,
 })
 
+export const validateDAOAddress = validator.compile({
+  type: 'string',
+  format: 'address',
+})
+
 export const validateWorkPlace = validator.compile({
   type: 'string',
   minLength: 1,

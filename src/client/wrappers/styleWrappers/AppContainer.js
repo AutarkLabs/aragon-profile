@@ -9,7 +9,7 @@ const AppContainer = ({ children }) => {
       appBar={<AppBar title="Profile" />}
       padding={0}
       css={`
-        background-color: #F7FBFD;
+        background-color: #f7fbfd;
         background-image: url(${logoBackground});
         background-position: 50% 50%;
         background-repeat: no-repeat;

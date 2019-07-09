@@ -2,7 +2,6 @@ import React, { useState, useContext, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useDropzone } from 'react-dropzone'
-import ClickOutHandler from 'react-onclickout'
 import { ipfsGateway } from '../../ipfs'
 import { removeItem } from '../stateManagers/modal'
 import { BoxContext } from '../wrappers/box'
@@ -113,7 +112,7 @@ const ImageMenu = ({
   }
 
   return (
-    <ClickOutHandler onClickOut={() => toggleImageMenu('')}>
+    <div tabIndex="-1" onBlur={() => toggleImageMenu('')}>
       <ImageMenuStyled
         top={top}
         right={right}
@@ -152,7 +151,7 @@ const ImageMenu = ({
           </React.Fragment>
         )}
       </ImageMenuStyled>
-    </ClickOutHandler>
+    </div>
   )
 }
 

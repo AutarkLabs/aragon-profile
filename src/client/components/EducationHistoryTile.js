@@ -35,6 +35,7 @@ const EducationHistoryTile = ({
     )}
   </SingleEducationItem>
 )
+
 const SingleEducationItem = styled.div`
   position: relative;
 `
@@ -73,11 +74,7 @@ EducationHistoryTile.propTypes = {
   }).isRequired,
   openModal: PropTypes.func.isRequired,
   removeItem: PropTypes.func.isRequired,
-  viewMode: PropTypes.bool,
-}
-
-EducationHistoryTile.defaultProps = {
-  viewMode: true,
+  viewMode: PropTypes.bool.isRequired,
 }
 
 export default EducationHistoryTile

@@ -31,7 +31,7 @@ const EducationPanel = () => {
             educationHistoryData={educationHistory[id]}
             openModal={() => dispatchModal(open('educationHistory', id))}
             removeItem={() => dispatchModal(removeItem(id, 'educationHistory'))}
-            viewMode
+            viewMode={viewMode}
           />
         ))
       ) : (

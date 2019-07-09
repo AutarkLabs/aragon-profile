@@ -87,11 +87,7 @@ WorkHistoryTile.propTypes = {
   }).isRequired,
   openModal: PropTypes.func.isRequired,
   removeItem: PropTypes.func.isRequired,
-  viewMode: PropTypes.bool,
-}
-
-WorkHistoryTile.defaultProps = {
-  viewMode: true,
+  viewMode: PropTypes.bool.isRequired,
 }
 
 export default WorkHistoryTile

@@ -31,7 +31,8 @@
           "^react(-dom)?$",
           "^styled-components$",
           "^@aragon/ui$",
-          "^prop-types$"
+          "^prop-types$",
+          "^web3-utils$"
         ]
       }
     ],

@@ -29,7 +29,7 @@ const WorkHistoryPanel = () => {
             workHistoryData={workHistory[id]}
             openModal={() => dispatchModal(open('workHistory', id))}
             removeItem={() => dispatchModal(removeItem(id, 'workHistory'))}
-            viewMode
+            viewMode={viewMode}
           />
         ))
       ) : (

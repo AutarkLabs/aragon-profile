@@ -1,6 +1,6 @@
 {
   "name": "@openworklabs/aragon-profile",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "a single profile component for the Aragon Client",
   "author": "Schwartz10",
   "license": "MIT",
@@ -28,9 +28,9 @@
   "dependencies": {
     "3box": "^1.9.0",
     "ajv": "^6.10.0",
+    "dayjs": "^1.8.14",
     "ipfs-http-client": "^32.0.1",
     "lodash.clonedeep": "^4.5.0",
-    "moment": "^2.24.0",
     "react-dropzone": "^10.1.5",
     "uuid": "^3.3.2"
   },

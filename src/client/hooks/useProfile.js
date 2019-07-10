@@ -15,6 +15,7 @@ const defaultValues = {
   github: { username: '', proof: '' },
   userLoaded: false,
   viewMode: true,
+  organizations: {},
 }
 
 const useProfile = () => {
@@ -36,6 +37,7 @@ const useProfile = () => {
     workHistory,
     twitter,
     github,
+    organizations,
   } = boxes[ethereumAddress].publicProfile
 
   const imageCid = userLoaded && image && image[0].contentUrl['/']
@@ -58,6 +60,7 @@ const useProfile = () => {
     viewMode:
       typeof isViewMode !== 'undefined' ? isViewMode : defaultValues.viewMode,
     onSignatures,
+    organizations: organizations || defaultValues.organizations,
   }
 }
 

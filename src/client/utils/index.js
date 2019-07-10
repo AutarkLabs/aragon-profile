@@ -1,17 +1,17 @@
-import moment from 'moment'
+import dayjs from 'dayjs'
 import uuidv1 from 'uuid/v1'
 // import { isAddress } from 'web3-utils'
 const isAddress = () => true
 
 /* TIME HELPERS */
-export const toUnix = date => moment(date, 'YYYY-MM-DD').unix()
+export const toUnix = date => dayjs(date, 'YYYY-MM-DD').unix()
 
-export const unixToCalendar = unix => moment.unix(unix).format('YYYY-MM-DD')
-export const yearFromUnix = unix => moment.unix(unix).format('YYYY')
-export const monthFromUnix = unix => moment.unix(unix).format('MM')
-export const unixToTileDate = unix => moment.unix(unix).format('MMM YYYY')
+export const unixToCalendar = unix => dayjs.unix(unix).format('YYYY-MM-DD')
+export const yearFromUnix = unix => dayjs.unix(unix).format('YYYY')
+export const monthFromUnix = unix => dayjs.unix(unix).format('MM')
+export const unixToTileDate = unix => dayjs.unix(unix).format('MMM YYYY')
 
-export const todayInUnix = () => Number(moment().format('X'))
+export const todayInUnix = () => dayjs().unix()
 
 /* FORM HELPERS */
 
@@ -28,9 +28,11 @@ export const reformatNestedFields = forms => {
       copiedForms.educationHistory
     )
   }
-
   if (copiedForms.workHistory) {
     copiedForms.workHistory = assignArbitraryIds(copiedForms.workHistory)
+  }
+  if (copiedForms.organizations) {
+    copiedForms.organizations = assignArbitraryIds(copiedForms.organizations)
   }
   return copiedForms
 }
@@ -93,6 +95,18 @@ export const isViewMode = (connectedAccount, queryParams) => {
   if (!isAddress(queryParams[0])) {
     return true
   }
+}
+
+export const shortDAOAddress = (address = '') => {
+  if (address.endsWith('.eth')) return address
+  return address.slice(0, 6) + '…' + address.slice(-4)
+}
+
+export const fakeIsMember = async (ethereumAddress, address) => {
+  let promise = new Promise((resolve, reject) => {
+    setTimeout(() => resolve(Math.random() >= 0.99), 2000)
+  })
+  return promise
 }
 
 export * from './login'

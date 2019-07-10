@@ -4,8 +4,9 @@ import { useProfile } from '../hooks'
 import { ModalContext } from '../wrappers/modal'
 import WorkHistoryTile from './WorkHistoryTile'
 import { open, removeItem } from '../stateManagers/modal'
-import { Text, theme } from '@aragon/ui'
+import { Text } from '@aragon/ui'
 import styled from 'styled-components'
+import { Link } from './styled-components'
 
 const WorkHistoryPanel = () => {
   const { workHistory, viewMode } = useProfile()
@@ -33,18 +34,14 @@ const WorkHistoryPanel = () => {
         ))
       ) : (
         <Center>
-          <Text size="xlarge">You have no work history</Text>
+          <Text size="normal">You have no work history</Text>
           {!viewMode && (
-            <Text
-              css={`
-                cursor: pointer;
-              `}
-              size="small"
-              color={theme.accent}
+            <Link.Button
               onClick={() => dispatchModal(open('workHistory'))}
+              size="small"
             >
               Add work
-            </Text>
+            </Link.Button>
           )}
         </Center>
       )}

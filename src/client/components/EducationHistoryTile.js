@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { Button as AragonButton, Text, theme } from '@aragon/ui'
-import { IconPencil, IconTrash } from './styled-components'
+import { IconPencil, IconTrash, TileHeader } from './styled-components'
 import { displayStartEndDates } from '../utils'
 
 const EducationHistoryTile = ({
@@ -13,8 +13,8 @@ const EducationHistoryTile = ({
 }) => (
   <SingleEducationItem>
     <div>
-      <Text.Block size="large">{educationHistoryData.organization}</Text.Block>
-      <Text.Block size="normal">
+      <TileHeader>{educationHistoryData.organization}</TileHeader>
+      <Text.Block size="normal" css="line-height: 1.8">
         {educationHistoryData.degree}
         {educationHistoryData.fieldOfStudy
           ? ', ' + educationHistoryData.fieldOfStudy
@@ -56,7 +56,7 @@ const Button = styled(AragonButton).attrs({ mode: 'text' })`
     margin-bottom: 4px;
   }
 `
-const Dates = styled(Text.Block).attrs({ size: 'small' })`
+const Dates = styled(Text.Block).attrs({ size: 'xsmall' })`
   color: ${theme.textTertiary};
   margin-top: 2px;
 `

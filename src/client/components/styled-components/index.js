@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Button, TextInput, DropDown, SafeLink, theme } from '@aragon/ui'
+import { Button, TextInput, DropDown, SafeLink, theme, Text } from '@aragon/ui'
 
 import { EditTextField } from '../readOrEditFields'
 import editImage from '../../../../assets/pencil-black-tool-interface-symbol.png'
@@ -102,6 +102,20 @@ export const DropDownWithValidation = props => (
 
 DropDownWithValidation.propTypes = { error: PropTypes.string }
 DropDownWithValidation.defaultProps = { error: '' }
+
+export const TileHeader = props => (
+  <Text.Block
+    size="large"
+    css={`
+      line-height: 1.8;
+      font-weight: bold;
+    `}
+  >
+    {props.children}
+  </Text.Block>
+)
+
+TileHeader.propTypes = { children: PropTypes.node }
 
 export { default as IconPencil } from './IconPencil'
 export { default as IconTrash } from './IconTrash'

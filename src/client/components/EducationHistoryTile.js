@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { Button as AragonButton, Text, theme } from '@aragon/ui'
-import { IconPencil, IconTrash } from './styled-components'
+import { IconPencil, IconTrash, SchoolCompanyName } from './styled-components'
 import { displayStartEndDates } from '../utils'
 
 const EducationHistoryTile = ({
@@ -13,15 +13,7 @@ const EducationHistoryTile = ({
 }) => (
   <SingleEducationItem>
     <div>
-      <Text.Block
-        size="large"
-        css={`
-          line-height: 1.8;
-          font-weight: bold;
-        `}
-      >
-        {educationHistoryData.organization}
-      </Text.Block>
+      <SchoolCompanyName>{educationHistoryData.organization}</SchoolCompanyName>
       <Text.Block size="normal" css="line-height: 1.8">
         {educationHistoryData.degree}
         {educationHistoryData.fieldOfStudy

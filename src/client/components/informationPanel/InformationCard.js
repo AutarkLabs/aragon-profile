@@ -91,7 +91,6 @@ const StyledCard = styled(Card).attrs({ width: '100%', height: 'auto' })`
 const EthAddr = styled(Text).attrs({ size: 'small' })`
   color: ${theme.textTertiary};
   word-break: break-all;
-  font-size: 12px;
 `
 const Icons = styled.div`
   position: absolute;

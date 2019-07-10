@@ -3,21 +3,13 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { Text, theme } from '@aragon/ui'
-import { IconPencil, IconTrash } from './styled-components'
+import { IconPencil, IconTrash, SchoolCompanyName } from './styled-components'
 import { displayStartEndDates } from '../utils'
 
 const WorkHistoryTile = ({ workHistoryData, openModal, removeItem }) => (
   <SingleWorkItem>
     <Details>
-      <Text.Block
-        size="large"
-        css={`
-          line-height: 1.8;
-          font-weight: bold;
-        `}
-      >
-        {workHistoryData.workPlace}
-      </Text.Block>
+      <SchoolCompanyName>{workHistoryData.workPlace}</SchoolCompanyName>
       <Text.Block size="large">
         {workHistoryData.jobTitle}
         <Text color={theme.textTertiary} size="xsmall" css="margin-left: 13px">

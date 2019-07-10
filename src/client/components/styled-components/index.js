@@ -103,7 +103,7 @@ export const DropDownWithValidation = props => (
 DropDownWithValidation.propTypes = { error: PropTypes.string }
 DropDownWithValidation.defaultProps = { error: '' }
 
-export const SchoolCompanyName = props => (
+export const TileHeader = props => (
   <Text.Block
     size="large"
     css={`
@@ -115,7 +115,7 @@ export const SchoolCompanyName = props => (
   </Text.Block>
 )
 
-SchoolCompanyName.propTypes = { children: PropTypes.node }
+TileHeader.propTypes = { children: PropTypes.node }
 
 export { default as IconPencil } from './IconPencil'
 export { default as IconTrash } from './IconTrash'

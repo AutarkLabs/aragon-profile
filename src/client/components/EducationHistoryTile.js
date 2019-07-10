@@ -10,6 +10,7 @@ const EducationHistoryTile = ({
   educationHistoryData,
   openModal,
   removeItem,
+  viewMode,
 }) => (
   <SingleEducationItem>
     <div>
@@ -22,16 +23,19 @@ const EducationHistoryTile = ({
       </Text.Block>
       <Dates>{displayStartEndDates(educationHistoryData)}</Dates>
     </div>
-    <Icons>
-      <Button onClick={openModal}>
-        <IconPencil width="16px" height="16px" color={theme.accent} />
-      </Button>
-      <Button onClick={removeItem}>
-        <IconTrash width="16px" height="16px" color={theme.accent} />
-      </Button>
-    </Icons>
+    {!viewMode && (
+      <Icons>
+        <Button onClick={openModal}>
+          <IconPencil width="16px" height="16px" color={theme.accent} />
+        </Button>
+        <Button onClick={removeItem}>
+          <IconTrash width="16px" height="16px" color={theme.accent} />
+        </Button>
+      </Icons>
+    )}
   </SingleEducationItem>
 )
+
 const SingleEducationItem = styled.div`
   position: relative;
 `
@@ -70,6 +74,7 @@ EducationHistoryTile.propTypes = {
   }).isRequired,
   openModal: PropTypes.func.isRequired,
   removeItem: PropTypes.func.isRequired,
+  viewMode: PropTypes.bool.isRequired,
 }
 
 export default EducationHistoryTile

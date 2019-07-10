@@ -6,7 +6,12 @@ import { Text, theme } from '@aragon/ui'
 import { IconPencil, IconTrash, TileHeader } from './styled-components'
 import { displayStartEndDates } from '../utils'
 
-const WorkHistoryTile = ({ workHistoryData, openModal, removeItem }) => (
+const WorkHistoryTile = ({
+  workHistoryData,
+  openModal,
+  removeItem,
+  viewMode,
+}) => (
   <SingleWorkItem>
     <Details>
       <TileHeader>{workHistoryData.workPlace}</TileHeader>
@@ -18,10 +23,12 @@ const WorkHistoryTile = ({ workHistoryData, openModal, removeItem }) => (
       </Text.Block>
       <Text.Block size="small">{workHistoryData.description}</Text.Block>
     </Details>
-    <Icons>
-      <IconPencil color={theme.accent} width="16px" onClick={openModal} />
-      <IconTrash color={theme.accent} width="16px" onClick={removeItem} />
-    </Icons>
+    {!viewMode && (
+      <Icons>
+        <IconPencil color={theme.accent} width="16px" onClick={openModal} />
+        <IconTrash color={theme.accent} width="16px" onClick={removeItem} />
+      </Icons>
+    )}
   </SingleWorkItem>
 )
 
@@ -62,6 +69,7 @@ WorkHistoryTile.propTypes = {
   }).isRequired,
   openModal: PropTypes.func.isRequired,
   removeItem: PropTypes.func.isRequired,
+  viewMode: PropTypes.bool.isRequired,
 }
 
 export default WorkHistoryTile

@@ -30,6 +30,7 @@ const OrganizationPanel = () => {
             key={id}
             organizationData={organizations[id]}
             removeItem={() => dispatchModal(removeItem(id, 'organizations'))}
+            viewMode={viewMode}
           />
         ))
       ) : (

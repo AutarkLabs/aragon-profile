@@ -82,7 +82,7 @@ export const fetchedPublicProfileErr = (state, error) => ({
 export const noPublicProfileFound = (state, error) => ({
   ...state,
   loadingPublicProf: false,
-  loadedPublicProf: false,
+  loadedPublicProf: true,
   loadedPublicProfSuccess: false,
   noPublicProfileFound: true,
   error,

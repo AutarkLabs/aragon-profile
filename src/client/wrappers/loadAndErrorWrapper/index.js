@@ -24,9 +24,8 @@ const LoadAndErrorWrapper = ({ children, ethereumAddress }) => {
   if (loadingPublicProf) return <LoadingPublicProfile />
   if (unlockingProf) return <UnlockingBox />
   // show NoProfile only if it doesn't exist and can't be created
-  if (noPublicProfileFound && viewMode) {
+  if (noPublicProfileFound && viewMode)
     return <NoProfile ethereumAddress={ethereumAddress} />
-  }
   return <Fragment>{children}</Fragment>
 }
 

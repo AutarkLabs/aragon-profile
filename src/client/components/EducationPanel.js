@@ -35,18 +35,10 @@ const EducationPanel = () => {
         ))
       ) : (
         <Center>
-          <Text
-            css={`
-              font-size: 15px;
-            `}
-          >
-            You have no education
-          </Text>
+          <Text size="normal">You have no education</Text>
           {!viewMode && (
             <Text
-              css={`
-                cursor: pointer;
-              `}
+              css="cursor: pointer"
               size="small"
               color={theme.accent}
               onClick={() => dispatchModal(open('educationHistory'))}

@@ -10,38 +10,21 @@ const WorkHistoryTile = ({ workHistoryData, openModal, removeItem }) => (
   <SingleWorkItem>
     <Details>
       <Text.Block
+        size="large"
         css={`
-          font-size: 16px;
           line-height: 1.8;
           font-weight: bold;
         `}
       >
         {workHistoryData.workPlace}
       </Text.Block>
-      <Text.Block
-        css={`
-          font-size: 16px;
-        `}
-      >
+      <Text.Block size="large">
         {workHistoryData.jobTitle}
-        <Text
-          color={theme.textTertiary}
-          css={`
-            margin-left: 13px;
-            font-size: 12px;
-          `}
-        >
+        <Text color={theme.textTertiary} size="xsmall" css="margin-left: 13px">
           {displayStartEndDates(workHistoryData)}
         </Text>
       </Text.Block>
-      <Text.Block
-        css={`
-          font-size: 14px;
-          font-weight: normal;
-        `}
-      >
-        {workHistoryData.description}
-      </Text.Block>
+      <Text.Block size="small">{workHistoryData.description}</Text.Block>
     </Details>
     <Icons>
       <IconPencil

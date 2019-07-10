@@ -14,32 +14,21 @@ const EducationHistoryTile = ({
   <SingleEducationItem>
     <div>
       <Text.Block
+        size="large"
         css={`
-          font-size: 16px;
           line-height: 1.8;
           font-weight: bold;
         `}
       >
         {educationHistoryData.organization}
       </Text.Block>
-      <Text.Block
-        css={`
-          font-size: 15px;
-          line-height: 1.8;
-        `}
-      >
+      <Text.Block size="normal" css="line-height: 1.8">
         {educationHistoryData.degree}
         {educationHistoryData.fieldOfStudy
           ? ', ' + educationHistoryData.fieldOfStudy
           : ''}
       </Text.Block>
-      <Dates
-        css={`
-          font-size: 12px;
-        `}
-      >
-        {displayStartEndDates(educationHistoryData)}
-      </Dates>
+      <Dates>{displayStartEndDates(educationHistoryData)}</Dates>
     </div>
     <Icons>
       <Button onClick={() => openModal()}>
@@ -75,7 +64,7 @@ const Button = styled(AragonButton).attrs({ mode: 'text' })`
     margin-bottom: 4px;
   }
 `
-const Dates = styled(Text.Block).attrs({ size: 'small' })`
+const Dates = styled(Text.Block).attrs({ size: 'xsmall' })`
   color: ${theme.textTertiary};
   margin-top: 2px;
 `

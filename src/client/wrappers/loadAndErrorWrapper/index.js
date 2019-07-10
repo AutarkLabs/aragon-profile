@@ -6,7 +6,7 @@ import LoadingPublicProfile from './LoadingPublicProfile'
 import ErrorState from './Error'
 import UnlockingBox from './UnlockingBox'
 import NoProfile from './NoProfile'
-import { useProfileStates } from '../../hooks'
+import { useProfile, useProfileStates } from '../../hooks'
 
 const LoadAndErrorWrapper = ({ children, ethereumAddress }) => {
   const {
@@ -15,15 +15,16 @@ const LoadAndErrorWrapper = ({ children, ethereumAddress }) => {
     noPublicProfileFound,
     error,
   } = useProfileStates()
+  const { viewMode } = useProfile()
 
   // it was hardcoded as syncing=false before
   const isInitializing = false
-
   if (Object.keys(error).length > 0) return <ErrorState />
   if (isInitializing) return <Initializing />
   if (loadingPublicProf) return <LoadingPublicProfile />
   if (unlockingProf) return <UnlockingBox />
-  if (noPublicProfileFound) {
+  // show NoProfile only if it doesn't exist and can't be created
+  if (noPublicProfileFound && viewMode) {
     return <NoProfile ethereumAddress={ethereumAddress} />
   }
   return <Fragment>{children}</Fragment>

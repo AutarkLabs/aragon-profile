@@ -105,7 +105,7 @@ const ImageMenu = ({
     boxes[ethereumAddress].publicProfile[imageTag][0].contentUrl['/']
 
   return (
-    <div tabIndex="-1" onBlur={() => setActive(false)}>
+    <ClickOutHandler onBlur={() => setActive(false)}>
       <ImageMenuStyled
         top={top}
         right={right}
@@ -119,29 +119,32 @@ const ImageMenu = ({
           imageCid,
         })}
       >
-        <div css="padding: 8px 8px 6px 8px" onClick={() => setActive(!active)}>
-          <IconCamera width="16px" height="16px" css="margin-right: 8px" />
+        <Button
+          aria-controls={`${imageTag}-photo-actions`}
+          css="font-weight: bold"
+          onClick={() => (imageExists ? setActive(!active) : open())}
+        >
+          <IconCamera width="16px" height="16px" />
           Update {imageTitle} photo
-        </div>
+        </Button>
 
-        {active && (
-          <React.Fragment>
-            <input {...getInputProps({ disabled: false })} />
-            <div css="padding: 8px 12px 6px 12px" onClick={open}>
-              Upload new image
-            </div>
-            {imageExists && (
-              <div
-                css="padding: 6px 12px 8px 12px"
-                onClick={() => dispatchModal(removeItem(imageCid, imageTag))}
-              >
-                Delete
-              </div>
-            )}
-          </React.Fragment>
-        )}
+        <div role="region" aria-live="polite" id={`${imageTag}-photo-actions`}>
+          <input {...getInputProps({ disabled: false })} />
+          {active && (
+            <React.Fragment>
+              <Button onClick={open}>Upload new image</Button>
+              {imageExists && (
+                <Button
+                  onClick={() => dispatchModal(removeItem(imageCid, imageTag))}
+                >
+                  Delete
+                </Button>
+              )}
+            </React.Fragment>
+          )}
+        </div>
       </ImageMenuStyled>
-    </div>
+    </ClickOutHandler>
   )
 }
 
@@ -155,13 +158,33 @@ ImageMenu.propTypes = {
   onSignatures: PropTypes.func.isRequired,
 }
 
+const ClickOutHandler = ({ children, onBlur }) => {
+  const wrap = React.createRef()
+
+  const handleBlur = e => {
+    if (wrap.current && wrap.current.contains(e.relatedTarget)) return
+    onBlur()
+  }
+
+  return (
+    <div tabIndex="-1" ref={wrap} onBlur={handleBlur}>
+      {children}
+    </div>
+  )
+}
+
+ClickOutHandler.propTypes = {
+  children: PropTypes.node.isRequired,
+  onBlur: PropTypes.func.isRequired,
+}
+
 const getBorder = props => {
   if (props.isDragAccept) return `2px #00e676 dashed;`
   if (props.isDragReject) return `2px #ff1744 dashed;`
   if (props.isDragActive) return `2px #2196f3 dashed;`
   if (props.dragging) return `2px #446fe9 dashed;`
 
-  return `1px solid rgba(209, 209, 209, ${getBackgroundAlpha(props)});`
+  return `1px solid rgba(209, 209, 209, 0.9);`
 }
 
 const isVisible = props =>
@@ -171,21 +194,9 @@ const isVisible = props =>
   props.dragging ||
   props.active
 
-const getVisibility = props => (isVisible(props) ? 'visible' : 'hidden')
-
-const getBackgroundAlpha = props => (isVisible(props) ? '0.8' : '0')
-
 const ImageMenuStyled = styled.div`
-  .imageHover:hover & {
-    visibility: visible;
-    background-color: rgba(255, 255, 255, 0.8);
-    color: rgba(0, 0, 0, 0.8);
-    border: 1px solid rgba(209, 209, 209, 0.8);
-  }
-  visibility: ${getVisibility};
-  transition: all 0.3s linear;
-  background-color: rgba(255, 255, 255, ${getBackgroundAlpha});
-  color: rgba(0, 0, 0, ${getBackgroundAlpha});
+  transition: opacity 0.3s;
+  background-color: rgba(255, 255, 255, 0.9);
   border: ${getBorder};
   border-radius: 2px;
   width: 170px;
@@ -194,19 +205,38 @@ const ImageMenuStyled = styled.div`
   top: ${({ top }) => `${top}px`};
   right: ${({ right }) => `${right}px`};
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.03);
+  opacity: ${props => (isVisible(props) ? 1 : 0)};
 
-  > :first-child {
-    font-weight: bold;
-    font-size: 13px;
-    display: flex;
+  :hover,
+  :focus-within {
+    background-color: white;
   }
-  > :not(:first-child) {
-    :hover {
+
+  &:focus-within,
+  .imageHover:hover & {
+    opacity: 1;
+  }
+`
+
+const Button = styled.button`
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  padding: 8px 8px 6px 8px;
+  text-align: left;
+  width: 100%;
+  svg {
+    margin-right: 8px;
+    vertical-align: text-bottom;
+  }
+  :not(:first-child) {
+    :hover,
+    :focus {
       background: #eee;
-      cursor: pointer;
     }
-    font-size: 12px;
-    background: #fff;
   }
 `
 

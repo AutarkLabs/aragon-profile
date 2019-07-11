@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const IconCamera = props => (
-  <svg width="22px" height="18px" viewBox="0 0 22 18" {...props}>
+const IconCamera = ({ color, height = 22, width = 18 }) => (
+  <svg viewBox="0 0 22 18" height={height} width={width}>
     <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
       <g
         transform="translate(-1126.000000, -113.000000)"
-        fill={props.color}
+        fill={color}
         fillRule="nonzero"
       >
         <g id="Group-3" transform="translate(1111.000000, 102.000000)">

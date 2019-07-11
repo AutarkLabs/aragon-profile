@@ -9,11 +9,7 @@ import WorkHistoryPanel from './WorkHistoryPanel'
 import CoverImage from './CoverImage'
 
 const Profile = () => (
-  <div
-    css={`
-      width: 100%;
-    `}
-  >
+  <div css="width: 100%">
     <CoverImage />
     <Viewport>
       {({ below }) =>

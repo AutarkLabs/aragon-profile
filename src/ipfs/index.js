@@ -7,4 +7,3 @@ export const ipfsGateway = ipfsClient({
   port: '5001',
   protocol: 'https',
 })
-

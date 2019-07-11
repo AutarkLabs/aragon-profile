@@ -26,7 +26,7 @@ const ProfilePicture = () => {
         <ImageMenu
           ethereumAddress={ethereumAddress}
           top={topMenuPos}
-          right={-6}
+          right={-12}
           imageExists={!!hasImage}
           imageTag="image"
           imageTitle="Profile"
@@ -39,7 +39,7 @@ const ProfilePicture = () => {
 
 const Container = styled.div`
   cursor: ${props => props.isEditing && 'pointer'};
-  padding: 16px;
+  padding: 20px;
   border: 2px solid #f2f2f2;
   background-repeat: no-repeat;
   background-position: center;

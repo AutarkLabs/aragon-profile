@@ -26,7 +26,15 @@
     "react-hooks/exhaustive-deps": "warn",
     "import/no-unresolved": [
       "error",
-      { "ignore": ["^react(-dom)?$", "^styled-components$"] }
+      {
+        "ignore": [
+          "^react(-dom)?$",
+          "^styled-components$",
+          "^@aragon/ui$",
+          "^prop-types$",
+          "^web3-utils$"
+        ]
+      }
     ],
     "promise/no-nesting": ["off"],
     "valid-jsdoc": "error",

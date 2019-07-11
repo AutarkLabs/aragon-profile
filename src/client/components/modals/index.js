@@ -19,6 +19,7 @@ import { close } from '../../stateManagers/modal'
 import WorkHistoryModal from './WorkHistory'
 import BasicInformationModal from './BasicInformation'
 import EducationHistoryModal from './EducationHistory'
+import OrganizationModal from './Organization'
 import RemoveItem from './RemoveItem'
 import BoxState from './BoxState'
 
@@ -59,7 +60,11 @@ const UserInfoModal = ({ ethereumAddress, onSignatures }) => {
     try {
       const { changed, forms } = boxes[ethereumAddress]
       const calculateChanged = field => {
-        if (field === 'workHistory' || field === 'educationHistory') {
+        if (
+          field === 'workHistory' ||
+          field === 'educationHistory' ||
+          field === 'organizations'
+        ) {
           return Object.keys(forms[field]).map(id => forms[field][id])
         }
         return forms[field]
@@ -161,6 +166,12 @@ const UserInfoModal = ({ ethereumAddress, onSignatures }) => {
         {modal.type === 'workHistory' && (
           <WorkHistoryModal
             workHistoryId={modal.id || key}
+            {...modalsCommonProps}
+          />
+        )}
+        {modal.type === 'organization' && (
+          <OrganizationModal
+            organizationId={modal.id || key}
             {...modalsCommonProps}
           />
         )}

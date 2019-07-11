@@ -146,11 +146,7 @@ const UserInfoModal = ({ ethereumAddress, onSignatures }) => {
 
   return (
     <Modal visible={!!modal.type} padding="0">
-      <div
-        css={`
-          position: relative;
-        `}
-      >
+      <div css="position: relative">
         {modal.type === 'basicInformation' && (
           <BasicInformationModal {...modalsCommonProps} />
         )}

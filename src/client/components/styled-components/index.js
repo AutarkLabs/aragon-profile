@@ -116,4 +116,3 @@ export { default as IconCamera } from './IconCamera'
 export { default as AnimationLoadingCircle } from './AnimationLoadingCircle'
 export { default as IconSuccess } from './IconSuccess'
 export { default as IconError } from './IconError'
-

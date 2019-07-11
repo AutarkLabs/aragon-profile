@@ -6,7 +6,7 @@ const IconCamera = props => (
     <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
       <g
         transform="translate(-1126.000000, -113.000000)"
-        fill="#000000"
+        fill={props.color}
         fillRule="nonzero"
       >
         <g id="Group-3" transform="translate(1111.000000, 102.000000)">

@@ -7,7 +7,7 @@ import {
   fetchedPublicProfileError,
 } from '../stateManagers/box'
 
-const useLinkedData = xboxes => {
+const useLinkedData = () => {
   // const { connectedAccount } = useAragonApi()
   const connectedAccount = ''
   const [formattedProfile, setFormattedProfile] = useState({})

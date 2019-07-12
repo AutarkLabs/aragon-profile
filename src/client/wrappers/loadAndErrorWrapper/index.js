@@ -41,7 +41,8 @@ const LoadAndErrorView = ({
   ethereumAddress,
   error,
 }) => {
-  if (error) return <ErrorState error={error} ethereumAddress={ethereumAddress} />
+  if (error)
+    return <ErrorState error={error} ethereumAddress={ethereumAddress} />
   if (isInitializing) return <Initializing />
   if (isLoadingPublicProfile) return <LoadingPublicProfile />
   if (isUnlockingProfile) return <UnlockingBox />

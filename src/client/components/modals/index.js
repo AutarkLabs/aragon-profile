@@ -19,6 +19,7 @@ import { close } from '../../stateManagers/modal'
 import WorkHistoryModal from './WorkHistory'
 import BasicInformationModal from './BasicInformation'
 import EducationHistoryModal from './EducationHistory'
+import OrganizationModal from './Organization'
 import RemoveItem from './RemoveItem'
 import BoxState from './BoxState'
 
@@ -59,7 +60,11 @@ const UserInfoModal = ({ ethereumAddress, onSignatures }) => {
     try {
       const { changed, forms } = boxes[ethereumAddress]
       const calculateChanged = field => {
-        if (field === 'workHistory' || field === 'educationHistory') {
+        if (
+          field === 'workHistory' ||
+          field === 'educationHistory' ||
+          field === 'organizations'
+        ) {
           return Object.keys(forms[field]).map(id => forms[field][id])
         }
         return forms[field]
@@ -146,36 +151,44 @@ const UserInfoModal = ({ ethereumAddress, onSignatures }) => {
 
   return (
     <Modal visible={!!modal.type} padding="0">
-      {modal.type === 'basicInformation' && (
-        <BasicInformationModal {...modalsCommonProps} />
-      )}
+      <div css="position: relative">
+        {modal.type === 'basicInformation' && (
+          <BasicInformationModal {...modalsCommonProps} />
+        )}
 
-      {modal.type === 'educationHistory' && (
-        <EducationHistoryModal
-          educationHistoryId={modal.id || key}
-          {...modalsCommonProps}
-        />
-      )}
+        {modal.type === 'educationHistory' && (
+          <EducationHistoryModal
+            educationHistoryId={modal.id || key}
+            {...modalsCommonProps}
+          />
+        )}
 
-      {modal.type === 'workHistory' && (
-        <WorkHistoryModal
-          workHistoryId={modal.id || key}
-          {...modalsCommonProps}
-        />
-      )}
-      {modal.type === 'removeItem' && (
-        <RemoveItem
-          itemType={modal.itemType}
-          onRemove={removeItem}
-          removingError={removingError}
-        />
-      )}
-      {modal.type === '3boxState' && (
-        <BoxState
-          messageSigning={boxes[ethereumAddress].messageSigning}
-          signaturesRequired={modal.sigsRequired}
-        />
-      )}
+        {modal.type === 'workHistory' && (
+          <WorkHistoryModal
+            workHistoryId={modal.id || key}
+            {...modalsCommonProps}
+          />
+        )}
+        {modal.type === 'organization' && (
+          <OrganizationModal
+            organizationId={modal.id || key}
+            {...modalsCommonProps}
+          />
+        )}
+        {modal.type === 'removeItem' && (
+          <RemoveItem
+            itemType={modal.itemType}
+            onRemove={removeItem}
+            removingError={removingError}
+          />
+        )}
+        {modal.type === '3boxState' && (
+          <BoxState
+            messageSigning={boxes[ethereumAddress].messageSigning}
+            signaturesRequired={modal.sigsRequired}
+          />
+        )}
+      </div>
     </Modal>
   )
 }

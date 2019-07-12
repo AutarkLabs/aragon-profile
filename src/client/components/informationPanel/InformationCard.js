@@ -84,7 +84,7 @@ const InformationCard = () => {
 }
 
 const StyledCard = styled(Card).attrs({ width: '100%', height: 'auto' })`
-  padding: 16px;
+  padding: 20px;
   padding-top: 52px;
   position: relative;
 `

@@ -14,15 +14,15 @@ const ModalWrapper = ({ children, title }) => {
   return (
     <Fragment>
       <PanelHeader>
-        <h1>
-          <Text size="xxlarge">{title}</Text>
-        </h1>
-
+        {title && (
+          <h1>
+            <Text size="xxlarge">{title}</Text>
+          </h1>
+        )}
         <PanelCloseButton type="button" onClick={() => dispatchModal(close())}>
           <IconClose />
         </PanelCloseButton>
       </PanelHeader>
-
       <PanelScrollView>
         <PanelContent>{children}</PanelContent>
       </PanelScrollView>

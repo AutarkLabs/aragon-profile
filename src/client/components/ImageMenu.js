@@ -1,4 +1,4 @@
-import React, { useContext, useCallback } from 'react'
+import React, { useState, useContext, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useDropzone } from 'react-dropzone'
@@ -9,6 +9,7 @@ import { ModalContext } from '../wrappers/modal'
 import { DragContext } from '../wrappers/drag'
 import { image } from '../../modules/things'
 import { unlockAndCreateBoxIfRequired } from '../utils'
+import { IconCamera } from './styled-components'
 
 import {
   uploadingImage,
@@ -28,6 +29,7 @@ const ImageMenu = ({
   imageTitle,
   onSignatures,
 }) => {
+  const [active, setActive] = useState(false)
   const { boxes, dispatch } = useContext(BoxContext)
   const { dispatchModal } = useContext(ModalContext)
   const { dragState } = useContext(DragContext)
@@ -104,28 +106,46 @@ const ImageMenu = ({
     boxes[ethereumAddress].publicProfile[imageTag][0].contentUrl['/']
 
   return (
-    <ImageMenuStyled
-      top={top}
-      right={right}
-      dragging={dragState.dragging}
-      {...getRootProps({
-        className: 'dropzone',
-        isDragActive,
-        isDragAccept,
-        isDragReject,
-        imageCid,
-      })}
-    >
-      {' '}
-      <div>Update {imageTitle} photo</div>
-      <input {...getInputProps({ disabled: false })} />
-      <div onClick={open}>Upload new image</div>
-      {imageExists && (
-        <div onClick={() => dispatchModal(removeItem(imageCid, imageTag))}>
-          Delete
+    <ClickOutHandler onBlur={() => setActive(false)}>
+      <ImageMenuStyled
+        top={top}
+        right={right}
+        dragging={dragState.dragging}
+        active={active}
+        {...getRootProps({
+          className: 'dropzone',
+          isDragActive,
+          isDragAccept,
+          isDragReject,
+          imageCid,
+        })}
+      >
+        <Button
+          aria-controls={`${imageTag}-photo-actions`}
+          css="font-weight: bold"
+          onClick={() => (imageExists ? setActive(!active) : open())}
+        >
+          <IconCamera width="16px" height="16px" />
+          Update {imageTitle} photo
+        </Button>
+
+        <div role="region" aria-live="polite" id={`${imageTag}-photo-actions`}>
+          <input {...getInputProps({ disabled: false })} />
+          {active && (
+            <React.Fragment>
+              <Button onClick={open}>Upload new image</Button>
+              {imageExists && (
+                <Button
+                  onClick={() => dispatchModal(removeItem(imageCid, imageTag))}
+                >
+                  Delete
+                </Button>
+              )}
+            </React.Fragment>
+          )}
         </div>
-      )}
-    </ImageMenuStyled>
+      </ImageMenuStyled>
+    </ClickOutHandler>
   )
 }
 
@@ -139,72 +159,85 @@ ImageMenu.propTypes = {
   onSignatures: PropTypes.func.isRequired,
 }
 
-const getBorder = props => {
-  let color
+const ClickOutHandler = ({ children, onBlur }) => {
+  const wrap = React.createRef()
 
-  if (props.isDragAccept) color = '#00e676'
-  else if (props.isDragReject) color = '#ff1744'
-  else if (props.isDragActive) color = '#2196f3'
-  else if (props.dragging) color = '#446fe9'
-  if (color) return `2px ${color} dashed`
-  else return '2px white solid'
+  const handleBlur = e => {
+    if (wrap.current && wrap.current.contains(e.relatedTarget)) return
+    onBlur()
+  }
+
+  return (
+    <div tabIndex="-1" ref={wrap} onBlur={handleBlur}>
+      {children}
+    </div>
+  )
+}
+
+ClickOutHandler.propTypes = {
+  children: PropTypes.node.isRequired,
+  onBlur: PropTypes.func.isRequired,
+}
+
+const getBorder = props => {
+  if (props.isDragAccept) return `2px #00e676 dashed;`
+  if (props.isDragReject) return `2px #ff1744 dashed;`
+  if (props.isDragActive) return `2px #2196f3 dashed;`
+  if (props.dragging) return `2px #446fe9 dashed;`
+
+  return `1px solid rgba(209, 209, 209, 0.9);`
 }
 
 const isVisible = props =>
   props.isDragAccept ||
   props.isDragReject ||
   props.isDragActive ||
-  props.dragging
-
-const getVisibility = props => {
-  if (isVisible(props)) return 'visible'
-  else return 'hidden'
-}
-const getOpacity = props => {
-  if (isVisible(props)) return '0.8'
-  else return '0'
-}
+  props.dragging ||
+  props.active
 
 const ImageMenuStyled = styled.div`
-  .imageHover:hover & {
-    visibility: visible;
-    transition: visibility 0.3s linear, opacity 0.3s linear;
-    visibility: visible;
-    opacity: 0.8;
-  }
-  border: ${props => getBorder(props)};
-  border-radius: 3px;
-  font-size: 12px;
-  transition: visibility 0.3s linear, opacity 0.3s linear;
-  visibility: ${props => getVisibility(props)};
-  opacity: ${props => getOpacity(props)};
-  width: 156px;
+  transition: opacity 0.3s;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: ${getBorder};
+  border-radius: 2px;
+  width: 170px;
   z-index: 1;
   position: absolute;
   top: ${({ top }) => `${top}px`};
   right: ${({ right }) => `${right}px`};
-  padding: 1px;
-  background: white;
-  > :first-child {
-    background: #d1d1d1;
-    opacity: 0.6;
-    font-weight: bold;
-    font-size: 13px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.03);
+  opacity: ${props => (isVisible(props) ? 1 : 0)};
+
+  :hover,
+  :focus-within {
+    background-color: white;
   }
-  > :not(:first-child) {
-    background: white;
-    opacity: 0.9;
-    :hover {
-      opacity: 1;
+
+  &:focus-within,
+  .imageHover:hover & {
+    opacity: 1;
+  }
+`
+
+const Button = styled.button`
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  padding: 8px 8px 6px 8px;
+  text-align: left;
+  width: 100%;
+  svg {
+    margin-right: 8px;
+    vertical-align: text-bottom;
+  }
+  :not(:first-child) {
+    :hover,
+    :focus {
       background: #eee;
-      cursor: pointer;
     }
-  }
-  > :not(:last-child) {
-    margin-bottom: 1px;
-  }
-  > * {
-    padding: 7px 12px;
   }
 `
 

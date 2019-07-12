@@ -7,7 +7,7 @@ import { use3Box, useLinkedData } from '../../hooks'
 
 const BoxWrapper = ({ account, children, onSignatures, isViewMode }) => {
   const { boxes, dispatch } = use3Box(account, onSignatures)
-  useLinkedData(boxes)
+  useLinkedData()
   return (
     <BoxContext.Provider
       value={{

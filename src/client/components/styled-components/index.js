@@ -2,8 +2,19 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { DateDropDown, EditTextField } from '../readOrEditFields'
-import { Button, TextInput, DropDown, SafeLink, theme, Text } from '@aragon/ui'
+import { Button, TextInput, SafeLink, theme, Text } from '@aragon/ui'
 import editImage from '../../../../assets/pencil-black-tool-interface-symbol.png'
+
+export const CheckWrapper = styled.div`
+  height: 146px;
+  display: flex;
+  align-items: center;
+  padding-bottom: 13px;
+  > :first-child {
+    margin-left: 10px;
+    margin-right: 30px;
+  }
+`
 
 export const AlignRight = styled.div`
   display: flex;

@@ -8,7 +8,6 @@ import { BoxContext } from '../../wrappers/box'
 import { ModalContext } from '../../wrappers/modal'
 import { close } from '../../stateManagers/modal'
 import { isEmpty } from 'lodash'
-import styled from 'styled-components'
 import { useProfileStates } from '../../hooks'
 import {
   requestedCheckMembership,
@@ -21,18 +20,8 @@ import {
   AnimationLoadingCircle,
   IconSuccess,
   IconError,
+  CheckWrapper,
 } from '../../components/styled-components'
-
-const CheckWrapper = styled.div`
-  height: 146px;
-  display: flex;
-  align-items: center;
-  padding-bottom: 13px;
-  > :first-child {
-    margin-left: 10px;
-    margin-right: 30px;
-  }
-`
 
 const BackToPreviousScreen = ({ ethereumAddress, dispatch }) => (
   <Text.Block

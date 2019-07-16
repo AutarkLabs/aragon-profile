@@ -1,24 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Card, Text, theme } from '@aragon/ui'
+import { Card, Text } from '@aragon/ui'
 import styled from 'styled-components'
+import { Link } from '../../components/styled-components'
 
 const CardWrapper = ({ children, title, addMore, addSeparators, viewMode }) => (
-  <div style={{ width: '100%' }}>
+  <div css="width: 100%">
     {title && (
-      <Text style={{ padding: '7px 0' }} size="xlarge">
+      <Text css="padding: 7px 0" size="xlarge">
         {title}
       </Text>
     )}
     {addMore && !viewMode && (
-      <Text
-        style={{ paddingLeft: '13px', cursor: 'pointer' }}
-        size="small"
-        color={theme.accent}
-        onClick={() => addMore()}
-      >
+      <Link.Button size="tiny" onClick={addMore} css="padding-left: 13px">
         Add more
-      </Text>
+      </Link.Button>
     )}
     {children && (
       <StyledCard addSeparators={addSeparators}>{children}</StyledCard>
@@ -41,7 +37,7 @@ CardWrapper.propTypes = {
 }
 
 const StyledCard = styled(Card).attrs({ width: '100%', height: 'auto' })`
-  padding: 16px;
+  padding: 20px;
   > :not(:last-child) {
     margin-bottom: 13px;
     padding-bottom: 13px;

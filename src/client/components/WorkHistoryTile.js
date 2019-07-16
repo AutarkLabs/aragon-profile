@@ -3,39 +3,32 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { Text, theme } from '@aragon/ui'
-import { IconPencil, IconTrash } from './styled-components'
+import { IconPencil, IconTrash, TileHeader } from './styled-components'
 import { displayStartEndDates } from '../utils'
 
-const WorkHistoryTile = ({ workHistoryData, openModal, removeItem }) => (
+const WorkHistoryTile = ({
+  workHistoryData,
+  openModal,
+  removeItem,
+  viewMode,
+}) => (
   <SingleWorkItem>
     <Details>
-      <Text.Block size="large" style={{ fontWeight: '700' }}>
-        {workHistoryData.workPlace}
-      </Text.Block>
-      <Text.Block size="normal" style={{ fontWeight: '600' }}>
+      <TileHeader>{workHistoryData.workPlace}</TileHeader>
+      <Text.Block size="large">
         {workHistoryData.jobTitle}
-        <Text
-          size="xsmall"
-          color={theme.textTertiary}
-          style={{ marginLeft: '13px' }}
-        >
+        <Text color={theme.textTertiary} size="xsmall" css="margin-left: 13px">
           {displayStartEndDates(workHistoryData)}
         </Text>
       </Text.Block>
-      <Text.Block size="normal">{workHistoryData.description}</Text.Block>
+      <Text.Block size="small">{workHistoryData.description}</Text.Block>
     </Details>
-    <Icons>
-      <IconPencil
-        color={theme.accent}
-        width="16px"
-        onClick={() => openModal()}
-      />
-      <IconTrash
-        color={theme.accent}
-        width="16px"
-        onClick={() => removeItem()}
-      />
-    </Icons>
+    {!viewMode && (
+      <Icons>
+        <IconPencil color={theme.accent} width="16px" onClick={openModal} />
+        <IconTrash color={theme.accent} width="16px" onClick={removeItem} />
+      </Icons>
+    )}
   </SingleWorkItem>
 )
 
@@ -76,6 +69,7 @@ WorkHistoryTile.propTypes = {
   }).isRequired,
   openModal: PropTypes.func.isRequired,
   removeItem: PropTypes.func.isRequired,
+  viewMode: PropTypes.bool.isRequired,
 }
 
 export default WorkHistoryTile

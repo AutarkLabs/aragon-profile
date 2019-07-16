@@ -1,9 +1,9 @@
 import ipfsClient from 'ipfs-http-client'
 
-const infuraIpfs = ipfsClient({
-  host: 'ipfs.infura.io',
+export const ipfsAddress = 'ipfs.autark.xyz'
+
+export const ipfsGateway = ipfsClient({
+  host: ipfsAddress,
   port: '5001',
   protocol: 'https',
 })
-
-export default infuraIpfs

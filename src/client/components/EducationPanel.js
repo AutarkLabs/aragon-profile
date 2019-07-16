@@ -4,8 +4,9 @@ import { useProfile } from '../hooks'
 import { ModalContext } from '../wrappers/modal'
 import EducationHistoryTile from './EducationHistoryTile'
 import { open, removeItem } from '../stateManagers/modal'
-import { Text, theme } from '@aragon/ui'
+import { Text } from '@aragon/ui'
 import styled from 'styled-components'
+import { Link } from './styled-components'
 
 const EducationPanel = () => {
   const { educationHistory, viewMode } = useProfile()
@@ -31,20 +32,19 @@ const EducationPanel = () => {
             educationHistoryData={educationHistory[id]}
             openModal={() => dispatchModal(open('educationHistory', id))}
             removeItem={() => dispatchModal(removeItem(id, 'educationHistory'))}
+            viewMode={viewMode}
           />
         ))
       ) : (
         <Center>
-          <Text size="xlarge">You have no education</Text>
+          <Text size="normal">You have no education</Text>
           {!viewMode && (
-            <Text
-              style={{ cursor: 'pointer' }}
-              size="small"
-              color={theme.accent}
+            <Link.Button
               onClick={() => dispatchModal(open('educationHistory'))}
+              size="small"
             >
               Add educaction
-            </Text>
+            </Link.Button>
           )}
         </Center>
       )}

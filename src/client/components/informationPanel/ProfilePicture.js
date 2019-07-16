@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 
 import ImageMenu from '../ImageMenu'
 import { useProfile } from '../../hooks'
+import { ipfsAddress } from '../../../ipfs'
 
 import defaultImage from '../../../../assets/profile_avatar.svg'
 
@@ -25,7 +26,7 @@ const ProfilePicture = () => {
         <ImageMenu
           ethereumAddress={ethereumAddress}
           top={topMenuPos}
-          right={-6}
+          right={-12}
           imageExists={!!hasImage}
           imageTag="image"
           imageTitle="Profile"
@@ -38,7 +39,7 @@ const ProfilePicture = () => {
 
 const Container = styled.div`
   cursor: ${props => props.isEditing && 'pointer'};
-  padding: 16px;
+  padding: 20px;
   border: 2px solid #f2f2f2;
   background-repeat: no-repeat;
   background-position: center;
@@ -53,7 +54,7 @@ const Container = styled.div`
   ${props =>
     props.imageCid
       ? css`
-          background-image: url(https://ipfs.infura.io/ipfs/${props.imageCid});
+          background-image: url(https://${ipfsAddress}/ipfs/${props.imageCid});
           background-size: 100%;
           background-color: white;
         `

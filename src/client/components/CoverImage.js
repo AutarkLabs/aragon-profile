@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import ImageMenu from './ImageMenu'
 import { useProfile } from '../hooks'
+import { ipfsAddress } from '../../ipfs'
 
 const CoverImage = () => {
   const {
@@ -13,17 +14,6 @@ const CoverImage = () => {
   } = useProfile()
   const hasImage = !!coverPhotoCid
 
-  const imageMenuProps = {
-    ethereumAddress,
-    top: 26,
-    right: 26,
-    imageExists: !!hasImage,
-    open,
-    imageTag: 'coverPhoto',
-    imageTitle: 'Cover',
-    onSignatures,
-  }
-
   return (
     <CoverBase className="imageHover">
       {hasImage ? (
@@ -31,13 +21,24 @@ const CoverImage = () => {
       ) : (
         <CoverPlaceholder />
       )}
-      {userLoaded && !viewMode && <ImageMenu {...imageMenuProps} />}
+      {userLoaded && !viewMode && (
+        <ImageMenu
+          ethereumAddress={ethereumAddress}
+          top={26}
+          right={26}
+          imageExists={!!hasImage}
+          open={open}
+          imageTag="coverPhoto"
+          imageTitle="Cover"
+          onSignatures={onSignatures}
+        />
+      )}
     </CoverBase>
   )
 }
 
 const getBackground = props =>
-  `url(https://ipfs.infura.io/ipfs/${props.imageCid})`
+  `url(https://${ipfsAddress}/ipfs/${props.imageCid})`
 
 const CoverBase = styled.div`
   width: 100%;

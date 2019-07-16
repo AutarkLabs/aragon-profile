@@ -1,6 +1,6 @@
 {
   "name": "@openworklabs/aragon-profile",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "a single profile component for the Aragon Client",
   "author": "Schwartz10",
   "license": "MIT",
@@ -14,7 +14,7 @@
     "build": "./node_modules/.bin/babel src --out-dir dist",
     "clean": "rm -rf ./dist",
     "prepublishOnly": "npm run build",
-    "prepare-local-dev": "cd ./node_modules && rm -rf react && rm -rf react-dom && rm -rf styled-components && rm -rf @aragon/ui && cd ../",
+    "prepare-local-dev": "cd ./node_modules && rm -rf react && rm -rf react-dom && rm -rf styled-components && rm -rf web3-utils && rm -rf @aragon/ui && cd ../",
     "test": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom"
   },
@@ -23,14 +23,15 @@
     "prop-types": "^15.6.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "styled-components": "^4.2.1"
+    "styled-components": "^4.2.1",
+    "web3-utils": "1.0.0-beta.33"
   },
   "dependencies": {
     "3box": "^1.9.0",
     "ajv": "^6.10.0",
+    "dayjs": "^1.8.14",
     "ipfs-http-client": "^32.0.1",
     "lodash.clonedeep": "^4.5.0",
-    "moment": "^2.24.0",
     "react-dropzone": "^10.1.5",
     "uuid": "^3.3.2"
   },

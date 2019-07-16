@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Button, TextInput, DropDown, SafeLink, theme } from '@aragon/ui'
-
-import { EditTextField } from '../readOrEditFields'
+import { DateDropDown, EditTextField } from '../readOrEditFields'
+import { Button, TextInput, DropDown, SafeLink, theme, Text } from '@aragon/ui'
 import editImage from '../../../../assets/pencil-black-tool-interface-symbol.png'
 
 export const AlignRight = styled.div`
@@ -75,6 +74,8 @@ export const TextInputWithValidation = styled(TextInput)`
 
 export const TextMultilineWithValidation = styled(TextInput.Multiline)`
   border-color: ${props => (props.error ? 'red' : 'default')};
+  padding: 10px 10px;
+  height: 80px;
 `
 
 export const Label = styled.div`
@@ -93,13 +94,27 @@ export const ErrorBar = styled.div`
 
 export const DropDownWithValidation = props => (
   <Fragment>
-    <DropDown {...props} />
+    <DateDropDown {...props} />
     {props.error && <ErrorBar />}
   </Fragment>
 )
 
 DropDownWithValidation.propTypes = { error: PropTypes.string }
 DropDownWithValidation.defaultProps = { error: '' }
+
+export const TileHeader = props => (
+  <Text.Block
+    size="large"
+    css={`
+      line-height: 1.8;
+      font-weight: bold;
+    `}
+  >
+    {props.children}
+  </Text.Block>
+)
+
+TileHeader.propTypes = { children: PropTypes.node }
 
 export { default as IconPencil } from './IconPencil'
 export { default as IconTrash } from './IconTrash'
@@ -110,6 +125,7 @@ export { default as IconLocation } from './IconLocation'
 export { default as IconVerified } from './IconVerified'
 export { default as AnimationLoading } from './AnimationLoading'
 export { default as IconGlobe } from './IconGlobe'
+export { default as IconCamera } from './IconCamera'
 export { default as AnimationLoadingCircle } from './AnimationLoadingCircle'
 export { default as IconSuccess } from './IconSuccess'
 export { default as IconError } from './IconError'

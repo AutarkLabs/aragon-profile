@@ -5,14 +5,16 @@ import styled from 'styled-components'
 import { Button as AragonButton, Text, theme } from '@aragon/ui'
 import { IconTrash } from './styled-components'
 
-const OrganizationTile = ({ organizationData, removeItem }) => (
+const OrganizationTile = ({ organizationData, removeItem, viewMode }) => (
   <OrganizationItem>
     <Text.Block size="large">{organizationData.address}</Text.Block>
-    <Icons>
-      <Button onClick={removeItem}>
-        <IconTrash width="16px" height="16px" color={theme.accent} />
-      </Button>
-    </Icons>
+    {!viewMode && (
+      <Icons>
+        <Button onClick={removeItem}>
+          <IconTrash width="16px" height="16px" color={theme.accent} />
+        </Button>
+      </Icons>
+    )}
   </OrganizationItem>
 )
 const OrganizationItem = styled.div`
@@ -44,6 +46,7 @@ OrganizationTile.propTypes = {
     address: PropTypes.string.isRequired,
   }).isRequired,
   removeItem: PropTypes.func.isRequired,
+  viewMode: PropTypes.bool.isRequired,
 }
 
 export default OrganizationTile

@@ -14,17 +14,6 @@ const CoverImage = () => {
   } = useProfile()
   const hasImage = !!coverPhotoCid
 
-  const imageMenuProps = {
-    ethereumAddress,
-    top: 26,
-    right: 26,
-    imageExists: !!hasImage,
-    open,
-    imageTag: 'coverPhoto',
-    imageTitle: 'Cover',
-    onSignatures,
-  }
-
   return (
     <CoverBase className="imageHover">
       {hasImage ? (
@@ -32,7 +21,18 @@ const CoverImage = () => {
       ) : (
         <CoverPlaceholder />
       )}
-      {userLoaded && !viewMode && <ImageMenu {...imageMenuProps} />}
+      {userLoaded && !viewMode && (
+        <ImageMenu
+          ethereumAddress={ethereumAddress}
+          top={26}
+          right={26}
+          imageExists={!!hasImage}
+          open={open}
+          imageTag="coverPhoto"
+          imageTitle="Cover"
+          onSignatures={onSignatures}
+        />
+      )}
     </CoverBase>
   )
 }

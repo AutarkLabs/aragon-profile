@@ -3,18 +3,19 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { Button as AragonButton, Text, theme } from '@aragon/ui'
-import { IconPencil, IconTrash } from './styled-components'
+import { IconPencil, IconTrash, TileHeader } from './styled-components'
 import { displayStartEndDates } from '../utils'
 
 const EducationHistoryTile = ({
   educationHistoryData,
   openModal,
   removeItem,
+  viewMode,
 }) => (
   <SingleEducationItem>
     <div>
-      <Text.Block size="large">{educationHistoryData.organization}</Text.Block>
-      <Text.Block size="normal">
+      <TileHeader>{educationHistoryData.organization}</TileHeader>
+      <Text.Block size="normal" css="line-height: 1.8">
         {educationHistoryData.degree}
         {educationHistoryData.fieldOfStudy
           ? ', ' + educationHistoryData.fieldOfStudy
@@ -22,16 +23,19 @@ const EducationHistoryTile = ({
       </Text.Block>
       <Dates>{displayStartEndDates(educationHistoryData)}</Dates>
     </div>
-    <Icons>
-      <Button onClick={openModal}>
-        <IconPencil width="16px" height="16px" color={theme.accent} />
-      </Button>
-      <Button onClick={removeItem}>
-        <IconTrash width="16px" height="16px" color={theme.accent} />
-      </Button>
-    </Icons>
+    {!viewMode && (
+      <Icons>
+        <Button onClick={openModal}>
+          <IconPencil width="16px" height="16px" color={theme.accent} />
+        </Button>
+        <Button onClick={removeItem}>
+          <IconTrash width="16px" height="16px" color={theme.accent} />
+        </Button>
+      </Icons>
+    )}
   </SingleEducationItem>
 )
+
 const SingleEducationItem = styled.div`
   position: relative;
 `
@@ -56,7 +60,7 @@ const Button = styled(AragonButton).attrs({ mode: 'text' })`
     margin-bottom: 4px;
   }
 `
-const Dates = styled(Text.Block).attrs({ size: 'small' })`
+const Dates = styled(Text.Block).attrs({ size: 'xsmall' })`
   color: ${theme.textTertiary};
   margin-top: 2px;
 `
@@ -70,6 +74,7 @@ EducationHistoryTile.propTypes = {
   }).isRequired,
   openModal: PropTypes.func.isRequired,
   removeItem: PropTypes.func.isRequired,
+  viewMode: PropTypes.bool.isRequired,
 }
 
 export default EducationHistoryTile

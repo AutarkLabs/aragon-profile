@@ -1,17 +1,16 @@
-import moment from 'moment'
+import dayjs from 'dayjs'
 import uuidv1 from 'uuid/v1'
-// import { isAddress } from 'web3-utils'
-const isAddress = () => true
+import { isAddress } from 'web3-utils'
 
 /* TIME HELPERS */
-export const toUnix = date => moment(date, 'YYYY-MM-DD').unix()
+export const toUnix = date => dayjs(date, 'YYYY-MM-DD').unix()
 
-export const unixToCalendar = unix => moment.unix(unix).format('YYYY-MM-DD')
-export const yearFromUnix = unix => moment.unix(unix).format('YYYY')
-export const monthFromUnix = unix => moment.unix(unix).format('MM')
-export const unixToTileDate = unix => moment.unix(unix).format('MMM YYYY')
+export const unixToCalendar = unix => dayjs.unix(unix).format('YYYY-MM-DD')
+export const yearFromUnix = unix => dayjs.unix(unix).format('YYYY')
+export const monthFromUnix = unix => dayjs.unix(unix).format('MM')
+export const unixToTileDate = unix => dayjs.unix(unix).format('MMM YYYY')
 
-export const todayInUnix = () => Number(moment().format('X'))
+export const todayInUnix = () => dayjs().unix()
 
 /* FORM HELPERS */
 

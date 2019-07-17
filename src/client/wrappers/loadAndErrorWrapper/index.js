@@ -17,7 +17,6 @@ const LoadAndErrorWrapper = ({ children, ethereumAddress }) => {
   } = useProfileStates()
   const { viewMode } = useProfile()
 
-  // it was hardcoded as syncing=false before
   const isInitializing = false
   if (Object.keys(error).length > 0) return <ErrorState />
   if (isInitializing) return <Initializing />

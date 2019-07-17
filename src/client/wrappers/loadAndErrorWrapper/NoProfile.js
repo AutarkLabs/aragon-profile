@@ -13,16 +13,11 @@ const NoProfile = ({ ethereumAddress }) => (
     <NoProfileCard>
       <div css="display: flex; margin-bottom: 24px">
         <IconEthereum width="18px" height="18px" color={theme.textTertiary} />
-        <Text
-          css="font-size: 13px; margin-left: 8px"
-          color={theme.textTertiary}
-        >
+        <Text size="small" css="margin-left: 8px" color={theme.textTertiary}>
           {ethereumAddress}
         </Text>
       </div>
-      <Text.Block css="font-size: 15px">
-        This account has not created a profile
-      </Text.Block>
+      <Text.Block>This account has not created a profile</Text.Block>
     </NoProfileCard>
   </div>
 )

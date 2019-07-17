@@ -96,6 +96,8 @@ export const isViewMode = (connectedAccount, queryParams) => {
   }
 }
 
+export const assetsPath = asset => asset.replace(/.*\//, '/')
+
 export const shortDAOAddress = (address = '') => {
   if (address.endsWith('.eth')) return address
   return address.slice(0, 6) + '…' + address.slice(-4)

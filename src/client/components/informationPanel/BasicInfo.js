@@ -77,7 +77,7 @@ export const Website = ({ website }) =>
 
 Website.propTypes = { website: PropTypes.string }
 
-export const Empty = handleOpenEdit => (
+export const Empty = ({ handleOpenEdit }) => (
   <Center height="130px">
     <Text.Block css="text-align: center" size="xlarge">
       You have no name, bio or location
@@ -89,6 +89,10 @@ export const Empty = handleOpenEdit => (
     </Button>
   </Center>
 )
+
+Empty.propTypes = {
+  handleOpenEdit: PropTypes.func.isRequired,
+}
 
 const Center = styled.div`
   display: flex;

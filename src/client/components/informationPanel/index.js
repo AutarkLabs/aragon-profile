@@ -18,6 +18,7 @@ const AlignCenter = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: -9px;
+  position: relative;
 `
 
 export default LeftPanel

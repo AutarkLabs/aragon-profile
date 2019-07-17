@@ -62,12 +62,14 @@ export class Profile {
     const publicProfile = this.boxState.opened
       ? await this.unlockedBox.public.all()
       : await Box.getProfile(this.ethereumAddress)
-
     return publicProfile
   }
 
   getPublic = async () => {
     const publicProfile = await this._getPublic()
+    if (!Object.keys(publicProfile).length) {
+      return publicProfile
+    }
 
     const { github, twitter } = await Box.getVerifiedAccounts(publicProfile)
     return {

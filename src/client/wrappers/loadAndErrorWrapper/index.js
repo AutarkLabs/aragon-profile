@@ -1,78 +1,36 @@
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
-import { BoxContext } from '../box'
 import Initializing from './Initializing'
 import LoadingPublicProfile from './LoadingPublicProfile'
 import ErrorState from './Error'
 import UnlockingBox from './UnlockingBox'
+import NoProfile from './NoProfile'
+import { useProfile, useProfileStates } from '../../hooks'
 
-const LoadAndErrorWrapper = props => {
-  const syncing = false
+const LoadAndErrorWrapper = ({ children, ethereumAddress }) => {
+  const {
+    loadingPublicProf,
+    unlockingProf,
+    noPublicProfileFound,
+    error,
+  } = useProfileStates()
+  const { viewMode } = useProfile()
 
-  const { boxes } = useContext(BoxContext)
-
-  const usersBox = boxes[props.ethereumAddress]
-
-  const loadingPublicProf = usersBox && usersBox.loadingPublicProf
-  const unlockingProf = usersBox && usersBox.unlockingProf
-
-  return (
-    <LoadAndErrorView
-      {...props}
-      isInitializing={syncing}
-      isLoadingPublicProfile={loadingPublicProf}
-      isUnlockingProfile={unlockingProf}
-    />
-  )
-}
-
-LoadAndErrorWrapper.propTypes = {
-  ethereumAddress: PropTypes.string.isRequired,
-}
-
-const LoadAndErrorView = ({
-  children,
-  isInitializing,
-  isLoadingPublicProfile,
-  isUnlockingProfile,
-  error,
-}) => {
+  const isInitializing = false
   if (Object.keys(error).length > 0) return <ErrorState />
   if (isInitializing) return <Initializing />
-  if (isLoadingPublicProfile) return <LoadingPublicProfile />
-  if (isUnlockingProfile) return <UnlockingBox />
+  if (loadingPublicProf) return <LoadingPublicProfile />
+  if (unlockingProf) return <UnlockingBox />
+  // show NoProfile only if it doesn't exist and can't be created
+  if (noPublicProfileFound && viewMode)
+    return <NoProfile ethereumAddress={ethereumAddress} />
   return <Fragment>{children}</Fragment>
 }
 
-LoadAndErrorView.propTypes = {
-  children: PropTypes.node.isRequired,
-  isInitializing: PropTypes.bool,
-  isLoadingPublicProfile: PropTypes.bool,
-  isUnlockingProfile: PropTypes.bool,
-  error: PropTypes.object,
-}
-
-LoadAndErrorWrapper.defaultProps = {
-  error: {},
-  isInitializing: true,
-  isLoadingPublicProfile: false,
-  isUnlockingProfile: false,
-}
-
 LoadAndErrorWrapper.propTypes = {
   children: PropTypes.node.isRequired,
-  isInitializing: PropTypes.bool,
-  isLoadingPublicProfile: PropTypes.bool,
-  isUnlockingProfile: PropTypes.bool,
-  error: PropTypes.object,
-}
-
-LoadAndErrorWrapper.defaultProps = {
-  error: {},
-  isInitializing: true,
-  isLoadingPublicProfile: false,
-  isUnlockingProfile: false,
+  ethereumAddress: PropTypes.string.isRequired,
 }
 
 export default LoadAndErrorWrapper

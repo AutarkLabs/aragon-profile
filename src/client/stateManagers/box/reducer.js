@@ -2,6 +2,7 @@ import {
   FETCHING_PUBLIC_PROFILE,
   FETCHED_PUBLIC_PROFILE_SUCCESS,
   FETCHED_PUBLIC_PROFILE_ERROR,
+  NO_PUBLIC_PROFILE_FOUND,
   REQUESTED_PROFILE_UNLOCK,
   PROFILE_UNLOCK_SUCCESS,
   PROFILE_UNLOCK_FAILURE,
@@ -34,6 +35,7 @@ import {
   fetchingPublicProfile,
   fetchedPublicProfileSuccess,
   fetchedPublicProfileErr,
+  noPublicProfileFound,
   requestedProfUnlock,
   profileUnlocked,
   profileUnlockFailed,
@@ -97,6 +99,15 @@ const boxReducer = (prevState, action) => {
       nextState[ethereumAddress] = fetchedPublicProfileErr(
         prevState[ethereumAddress],
         action.error
+      )
+      logStateUpdate(action, prevState, nextState)
+      return nextState
+    }
+    case NO_PUBLIC_PROFILE_FOUND: {
+      const nextState = { ...prevState }
+      const ethereumAddress = action.meta.ethereumAddress
+      nextState[ethereumAddress] = noPublicProfileFound(
+        prevState[ethereumAddress]
       )
       logStateUpdate(action, prevState, nextState)
       return nextState

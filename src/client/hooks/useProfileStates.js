@@ -5,6 +5,9 @@ const defaultValues = {
   checkingMembership: false,
   checkedMembershipSuccess: false,
   checkedMembershipError: false,
+  loadingPublicProf: false,
+  unlockingProf: false,
+  noPublicProfileFound: false,
   error: '',
 }
 
@@ -18,6 +21,9 @@ const useProfileStates = () => {
     checkingMembership,
     checkedMembershipSuccess,
     checkedMembershipError,
+    loadingPublicProf,
+    unlockingProf,
+    noPublicProfileFound,
     error,
   } = boxes[ethereumAddress]
 
@@ -25,6 +31,9 @@ const useProfileStates = () => {
     checkingMembership,
     checkedMembershipSuccess,
     checkedMembershipError,
+    loadingPublicProf,
+    unlockingProf,
+    noPublicProfileFound,
     error: error || defaultValues.error,
   }
 }

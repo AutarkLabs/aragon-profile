@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 import ImageMenu from '../ImageMenu'
 import { useProfile } from '../../hooks'
 import { ipfsAddress } from '../../../ipfs'
+import { assetsPath } from '../../utils'
 
 import defaultImage from '../../../../assets/profile_avatar.svg'
 
@@ -59,7 +60,7 @@ const Container = styled.div`
           background-color: white;
         `
       : css`
-          background-image: url(${defaultImage});
+          background-image: url(${assetsPath(defaultImage)});
           background-size: 50%;
           background-color: #e5e8eb;
         `}

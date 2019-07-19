@@ -23,7 +23,13 @@ const useLinkedData = (boxes, dispatch, ethereumAddress) => {
     } catch (error) {
       dispatch(fetchedPublicProfileError(ethereumAddress, error))
     }
-  }, [ethereumAddress, loadedPublicProf, publicProfile, setFormattedProfile])
+  }, [
+    ethereumAddress,
+    loadedPublicProf,
+    publicProfile,
+    setFormattedProfile,
+    dispatch,
+  ])
 
   return { formattedProfile }
 }

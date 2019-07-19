@@ -13,6 +13,7 @@
   "scripts": {
     "build": "./node_modules/.bin/babel src --out-dir dist",
     "clean": "rm -rf ./dist",
+    "lint": "eslint --ext .js src/",
     "prepublishOnly": "npm run build",
     "prepare-local-dev": "cd ./node_modules && rm -rf react && rm -rf react-dom && rm -rf styled-components && rm -rf web3-utils && rm -rf @aragon/ui && cd ../",
     "test": "cross-env CI=1 react-scripts test --env=jsdom",
@@ -23,6 +24,8 @@
     "prop-types": "^15.6.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-onclickout": "^2.0.8",
+    "react-spring": "^7.2.10",
     "styled-components": "^4.2.1",
     "web3-utils": "1.0.0-beta.33"
   },

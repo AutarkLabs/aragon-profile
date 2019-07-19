@@ -1,7 +1,9 @@
 import dayjs from 'dayjs'
 import uuidv1 from 'uuid/v1'
 // import { isAddress } from 'web3-utils'
-const isAddress = _ => true
+const isAddress = () => true
+
+export const str: string = 42
 
 /* TIME HELPERS */
 export const toUnix = (date: string) => dayjs(date, 'YYYY-MM-DD').unix()

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Viewport } from '@aragon/ui'
+import { BREAKPOINTS, breakpoint } from '@aragon/ui'
 
 import InformationPanel from './informationPanel'
 // import OrganizationPanel from './OrganizationPanel'
@@ -9,66 +9,37 @@ import WorkHistoryPanel from './WorkHistoryPanel'
 import CoverImage from './CoverImage'
 
 const Profile = () => (
-  <div css="width: 100%">
+  <React.Fragment>
     <CoverImage />
-    <Viewport>
-      {({ below }) =>
-        below(640) ? (
-          <SingleColumn>
-            <InformationPanel />
-            {/*
-            <OrganizationPanel />
-            */}
-            <WorkHistoryPanel />
-            <EducationPanel />
-          </SingleColumn>
-        ) : (
-          <DoubleColumn>
-            <LeftColumn>
-              <InformationPanel />
-              <EducationPanel />
-            </LeftColumn>
-            <RightColumn>
-              {/*
-                For future reference: this will be re-enabled
-                when it is possible to confirm membership in external DAOs.
+    <Grid>
+      <InformationPanel />
+      {/*
+        For future reference: this will be re-enabled
+        when it is possible to confirm membership in external DAOs.
 
-                What is left in place: modal allowing to add membership record,
-                events and all state-related code, incomplete styling for DAOs
-                Membership Panel.
-              <OrganizationPanel />
-              */}
-              <WorkHistoryPanel />
-            </RightColumn>
-          </DoubleColumn>
-        )
-      }
-    </Viewport>
-  </div>
+        What is left in place: modal allowing to add membership record,
+        events and all state-related code, incomplete styling for DAOs
+        Membership Panel.
+      <OrganizationPanel />
+      */}
+      <WorkHistoryPanel css="grid-row: span 2" />
+      <EducationPanel />
+    </Grid>
+  </React.Fragment>
 )
 
-const LeftColumn = styled.div`
-  display: flex;
-  flex-direction: column;
+const Grid = styled.div`
+  display: grid;
+  grid-gap: 26px;
+  margin: 0 auto;
+  max-width: ${BREAKPOINTS.large}px;
+  padding: 30px;
   width: 100%;
-  max-width: 400px;
-  margin: 13px;
-  > * {
-    margin-bottom: 26px;
-  }
-`
-const RightColumn = styled(LeftColumn)`
-  width: 100%;
-  max-width: 600px;
-`
-const SingleColumn = styled(RightColumn)`
-  width: auto;
-  align-content: stretch;
-`
-const DoubleColumn = styled.div`
-  display: flex;
-  flex-direction: row;
-  padding: 0 26px;
+  ${breakpoint(
+    'small',
+    'grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));'
+  )};
+  ${breakpoint('large', 'grid-template-columns: 2fr 3fr')};
 `
 
 export default Profile

@@ -49,8 +49,8 @@ const Container = styled.div`
   width: 150px;
   height: 150px;
   position: absolute;
-  top: 52px;
-  left: 52px;
+  bottom: calc(100% - 30px);
+  left: 30px;
   z-index: 4;
   ${props =>
     props.imageCid

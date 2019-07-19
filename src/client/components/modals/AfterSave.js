@@ -10,44 +10,27 @@ import {
   AnimationLoadingCircle,
 } from '../styled-components'
 
-const calculateText = (
-  savingProfile,
-  savedProfileSuccess,
-  savedProfileError
-) => {
-  if (savingProfile) return 'Updating your profile...'
-  else if (savedProfileSuccess) return 'Your profile has been updated!'
-  else if (savedProfileError) return 'Your profile could not be updated.'
-  return 'Oops, something went wrong on our end. Please try again.'
+const messages = {
+  savingProfile: 'Updating your profile...',
+  savedProfileSuccess: 'Your profile has been updated!',
+  savedProfileError: 'Your profile could not be updated.',
 }
 
-const calculateIcon = (
-  savingProfile,
-  savedProfileSuccess,
-  savedProfileError
-) => {
-  if (savingProfile) return AnimationLoadingCircle
-  else if (savedProfileSuccess) return IconSuccess
-  else if (savedProfileError) return IconError
-  return IconError
+const icons = {
+  savingProfile: AnimationLoadingCircle,
+  savedProfileSuccess: IconSuccess,
+  savedProfileError: IconError,
 }
 
-const AfterSave = ({
-  savingProfile,
-  savedProfileSuccess,
-  savedProfileError,
-}) => {
-  const Icon = calculateIcon(
-    savingProfile,
-    savedProfileSuccess,
-    savedProfileError
-  )
+const AfterSave = ({ state }) => {
+  const Icon = icons[state] || IconError
   return (
     <ModalWrapper>
       <CheckWrapper>
         <Icon />
         <Text size="xxlarge">
-          {calculateText(savingProfile, savedProfileSuccess, savedProfileError)}
+          {messages[state] ||
+            'Oops, something went wrong on our end. Please try again.'}
         </Text>
       </CheckWrapper>
     </ModalWrapper>
@@ -55,15 +38,7 @@ const AfterSave = ({
 }
 
 AfterSave.propTypes = {
-  savingProfile: PropTypes.bool,
-  savedProfileSuccess: PropTypes.bool,
-  savedProfileError: PropTypes.bool,
-}
-
-AfterSave.defaultProps = {
-  savingProfile: false,
-  savedProfileSuccess: false,
-  savedProfileError: false,
+  state: PropTypes.string,
 }
 
 export default AfterSave

@@ -1,3 +1,5 @@
+import { REMOVE_ITEM, BOX_STATE } from './types'
+
 export const initialState = {
   type: null,
   id: null,
@@ -20,13 +22,13 @@ export const closedModal = state => ({
 
 export const removeItem = (state, id, itemType) => ({
   ...state,
-  type: 'removeItem',
+  type: REMOVE_ITEM,
   itemType,
   id,
 })
 
 export const openedBoxStateModal = (state, sigsRequired) => ({
   ...state,
-  type: '3boxState',
+  type: BOX_STATE,
   sigsRequired,
 })

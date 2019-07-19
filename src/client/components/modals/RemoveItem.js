@@ -57,8 +57,12 @@ const ButtonsRow = styled.div`
 
 RemoveItem.propTypes = {
   onRemove: PropTypes.func.isRequired,
-  itemType: PropTypes.string.isRequired,
+  itemType: PropTypes.string,
   removingError: PropTypes.object,
+}
+
+RemoveItem.defaultProps = {
+  itemType: '',
 }
 
 export default RemoveItem

@@ -4,8 +4,15 @@ import { Card, Text } from '@aragon/ui'
 import styled from 'styled-components'
 import { Link } from '../../components/styled-components'
 
-const CardWrapper = ({ children, title, addMore, addSeparators, viewMode }) => (
-  <div css="width: 100%">
+const CardWrapper = ({
+  children,
+  className,
+  title,
+  addMore,
+  addSeparators,
+  viewMode,
+}) => (
+  <div css="width: 100%" className={className}>
     {title && (
       <Text css="padding: 7px 0" size="xlarge">
         {title}
@@ -30,6 +37,7 @@ CardWrapper.defaultProps = {
 
 CardWrapper.propTypes = {
   children: PropTypes.node,
+  className: PropTypes.string,
   title: PropTypes.string,
   addMore: PropTypes.func,
   addSeparators: PropTypes.bool,

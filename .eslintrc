@@ -32,7 +32,9 @@
           "^styled-components$",
           "^@aragon/ui$",
           "^prop-types$",
-          "^web3-utils$"
+          "^web3-utils$",
+          "^react-onclickout$",
+          "^react-spring$"
         ]
       }
     ],

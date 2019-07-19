@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 import ImageMenu from '../ImageMenu'
 import { useProfile } from '../../hooks'
 import { ipfsAddress } from '../../../ipfs'
+import { assetsPath } from '../../utils'
 
 import defaultImage from '../../../../assets/profile_avatar.svg'
 
@@ -48,8 +49,8 @@ const Container = styled.div`
   width: 150px;
   height: 150px;
   position: absolute;
-  top: 52px;
-  left: 52px;
+  bottom: calc(100% - 30px);
+  left: 30px;
   z-index: 4;
   ${props =>
     props.imageCid
@@ -59,7 +60,7 @@ const Container = styled.div`
           background-color: white;
         `
       : css`
-          background-image: url(${defaultImage});
+          background-image: url(${assetsPath(defaultImage)});
           background-size: 50%;
           background-color: #e5e8eb;
         `}

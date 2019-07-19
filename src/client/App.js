@@ -16,7 +16,7 @@ const App = ({ account, onSignatures, parts }) => (
   <Main>
     <BoxWrapper
       isViewMode={isViewMode(account, parts)}
-      account={determineAddress(account, parts)}
+      ethereumAddress={determineAddress(account, parts)}
       onSignatures={onSignatures}
     >
       <ModalWrapper

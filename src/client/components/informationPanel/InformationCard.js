@@ -29,7 +29,9 @@ const InformationCard = () => {
   // return early if there is no profile to display
   if (!userLoaded) return <div />
 
-  const handleOpenEdit = () => dispatchModal(open('basicInformation'))
+  const handleOpenEdit = () => {
+    dispatchModal(open('basicInformation'))
+  }
 
   return (
     <StyledCard>

@@ -10,21 +10,11 @@ const Initializing = () => (
       justify-content: center;
     `}
   >
-    <div
-      css={`
-        text-align: center;
-      `}
-    >
+    <div css="text-align: center">
       <AnimationLoading />
     </div>
 
-    <div
-      css={`
-        margin-top: 13px;
-      `}
-    >
-      Initializing
-    </div>
+    <div css="margin-top: 13px">Initializing</div>
   </div>
 )
 

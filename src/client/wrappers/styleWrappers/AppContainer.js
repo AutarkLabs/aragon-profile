@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { AppView, AppBar } from '@aragon/ui'
 import logoBackground from '../../../../assets/logo-background.svg'
+import { assetsPath } from '../../utils'
 
 const AppContainer = ({ children }) => {
   return (
@@ -10,7 +11,7 @@ const AppContainer = ({ children }) => {
       padding={0}
       css={`
         background-color: #f7fbfd;
-        background-image: url(${logoBackground});
+        background-image: url(${assetsPath(logoBackground)});
         background-position: 50% 50%;
         background-repeat: no-repeat;
       `}

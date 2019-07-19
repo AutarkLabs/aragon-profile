@@ -8,7 +8,7 @@ import { Text } from '@aragon/ui'
 import styled from 'styled-components'
 import { Link } from './styled-components'
 
-const WorkHistoryPanel = () => {
+const WorkHistoryPanel = ({ className }) => {
   const { workHistory, viewMode } = useProfile()
   const { dispatchModal } = useContext(ModalContext)
 
@@ -18,6 +18,7 @@ const WorkHistoryPanel = () => {
     title: 'Work history',
     addMore: historyNotEmpty ? () => dispatchModal(open('workHistory')) : null,
     addSeparators: true,
+    className,
     viewMode,
   }
 

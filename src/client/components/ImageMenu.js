@@ -43,7 +43,7 @@ const ImageMenu = ({
       reader.onerror = error => {
         reader.onabort = () =>
           console.log('file reading failed and was aborted')
-        dispatch(uploadedImageFailure(error))
+        dispatch(uploadedImageFailure(ethereumAddress, error))
       }
 
       reader.onload = async () => {
@@ -56,6 +56,7 @@ const ImageMenu = ({
             ethereumAddress,
             onSignatures
           )
+
           if (unlockedBox) {
             const result = await ipfsGateway.add(file)
             dispatch(uploadedImage(ethereumAddress, imageTag, result[0].hash))
@@ -76,7 +77,7 @@ const ImageMenu = ({
             }
           }
         } catch (error) {
-          dispatch(uploadedImageFailure(error))
+          dispatch(uploadedImageFailure(ethereumAddress, error))
         }
       }
 

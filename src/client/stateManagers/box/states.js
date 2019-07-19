@@ -184,7 +184,7 @@ export const uploadedImageError = (state, error) => ({
   uploadingImage: false,
   uploadedImageSuccess: false,
   uploadedImage: true,
-  image_error: error,
+  error,
 })
 
 export const requestedCheckMembership = state => ({

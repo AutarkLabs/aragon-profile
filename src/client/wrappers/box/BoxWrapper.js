@@ -1,19 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-// import { EthereumAddressType } from '../../../../../prop-types'
 import { BoxContext } from '../box'
 import { use3Box, useLinkedData } from '../../hooks'
 
-const BoxWrapper = ({ account, children, onSignatures, isViewMode }) => {
-  const { boxes, dispatch } = use3Box(account, onSignatures)
-  useLinkedData()
+const BoxWrapper = ({ ethereumAddress, children, onSignatures, isViewMode }) => {
+  const { boxes, dispatch } = use3Box(ethereumAddress, onSignatures)
+  useLinkedData(boxes, dispatch, ethereumAddress)
   return (
     <BoxContext.Provider
       value={{
         boxes,
         dispatch,
-        ethereumAddress: account,
+        ethereumAddress,
         isViewMode,
         onSignatures,
       }}
@@ -24,7 +23,7 @@ const BoxWrapper = ({ account, children, onSignatures, isViewMode }) => {
 }
 
 BoxWrapper.propTypes = {
-  account: PropTypes.string,
+  ethereumAddress: PropTypes.string,
   children: PropTypes.node.isRequired,
   onSignatures: PropTypes.func.isRequired,
   isViewMode: PropTypes.bool.isRequired,

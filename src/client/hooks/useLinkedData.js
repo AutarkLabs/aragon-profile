@@ -1,21 +1,15 @@
-import { useEffect, useState, useReducer } from 'react'
+import { useEffect, useState } from 'react'
 
 import { format } from '../../modules/3box-LD'
-import {
-  boxReducer,
-  initialState,
-  fetchedPublicProfileError,
-} from '../stateManagers/box'
+import { fetchedPublicProfileError } from '../stateManagers/box'
 
-const useLinkedData = () => {
-  // const { connectedAccount } = useAragonApi()
-  const connectedAccount = ''
+const useLinkedData = (boxes, dispatch, ethereumAddress) => {
   const [formattedProfile, setFormattedProfile] = useState({})
 
-  const [boxes, dispatch] = useReducer(boxReducer, initialState)
-  const box = boxes[connectedAccount]
+  const box = boxes[ethereumAddress]
   const loadedPublicProf = box ? box.loadedPublicProfSuccess : false
   const publicProfile = loadedPublicProf ? box.publicProfile : {}
+
   useEffect(() => {
     try {
       if (loadedPublicProf) {
@@ -27,10 +21,9 @@ const useLinkedData = () => {
         document.head.appendChild(script)
       }
     } catch (error) {
-      console.error('useLinkedData', error)
-      dispatch(fetchedPublicProfileError(connectedAccount, error))
+      dispatch(fetchedPublicProfileError(ethereumAddress, error))
     }
-  }, [loadedPublicProf, publicProfile, setFormattedProfile])
+  }, [ethereumAddress, loadedPublicProf, publicProfile, setFormattedProfile])
 
   return { formattedProfile }
 }

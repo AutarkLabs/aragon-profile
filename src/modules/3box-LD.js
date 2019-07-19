@@ -93,7 +93,7 @@ export const handleImage = publicProfile => {
     typeof publicProfile.image[0].contentUrl === 'object'
 
   const cid = isProperlyTyped && publicProfile.image[0].contentUrl['/']
-  const isIPLD = isIPFS.cid(cid)
+  const isIPLD = isIPFS(cid)
 
   if (isIPLD) {
     delete publicProfile.image

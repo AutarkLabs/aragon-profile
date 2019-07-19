@@ -5,6 +5,17 @@ import { DateDropDown, EditTextField } from '../readOrEditFields'
 import { Button, TextInput, SafeLink, theme, Text } from '@aragon/ui'
 import editImage from '../../../../assets/pencil-black-tool-interface-symbol.png'
 
+export const CheckWrapper = styled.div`
+  height: 146px;
+  display: flex;
+  align-items: center;
+  padding-bottom: 13px;
+  > :first-child {
+    margin-left: 10px;
+    margin-right: 30px;
+  }
+`
+
 export const AlignRight = styled.div`
   display: flex;
   flex-direction: column;

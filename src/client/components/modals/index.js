@@ -15,13 +15,25 @@ import {
   removedItemError,
 } from '../../stateManagers/box'
 import { unlockAndCreateBoxIfRequired } from '../../utils'
-import { close } from '../../stateManagers/modal'
+import { close, open } from '../../stateManagers/modal'
 import WorkHistoryModal from './WorkHistory'
 import BasicInformationModal from './BasicInformation'
 import EducationHistoryModal from './EducationHistory'
 import OrganizationModal from './Organization'
 import RemoveItem from './RemoveItem'
 import BoxState from './BoxState'
+import AfterSave from './AfterSave'
+import {
+  BASIC_INFORMATION,
+  EDUCATION_HISTORY,
+  WORK_HISTORY,
+  ORGANIZATION,
+  REMOVE_ITEM,
+  BOX_STATE,
+  SAVING_PROFILE,
+  SAVED_PROFILE_SUCCESS,
+  SAVED_PROFILE_ERROR,
+} from '../../stateManagers/modal/types'
 
 const UserInfoModal = ({ ethereumAddress, onSignatures }) => {
   const { boxes, dispatch } = useContext(BoxContext)
@@ -47,15 +59,16 @@ const UserInfoModal = ({ ethereumAddress, onSignatures }) => {
     return value || ''
   }
 
-  const delay = () =>
+  const delay = ms =>
     new Promise(resolve => {
       setTimeout(() => {
         resolve()
-      }, 1000)
+      }, ms)
     })
 
   const saveProfile = async ethereumAddress => {
     dispatch(savingProfile(ethereumAddress))
+    dispatchModal(open('savingProfile'))
 
     try {
       const { changed, forms } = boxes[ethereumAddress]
@@ -82,12 +95,17 @@ const UserInfoModal = ({ ethereumAddress, onSignatures }) => {
       if (unlockedBox) {
         await unlockedBox.setPublicFields(changed, changedValues)
         dispatch(savedProfile(ethereumAddress, forms))
-        await delay()
+        await delay(500)
+        dispatchModal(open('savedProfileSuccess'))
+        await delay(2000)
         dispatchModal(close())
         setKey(uuidv1())
       }
     } catch (error) {
       dispatch(saveProfileError(ethereumAddress, error))
+      dispatchModal(open('savedProfileError'))
+      await delay(2000)
+      dispatchModal(close())
     }
   }
 
@@ -120,10 +138,15 @@ const UserInfoModal = ({ ethereumAddress, onSignatures }) => {
         const updatedProfile = await unlockedBox.getPublic()
 
         dispatch(removedItem(ethereumAddress, updatedProfile))
+        dispatchModal(open('savedProfileSuccess'))
+        await delay(2000)
         dispatchModal(close())
       }
     } catch (err) {
       dispatch(removedItemError(ethereumAddress, err))
+      dispatchModal(open('savedProfileError'))
+      await delay(2000)
+      dispatchModal(close())
     }
   }
 
@@ -149,46 +172,47 @@ const UserInfoModal = ({ ethereumAddress, onSignatures }) => {
     removingError,
   }
 
+  const modals = {
+    [BASIC_INFORMATION]: <BasicInformationModal {...modalsCommonProps} />,
+    [EDUCATION_HISTORY]: (
+      <EducationHistoryModal
+        educationHistoryId={modal.id || key}
+        {...modalsCommonProps}
+      />
+    ),
+    [WORK_HISTORY]: (
+      <WorkHistoryModal
+        workHistoryId={modal.id || key}
+        {...modalsCommonProps}
+      />
+    ),
+    [ORGANIZATION]: (
+      <OrganizationModal
+        organizationId={modal.id || key}
+        {...modalsCommonProps}
+      />
+    ),
+    [REMOVE_ITEM]: (
+      <RemoveItem
+        itemType={modal.itemType}
+        onRemove={removeItem}
+        removingError={removingError}
+      />
+    ),
+    [BOX_STATE]: (
+      <BoxState
+        messageSigning={boxes[ethereumAddress].messageSigning}
+        signaturesRequired={modal.sigsRequired}
+      />
+    ),
+    [SAVING_PROFILE]: <AfterSave state="savingProfile" />,
+    [SAVED_PROFILE_SUCCESS]: <AfterSave state="savedProfileSuccess" />,
+    [SAVED_PROFILE_ERROR]: <AfterSave state="savedProfileError" />,
+  }
+
   return (
     <Modal visible={!!modal.type} padding="0">
-      <div css="position: relative">
-        {modal.type === 'basicInformation' && (
-          <BasicInformationModal {...modalsCommonProps} />
-        )}
-
-        {modal.type === 'educationHistory' && (
-          <EducationHistoryModal
-            educationHistoryId={modal.id || key}
-            {...modalsCommonProps}
-          />
-        )}
-
-        {modal.type === 'workHistory' && (
-          <WorkHistoryModal
-            workHistoryId={modal.id || key}
-            {...modalsCommonProps}
-          />
-        )}
-        {modal.type === 'organization' && (
-          <OrganizationModal
-            organizationId={modal.id || key}
-            {...modalsCommonProps}
-          />
-        )}
-        {modal.type === 'removeItem' && (
-          <RemoveItem
-            itemType={modal.itemType}
-            onRemove={removeItem}
-            removingError={removingError}
-          />
-        )}
-        {modal.type === '3boxState' && (
-          <BoxState
-            messageSigning={boxes[ethereumAddress].messageSigning}
-            signaturesRequired={modal.sigsRequired}
-          />
-        )}
-      </div>
+      <div css="position: relative">{modal.type && modals[modal.type]}</div>
     </Modal>
   )
 }

@@ -37,7 +37,7 @@ const EducationPanel = () => {
         ))
       ) : (
         <Center>
-          <Text size="normal">You have no education</Text>
+          <Text size="normal">No education added</Text>
           {!viewMode && (
             <Link.Button
               onClick={() => dispatchModal(open('educationHistory'))}

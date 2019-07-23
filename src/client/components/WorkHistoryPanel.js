@@ -37,7 +37,7 @@ const WorkHistoryPanel = ({ className }) => {
         ))
       ) : (
         <Center>
-          <Text size="normal">You have no work history</Text>
+          <Text size="normal">No work history added</Text>
           {!viewMode && (
             <Link.Button
               onClick={() => dispatchModal(open('workHistory'))}

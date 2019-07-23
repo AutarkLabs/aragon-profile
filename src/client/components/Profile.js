@@ -30,10 +30,11 @@ const Profile = () => (
 
 const Grid = styled.div`
   display: grid;
-  grid-gap: 26px;
+  grid-column-gap: 26px;
   margin: 0 auto;
   max-width: ${BREAKPOINTS.large}px;
   padding: 30px;
+  padding-top: 0;
   width: 100%;
   ${breakpoint(
     'small',

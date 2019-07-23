@@ -86,8 +86,11 @@ const InformationCard = () => {
 }
 
 const StyledCard = styled(Card).attrs({ width: '100%', height: 'auto' })`
+  border-top: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
   padding: 20px;
-  padding-top: 52px;
+  padding-top: 35px;
   position: relative;
 `
 const EthAddr = styled(Text).attrs({ size: 'small' })`

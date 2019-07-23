@@ -1,23 +1,16 @@
 import React from 'react'
-import styled from 'styled-components'
 
 import ProfilePicture from './ProfilePicture'
 import InformationCard from './InformationCard'
+import { BasicInfoCardWrap } from '../styled-components'
 
-const LeftPanel = () => {
+const InformationCardWrap = () => {
   return (
-    <AlignCenter>
+    <BasicInfoCardWrap>
       <ProfilePicture />
       <InformationCard />
-    </AlignCenter>
+    </BasicInfoCardWrap>
   )
 }
 
-const AlignCenter = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-`
-
-export default LeftPanel
+export default InformationCardWrap

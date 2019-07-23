@@ -1,12 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import { BREAKPOINTS, breakpoint } from '@aragon/ui'
+import { breakpoint } from '@aragon/ui'
 
 import InformationPanel from './informationPanel'
 // import OrganizationPanel from './OrganizationPanel'
 import EducationPanel from './EducationPanel'
 import WorkHistoryPanel from './WorkHistoryPanel'
 import CoverImage from './CoverImage'
+import { ContentWrap } from './styled-components'
 
 const Profile = () => (
   <React.Fragment>
@@ -28,14 +29,9 @@ const Profile = () => (
   </React.Fragment>
 )
 
-const Grid = styled.div`
+const Grid = styled(ContentWrap)`
   display: grid;
   grid-column-gap: 26px;
-  margin: 0 auto;
-  max-width: ${BREAKPOINTS.large}px;
-  padding: 30px;
-  padding-top: 0;
-  width: 100%;
   ${breakpoint(
     'small',
     'grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));'

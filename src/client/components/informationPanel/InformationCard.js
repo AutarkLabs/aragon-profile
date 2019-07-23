@@ -1,11 +1,11 @@
 import React, { Fragment, useContext, useState } from 'react'
 import styled from 'styled-components'
-import { Text, Card, theme } from '@aragon/ui'
+import { theme } from '@aragon/ui'
 
 import { ModalContext } from '../../wrappers/modal'
 import { useProfile } from '../../hooks'
 import { open } from '../../stateManagers/modal'
-import { Social, IconPencil, IconEthereum } from '../styled-components'
+import { EthAddr, Social, IconPencil, IconEthereum } from '../styled-components'
 
 import { GitHub, Twitter } from './SocialInfo'
 import { Name, Description, Location, Website, Empty } from './BasicInfo'
@@ -34,7 +34,7 @@ const InformationCard = () => {
   }
 
   return (
-    <StyledCard>
+    <Wrap>
       <div>
         <Details>
           {!(name || description || location) ? (
@@ -63,11 +63,7 @@ const InformationCard = () => {
           />
           <Separator />
           <Social>
-            <IconEthereum
-              width="13px"
-              height="13px"
-              color={theme.textTertiary}
-            />
+            <IconEthereum width="13px" height="13px" />
             <EthAddr>{ethereumAddress}</EthAddr>
           </Social>
         </Details>
@@ -81,22 +77,13 @@ const InformationCard = () => {
           </Icons>
         )}
       </div>
-    </StyledCard>
+    </Wrap>
   )
 }
 
-const StyledCard = styled(Card).attrs({ width: '100%', height: 'auto' })`
-  border-top: none;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  padding: 20px;
-  padding-top: 35px;
-  position: relative;
-`
-const EthAddr = styled(Text).attrs({ size: 'small' })`
-  color: ${theme.textTertiary};
-  word-break: break-all;
-`
+// used for hover effects in Icons; needs no styling of its own
+const Wrap = styled.div``
+
 const Icons = styled.div`
   position: absolute;
   top: 14px;
@@ -108,7 +95,7 @@ const Icons = styled.div`
     padding: 4px;
     cursor: pointer;
   }
-  ${StyledCard}:hover & {
+  ${Wrap}:hover & {
     visibility: visible;
   }
 `

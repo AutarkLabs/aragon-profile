@@ -127,6 +127,9 @@ export const TileHeader = props => (
 
 TileHeader.propTypes = { children: PropTypes.node }
 
+export { default as BasicInfoCardWrap } from './BasicInfoCardWrap'
+export { default as ContentWrap } from './ContentWrap'
+export { default as EthAddr } from './EthAddr'
 export { default as IconPencil } from './IconPencil'
 export { default as IconTrash } from './IconTrash'
 export { default as IconGitHub } from './IconGitHub'

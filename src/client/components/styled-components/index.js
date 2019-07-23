@@ -85,15 +85,9 @@ export const TextInputWithValidation = styled(TextInput)`
 
 export const TextMultilineWithValidation = styled(TextInput.Multiline)`
   border-color: ${props => (props.error ? 'red' : 'default')};
+  display: block; /* fixes a whitespace issue */
   padding: 10px 10px;
   height: 80px;
-`
-
-export const Label = styled.div`
-  text-transform: lowercase;
-  font-variant: small-caps;
-  color: #707070;
-  margin: 0;
 `
 
 export const ErrorBar = styled.div`

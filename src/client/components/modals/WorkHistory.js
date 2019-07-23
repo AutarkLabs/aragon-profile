@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import { Button } from '@aragon/ui'
+import { Field, Button } from '@aragon/ui'
 import PropTypes from 'prop-types'
 import { ModalWrapper, TwoColumnsRow, DisplayErrors } from './ModalWrapper'
 import { useDate } from '../../hooks'
 import { years } from '../../utils'
 import DateDropdowns from '../DateDropdowns'
 import {
-  Label,
   TextInputWithValidation,
   TextMultilineWithValidation,
 } from '../styled-components'
@@ -64,8 +63,7 @@ const WorkHistory = ({
     <ModalWrapper title="Add Work">
       <DisplayErrors errors={{ ...validationErrors, ...savingError }} />
       <TwoColumnsRow>
-        <div>
-          <Label>Company or Project</Label>
+        <Field label="Company or Project">
           <TextInputWithValidation
             wide
             value={getFormValue('workHistory', workHistoryId, 'workPlace')}
@@ -79,9 +77,8 @@ const WorkHistory = ({
             }
             error={validationErrors['workPlace']}
           />
-        </div>
-        <div>
-          <Label>Job Title or Role</Label>
+        </Field>
+        <Field label="Job Title or Role">
           <TextInputWithValidation
             wide
             value={getFormValue('workHistory', workHistoryId, 'jobTitle')}
@@ -90,11 +87,10 @@ const WorkHistory = ({
             }
             error={validationErrors['jobTitle']}
           />
-        </div>
+        </Field>
       </TwoColumnsRow>
 
-      <div>
-        <Label>Description</Label>
+      <Field label="Description">
         <TextMultilineWithValidation
           wide
           value={getFormValue('workHistory', workHistoryId, 'description')}
@@ -108,7 +104,7 @@ const WorkHistory = ({
           }
           error={validationErrors['description']}
         />
-      </div>
+      </Field>
 
       <DateDropdowns
         current={current}

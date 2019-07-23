@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { Button, TextInput } from '@aragon/ui'
+import { Button, Field, TextInput } from '@aragon/ui'
 import PropTypes from 'prop-types'
 import { ModalWrapper, TwoColumnsRow, DisplayErrors } from './ModalWrapper'
 import {
-  Label,
   TextInputWithValidation,
   TextMultilineWithValidation,
 } from '../styled-components'
@@ -36,35 +35,31 @@ const BasicInformation = ({
     <ModalWrapper title="Edit Basic Information">
       <DisplayErrors errors={{ ...validationErrors, ...savingError }} />
       <TwoColumnsRow>
-        <div>
-          <Label>Name</Label>
+        <Field label="Name">
           <TextInputWithValidation
             wide
             onChange={e => onChange(e.target.value, 'name')}
             value={getFormValue('name')}
             error={validationErrors['name']}
           />
-        </div>
-        <div>
-          <Label>Location</Label>
+        </Field>
+        <Field label="Location">
           <TextInput
             wide
             onChange={e => onChange(e.target.value, 'location')}
             value={getFormValue('location')}
           />
-        </div>
+        </Field>
       </TwoColumnsRow>
 
-      <div>
-        <Label>Bio</Label>
+      <Field label="Bio">
         <TextMultilineWithValidation
           wide
           value={getFormValue('description')}
           onChange={e => onChange(e.target.value, 'description')}
         />
-      </div>
-      <div>
-        <Label>Website</Label>
+      </Field>
+      <Field label="Website">
         <TextInputWithValidation
           wide
           value={getFormValue('website')}
@@ -72,7 +67,7 @@ const BasicInformation = ({
           type="url"
           error={validationErrors['website']}
         />
-      </div>
+      </Field>
 
       <Button mode="strong" wide onClick={validateAndSave}>
         Save

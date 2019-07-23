@@ -5,7 +5,7 @@ import { ModalWrapper, TwoColumnsRow, DisplayErrors } from './ModalWrapper'
 import { useDate } from '../../hooks'
 import { years } from '../../utils'
 import DateDropdowns from '../DateDropdowns'
-import { Label, TextInputWithValidation } from '../styled-components'
+import { TextInputWithValidation } from '../styled-components'
 import {
   validateEducationOrg,
   validateEducationDates,
@@ -89,8 +89,7 @@ const EducationHistory = ({
       </Field>
 
       <TwoColumnsRow>
-        <div>
-          <Label>Degree</Label>
+        <Field label="Degree">
           <TextInput
             wide
             value={getFormValue(
@@ -107,9 +106,8 @@ const EducationHistory = ({
               )
             }
           />
-        </div>
-        <div>
-          <Label>Field of Study</Label>
+        </Field>
+        <Field label="Field of Study">
           <TextInput
             wide
             value={getFormValue(
@@ -126,7 +124,7 @@ const EducationHistory = ({
               )
             }
           />
-        </div>
+        </Field>
       </TwoColumnsRow>
 
       <DateDropdowns

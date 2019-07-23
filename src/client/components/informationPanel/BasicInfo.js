@@ -6,9 +6,7 @@ import { Social, Link, IconLocation, IconGlobe } from '../styled-components'
 
 export const Name = ({ name, handleOpenEdit }) => {
   return name ? (
-    <Text.Block size="xxlarge" css="font-weight: 700">
-      {name}
-    </Text.Block>
+    <Text.Block size="xxlarge">{name}</Text.Block>
   ) : (
     <Center>
       <Button onClick={handleOpenEdit}>

@@ -42,11 +42,8 @@ const InformationCard = () => {
           ) : (
             <Fragment>
               <Name name={name} handleOpenEdit={handleOpenEdit} />
-              <Description
-                description={description}
-                handleOpenEdit={handleOpenEdit}
-              />
-              <Location location={location} handleOpenEdit={handleOpenEdit} />
+              <Description description={description} />
+              <Location location={location} />
             </Fragment>
           )}
           <Website website={website} />

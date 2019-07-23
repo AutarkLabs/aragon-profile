@@ -17,7 +17,9 @@ const BasicInformation = ({
 }) => {
   const [validationErrors, setValidationErrors] = useState({})
 
-  const validateAndSave = () => {
+  const validateAndSave = e => {
+    e.preventDefault()
+
     const errors = {}
     if (!validateName(getFormValue('name')))
       errors['name'] = 'Please provide valid name'
@@ -33,45 +35,48 @@ const BasicInformation = ({
 
   return (
     <ModalWrapper title="Edit Basic Information">
-      <DisplayErrors errors={{ ...validationErrors, ...savingError }} />
-      <TwoColumnsRow>
-        <Field label="Name">
+      <form onSubmit={validateAndSave}>
+        <DisplayErrors errors={{ ...validationErrors, ...savingError }} />
+        <TwoColumnsRow>
+          <Field label="Name">
+            <TextInputWithValidation
+              wide
+              onChange={e => onChange(e.target.value, 'name')}
+              value={getFormValue('name')}
+              error={validationErrors['name']}
+            />
+          </Field>
+          <Field label="Location">
+            <TextInput
+              wide
+              onChange={e => onChange(e.target.value, 'location')}
+              value={getFormValue('location')}
+            />
+          </Field>
+        </TwoColumnsRow>
+
+        <Field label="Bio">
+          <TextMultilineWithValidation
+            wide
+            value={getFormValue('description')}
+            onChange={e => onChange(e.target.value, 'description')}
+          />
+        </Field>
+        <Field label="Website">
           <TextInputWithValidation
             wide
-            onChange={e => onChange(e.target.value, 'name')}
-            value={getFormValue('name')}
-            error={validationErrors['name']}
+            value={getFormValue('website')}
+            onChange={e => onChange(e.target.value, 'website')}
+            placeholder="https://"
+            type="url"
+            error={validationErrors['website']}
           />
         </Field>
-        <Field label="Location">
-          <TextInput
-            wide
-            onChange={e => onChange(e.target.value, 'location')}
-            value={getFormValue('location')}
-          />
-        </Field>
-      </TwoColumnsRow>
 
-      <Field label="Bio">
-        <TextMultilineWithValidation
-          wide
-          value={getFormValue('description')}
-          onChange={e => onChange(e.target.value, 'description')}
-        />
-      </Field>
-      <Field label="Website">
-        <TextInputWithValidation
-          wide
-          value={getFormValue('website')}
-          onChange={e => onChange(e.target.value, 'website')}
-          type="url"
-          error={validationErrors['website']}
-        />
-      </Field>
-
-      <Button mode="strong" wide onClick={validateAndSave}>
-        Save
-      </Button>
+        <Button mode="strong" wide type="submit">
+          Save
+        </Button>
+      </form>
     </ModalWrapper>
   )
 }

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import PropTypes from 'prop-types'
 import CardWrapper from '../wrappers/styleWrappers/CardWrapper'
 import { useProfile } from '../hooks'
 import { ModalContext } from '../wrappers/modal'
@@ -49,6 +50,10 @@ const WorkHistoryPanel = ({ className }) => {
       )}
     </CardWrapper>
   )
+}
+
+WorkHistoryPanel.propTypes = {
+  className: PropTypes.string,
 }
 
 const Center = styled.div`

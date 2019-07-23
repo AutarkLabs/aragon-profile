@@ -226,6 +226,7 @@ const Button = styled.button`
   cursor: pointer;
   font: inherit;
   font-size: 13px;
+  outline: none;
   padding: 8px 8px 6px 8px;
   text-align: left;
   width: 100%;

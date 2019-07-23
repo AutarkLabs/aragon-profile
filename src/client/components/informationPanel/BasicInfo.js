@@ -6,9 +6,7 @@ import { Social, Link, IconLocation, IconGlobe } from '../styled-components'
 
 export const Name = ({ name, handleOpenEdit }) => {
   return name ? (
-    <Text.Block size="xxlarge" css="font-weight: 700">
-      {name}
-    </Text.Block>
+    <Text.Block size="xxlarge">{name}</Text.Block>
   ) : (
     <Center>
       <Button onClick={handleOpenEdit}>
@@ -25,44 +23,25 @@ Name.propTypes = {
   handleOpenEdit: PropTypes.func.isRequired,
 }
 
-export const Description = ({ description, handleOpenEdit }) =>
-  description ? (
-    <Text.Block>{description}</Text.Block>
-  ) : (
-    <Center>
-      <Button size="small" onClick={handleOpenEdit}>
-        <Text size="large" color={theme.accent}>
-          Add bio
-        </Text>
-      </Button>
-    </Center>
-  )
+export const Description = ({ description }) =>
+  description && <Text.Block>{description}</Text.Block>
 
 Description.propTypes = {
   description: PropTypes.string,
-  handleOpenEdit: PropTypes.func.isRequired,
 }
 
-export const Location = ({ location, handleOpenEdit }) => (
-  <Social>
-    <IconLocation width="13px" height="13px" color={theme.textTertiary} />
-    {location ? (
+export const Location = ({ location }) =>
+  location && (
+    <Social>
+      <IconLocation width="13px" height="13px" color={theme.textTertiary} />
       <Text size="normal" color={theme.textTertiary}>
         {location}
       </Text>
-    ) : (
-      <div>
-        <Link.Button size="tiny" onClick={handleOpenEdit}>
-          Add location
-        </Link.Button>
-      </div>
-    )}
-  </Social>
-)
+    </Social>
+  )
 
 Location.propTypes = {
   location: PropTypes.string,
-  handleOpenEdit: PropTypes.func.isRequired,
 }
 
 export const Website = ({ website }) =>

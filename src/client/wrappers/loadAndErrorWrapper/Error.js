@@ -12,7 +12,7 @@ const ErrorState = ({ ethereumAddress, error }) => (
     <ProfilePicture />
     <ErrorCard>
       <div css="display: flex; margin-bottom: 24px">
-        <IconEthereum width="18px" height="18px" color={theme.textTertiary} />
+        <IconEthereum width="18px" height="18px" />
         <Text size="small" css="margin-left: 8px" color={theme.textTertiary}>
           {ethereumAddress}
         </Text>

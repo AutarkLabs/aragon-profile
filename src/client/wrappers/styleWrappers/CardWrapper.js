@@ -12,9 +12,9 @@ const CardWrapper = ({
   addSeparators,
   viewMode,
 }) => (
-  <div css="width: 100%" className={className}>
+  <div css="margin-top: 15px" className={className}>
     {title && (
-      <Text css="padding: 7px 0" size="xlarge">
+      <Text css="padding-bottom: 3px; display: inline-block;" size="xlarge">
         {title}
       </Text>
     )}

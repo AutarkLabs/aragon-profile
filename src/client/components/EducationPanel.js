@@ -43,7 +43,7 @@ const EducationPanel = () => {
               onClick={() => dispatchModal(open('educationHistory'))}
               size="small"
             >
-              Add educaction
+              Add education
             </Link.Button>
           )}
         </Center>

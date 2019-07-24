@@ -131,14 +131,16 @@ export class Profile {
       })
     })
 
-  createProfile = () => this.unlockedBox.linkAccount()
+  createProfile = () => this.unlockedBox.linkAddress()
 
   hasProfile = async () => {
-    if (this.boxState.opened) {
-      return this.unlockedBox.isAccountLinked()
+    try {
+      const config = await Box.getConfig(this.ethereumAddress)
+      // in case config comes back undefined or empty
+      return config && config.links && config.links.length > 0
+    } catch (error) {
+      return false
     }
-    const publicProfile = await this._getPublic()
-    return Object.keys(publicProfile).length > 1
   }
 
   isLoggedIn = () => Box.isLoggedIn(this.ethereumAddress)

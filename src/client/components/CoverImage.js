@@ -44,6 +44,8 @@ const CoverBase = styled.div`
   width: 100%;
   height: 156px;
   position: relative;
+  background-size: cover;
+  background-position: center;
 `
 const CoverPicture = styled(CoverBase)`
   background-image: ${props => getBackground(props)};

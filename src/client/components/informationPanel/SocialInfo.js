@@ -27,7 +27,7 @@ const VerifySocial = ({ social, setPopover }) => {
         Aragon manages profiles using 3box.io. To verify your {social}, you must
         visit your 3box profile.
       </Text.Block>
-      <Link size="small" href="https://3box.io">
+      <Link size="small" href="https://3box.io/hub">
         Take me to my 3box
       </Link>
     </VerifyCard>

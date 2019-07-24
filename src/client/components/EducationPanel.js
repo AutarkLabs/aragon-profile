@@ -26,15 +26,20 @@ const EducationPanel = () => {
   return (
     <CardWrapper {...cardProps}>
       {historyNotEmpty ? (
-        Object.keys(educationHistory).map(id => (
-          <EducationHistoryTile
-            key={id}
-            educationHistoryData={educationHistory[id]}
-            openModal={() => dispatchModal(open('educationHistory', id))}
-            removeItem={() => dispatchModal(removeItem(id, 'educationHistory'))}
-            viewMode={viewMode}
-          />
-        ))
+        Object.keys(educationHistory)
+          .map(id => ({ id, ...educationHistory[id] }))
+          .sort((a, b) => (!a.endDate ? -1 : a.endDate > b.endDate ? -1 : 1))
+          .map(item => (
+            <EducationHistoryTile
+              key={item.id}
+              educationHistoryData={item}
+              openModal={() => dispatchModal(open('educationHistory', item.id))}
+              removeItem={() =>
+                dispatchModal(removeItem(item.id, 'educationHistory'))
+              }
+              viewMode={viewMode}
+            />
+          ))
       ) : (
         <Center>
           <Text size="normal">No education added</Text>

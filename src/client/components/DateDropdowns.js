@@ -18,11 +18,7 @@ const DateDropdowns = ({
   <Fragment>
     <Field label="Start Date">
       <DateDropDowns>
-        <div
-          css={`
-            width: 48%;
-          `}
-        >
+        <div css="width: 48%;">
           <DropDownWithValidation
             wide
             items={months}
@@ -33,11 +29,7 @@ const DateDropdowns = ({
             error={error}
           />
         </div>
-        <div
-          css={`
-            width: 48%;
-          `}
-        >
+        <div css="width: 48%;">
           <DropDownWithValidation
             wide
             items={years}
@@ -52,19 +44,10 @@ const DateDropdowns = ({
     </Field>
 
     <Field label="End Date">
-      <div
-        css={`
-          display: flex;
-          height: 40px;
-        `}
-      >
+      <div css="display: flex; height: 40px;">
         {!current && (
           <DateDropDowns>
-            <div
-              css={`
-                width: 48%;
-              `}
-            >
+            <div css="width: 48%;">
               <DropDownWithValidation
                 wide
                 items={months}
@@ -75,11 +58,7 @@ const DateDropdowns = ({
                 error={error}
               />
             </div>
-            <div
-              css={`
-                width: 48%;
-              `}
-            >
+            <div css="width: 48%;">
               <DropDownWithValidation
                 wide
                 items={years}
@@ -92,12 +71,7 @@ const DateDropdowns = ({
             </div>
           </DateDropDowns>
         )}
-        <div
-          css={`
-            display: flex;
-            align-items: center;
-          `}
-        >
+        <div css="display: flex; align-items: center;">
           <Checkbox
             checked={current}
             onChange={index =>

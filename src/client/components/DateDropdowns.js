@@ -5,6 +5,13 @@ import { Checkbox, Field } from '@aragon/ui'
 import { DropDownWithValidation } from './styled-components'
 import { years, months } from '../utils'
 
+// copied from aragonUI Field
+const Label = styled.label`
+  text-transform: lowercase;
+  font-variant: small-caps;
+  color: #707070;
+`
+
 const DateDropdowns = ({
   current,
   dispatchDateChange,
@@ -43,47 +50,44 @@ const DateDropdowns = ({
       </DateDropDowns>
     </Field>
 
-    <Field label="End Date">
-      <div css="display: flex; height: 40px;">
-        {!current && (
-          <DateDropDowns>
-            <div css="width: 48%;">
-              <DropDownWithValidation
-                wide
-                items={months}
-                active={indexEndMonth}
-                onChange={index =>
-                  dispatchDateChange({ type: 'setIndexEndMonth', index })
-                }
-                error={error}
-              />
-            </div>
-            <div css="width: 48%;">
-              <DropDownWithValidation
-                wide
-                items={years}
-                active={indexEndYear}
-                onChange={index =>
-                  dispatchDateChange({ type: 'setIndexEndYear', index })
-                }
-                error={error}
-              />
-            </div>
-          </DateDropDowns>
-        )}
-        <div css="display: flex; align-items: center;">
-          <Checkbox
-            checked={current}
-            onChange={index =>
-              dispatchDateChange({ type: 'setCurrent', index })
-            }
-          />
-          {type === 'workHistory'
-            ? 'I currently work here'
-            : 'I currently study here'}
-        </div>
-      </div>
-    </Field>
+    <Label>End Date</Label>
+    <div css="display: flex; height: 40px; margin-bottom: 20px;">
+      {!current && (
+        <DateDropDowns>
+          <div css="width: 48%;">
+            <DropDownWithValidation
+              wide
+              items={months}
+              active={indexEndMonth}
+              onChange={index =>
+                dispatchDateChange({ type: 'setIndexEndMonth', index })
+              }
+              error={error}
+            />
+          </div>
+          <div css="width: 48%;">
+            <DropDownWithValidation
+              wide
+              items={years}
+              active={indexEndYear}
+              onChange={index =>
+                dispatchDateChange({ type: 'setIndexEndYear', index })
+              }
+              error={error}
+            />
+          </div>
+        </DateDropDowns>
+      )}
+      <label css="display: flex; align-items: center;">
+        <Checkbox
+          checked={current}
+          onChange={index => dispatchDateChange({ type: 'setCurrent', index })}
+        />
+        {type === 'workHistory'
+          ? 'I currently work here'
+          : 'I currently study here'}
+      </label>
+    </div>
   </Fragment>
 )
 

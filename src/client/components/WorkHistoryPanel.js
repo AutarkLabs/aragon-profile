@@ -8,6 +8,7 @@ import { open, removeItem } from '../stateManagers/modal'
 import { Text } from '@aragon/ui'
 import styled from 'styled-components'
 import { Link } from './styled-components'
+import { sortHistory } from '../utils'
 
 const WorkHistoryPanel = ({ className }) => {
   const { workHistory, viewMode } = useProfile()
@@ -26,20 +27,15 @@ const WorkHistoryPanel = ({ className }) => {
   return (
     <CardWrapper {...cardProps}>
       {historyNotEmpty ? (
-        Object.keys(workHistory)
-          .map(id => ({ id, ...workHistory[id] }))
-          .sort((a, b) => (!a.endDate ? -1 : a.endDate > b.endDate ? -1 : 1))
-          .map(item => (
-            <WorkHistoryTile
-              key={item.id}
-              workHistoryData={item}
-              openModal={() => dispatchModal(open('workHistory', item.id))}
-              removeItem={() =>
-                dispatchModal(removeItem(item.id, 'workHistory'))
-              }
-              viewMode={viewMode}
-            />
-          ))
+        sortHistory(workHistory).map(item => (
+          <WorkHistoryTile
+            key={item.id}
+            workHistoryData={item}
+            openModal={() => dispatchModal(open('workHistory', item.id))}
+            removeItem={() => dispatchModal(removeItem(item.id, 'workHistory'))}
+            viewMode={viewMode}
+          />
+        ))
       ) : (
         <Center>
           <Text size="normal">No work history added</Text>

@@ -26,15 +26,20 @@ const WorkHistoryPanel = ({ className }) => {
   return (
     <CardWrapper {...cardProps}>
       {historyNotEmpty ? (
-        Object.keys(workHistory).map(id => (
-          <WorkHistoryTile
-            key={id}
-            workHistoryData={workHistory[id]}
-            openModal={() => dispatchModal(open('workHistory', id))}
-            removeItem={() => dispatchModal(removeItem(id, 'workHistory'))}
-            viewMode={viewMode}
-          />
-        ))
+        Object.keys(workHistory)
+          .map(id => ({ id, ...workHistory[id] }))
+          .sort((a, b) => (!a.endDate ? -1 : a.endDate > b.endDate ? -1 : 1))
+          .map(item => (
+            <WorkHistoryTile
+              key={item.id}
+              workHistoryData={item}
+              openModal={() => dispatchModal(open('workHistory', item.id))}
+              removeItem={() =>
+                dispatchModal(removeItem(item.id, 'workHistory'))
+              }
+              viewMode={viewMode}
+            />
+          ))
       ) : (
         <Center>
           <Text size="normal">No work history added</Text>

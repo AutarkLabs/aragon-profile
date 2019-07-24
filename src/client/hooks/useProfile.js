@@ -15,6 +15,7 @@ const defaultValues = {
   github: { username: '', proof: '' },
   userLoaded: false,
   viewMode: true,
+  metamaskEnabled: false,
   organizations: {},
 }
 
@@ -22,9 +23,11 @@ const useProfile = () => {
   const { boxes, ethereumAddress, isViewMode, onSignatures } = useContext(
     BoxContext
   )
+
+  const metamaskEnabled = !!ethereumAddress
   const userLoaded = !!boxes[ethereumAddress]
 
-  if (!userLoaded) return defaultValues
+  if (!userLoaded || !metamaskEnabled) return defaultValues
 
   const {
     description,
@@ -57,6 +60,7 @@ const useProfile = () => {
     twitter: twitter || defaultValues.twitter,
     github: github || defaultValues.github,
     userLoaded,
+    metamaskEnabled,
     viewMode:
       typeof isViewMode !== 'undefined' ? isViewMode : defaultValues.viewMode,
     onSignatures,

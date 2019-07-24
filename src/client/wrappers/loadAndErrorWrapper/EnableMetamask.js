@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { EmptyStateCard, unselectable, IconIdentity } from '@aragon/ui'
+import { EmptyStateCard, IconIdentity } from '@aragon/ui'
 
 const EnableMetamask = ({ enableWallet }) => (
   <EmptyWrapper>
@@ -20,7 +20,6 @@ EnableMetamask.propTypes = {
 }
 
 const EmptyWrapper = styled.div`
-  ${unselectable};
   margin-top: 50px;
   flex-grow: 1;
   display: flex;

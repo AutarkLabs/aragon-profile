@@ -13,11 +13,13 @@ const EducationPanel = () => {
   const { educationHistory, viewMode } = useProfile()
   const { dispatchModal } = useContext(ModalContext)
 
-  const historyNotEmpty = Object.keys(educationHistory).length > 0
+  const historyPresent = Object.keys(educationHistory).length > 0
+
+  if (!historyPresent && viewMode) return null
 
   const cardProps = {
     title: 'Education',
-    addMore: historyNotEmpty
+    addMore: historyPresent
       ? () => dispatchModal(open('educationHistory'))
       : null,
     addSeparators: true,
@@ -26,7 +28,7 @@ const EducationPanel = () => {
 
   return (
     <CardWrapper {...cardProps}>
-      {historyNotEmpty ? (
+      {historyPresent ? (
         sortHistory(educationHistory).map(item => (
           <EducationHistoryTile
             key={item.id}
@@ -41,14 +43,12 @@ const EducationPanel = () => {
       ) : (
         <Center>
           <Text size="normal">No education added</Text>
-          {!viewMode && (
-            <Link.Button
-              onClick={() => dispatchModal(open('educationHistory'))}
-              size="small"
-            >
-              Add education
-            </Link.Button>
-          )}
+          <Link.Button
+            onClick={() => dispatchModal(open('educationHistory'))}
+            size="small"
+          >
+            Add education
+          </Link.Button>
         </Center>
       )}
     </CardWrapper>

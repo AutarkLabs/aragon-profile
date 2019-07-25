@@ -47,17 +47,21 @@ const InformationCard = () => {
             </Fragment>
           )}
           <Website website={website} />
-          <Separator />
-          <Twitter
-            twitter={twitter}
-            activePopover={activePopover}
-            setPopover={setPopover}
-          />
-          <GitHub
-            github={github}
-            activePopover={activePopover}
-            setPopover={setPopover}
-          />
+          {(!viewMode || twitter.username || github.username) && <Separator />}
+          {(!viewMode || twitter.username) && (
+            <Twitter
+              twitter={twitter}
+              activePopover={activePopover}
+              setPopover={setPopover}
+            />
+          )}
+          {(!viewMode || github.username) && (
+            <GitHub
+              github={github}
+              activePopover={activePopover}
+              setPopover={setPopover}
+            />
+          )}
           <Separator />
           <Social>
             <IconEthereum width="13px" height="13px" />

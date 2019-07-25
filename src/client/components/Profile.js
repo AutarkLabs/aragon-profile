@@ -23,7 +23,7 @@ const Profile = () => (
         Membership Panel.
       <OrganizationPanel />
       */}
-      <WorkHistoryPanel css="grid-row: span 2" />
+      <WorkHistoryPanel css="grid-row: span 20" />
       <EducationPanel />
     </Grid>
   </React.Fragment>

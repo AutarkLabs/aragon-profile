@@ -7,6 +7,7 @@ import { open, removeItem } from '../stateManagers/modal'
 import { Text } from '@aragon/ui'
 import styled from 'styled-components'
 import { Link } from './styled-components'
+import { sortHistory } from '../utils'
 
 const EducationPanel = () => {
   const { educationHistory, viewMode } = useProfile()
@@ -26,12 +27,14 @@ const EducationPanel = () => {
   return (
     <CardWrapper {...cardProps}>
       {historyNotEmpty ? (
-        Object.keys(educationHistory).map(id => (
+        sortHistory(educationHistory).map(item => (
           <EducationHistoryTile
-            key={id}
-            educationHistoryData={educationHistory[id]}
-            openModal={() => dispatchModal(open('educationHistory', id))}
-            removeItem={() => dispatchModal(removeItem(id, 'educationHistory'))}
+            key={item.id}
+            educationHistoryData={item}
+            openModal={() => dispatchModal(open('educationHistory', item.id))}
+            removeItem={() =>
+              dispatchModal(removeItem(item.id, 'educationHistory'))
+            }
             viewMode={viewMode}
           />
         ))

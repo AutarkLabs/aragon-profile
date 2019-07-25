@@ -110,4 +110,14 @@ export const fakeIsMember = async (ethereumAddress, address) => {
   return promise
 }
 
+export const sortHistory = history =>
+  Object.keys(history)
+    .map(id => ({ id, ...history[id] }))
+    .sort((a, b) => {
+      if (a.endDate && !b.endDate) return 1
+      if (b.endDate && !a.endDate) return -1
+      if (!a.endDate && !b.endDate) return b.startDate - a.startDate
+      if (a.endDate && b.endDate) return b.endDate - a.endDate
+    })
+
 export * from './login'

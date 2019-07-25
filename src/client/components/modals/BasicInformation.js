@@ -67,7 +67,7 @@ const BasicInformation = ({
             wide
             value={getFormValue('website')}
             onChange={e => onChange(e.target.value, 'website')}
-            placeholder="https://"
+            placeholder="Enter a website starting with https://"
             type="url"
             error={validationErrors['website']}
           />

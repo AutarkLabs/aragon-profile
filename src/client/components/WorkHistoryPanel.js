@@ -14,11 +14,13 @@ const WorkHistoryPanel = ({ className }) => {
   const { workHistory, viewMode } = useProfile()
   const { dispatchModal } = useContext(ModalContext)
 
-  const historyNotEmpty = Object.keys(workHistory).length > 0
+  const historyPresent = Object.keys(workHistory).length > 0
+
+  if (!historyPresent && viewMode) return null
 
   const cardProps = {
     title: 'Work history',
-    addMore: historyNotEmpty ? () => dispatchModal(open('workHistory')) : null,
+    addMore: historyPresent ? () => dispatchModal(open('workHistory')) : null,
     addSeparators: true,
     className,
     viewMode,
@@ -26,7 +28,7 @@ const WorkHistoryPanel = ({ className }) => {
 
   return (
     <CardWrapper {...cardProps}>
-      {historyNotEmpty ? (
+      {historyPresent ? (
         sortHistory(workHistory).map(item => (
           <WorkHistoryTile
             key={item.id}
@@ -39,14 +41,12 @@ const WorkHistoryPanel = ({ className }) => {
       ) : (
         <Center>
           <Text size="normal">No work history added</Text>
-          {!viewMode && (
-            <Link.Button
-              onClick={() => dispatchModal(open('workHistory'))}
-              size="small"
-            >
-              Add work
-            </Link.Button>
-          )}
+          <Link.Button
+            onClick={() => dispatchModal(open('workHistory'))}
+            size="small"
+          >
+            Add work
+          </Link.Button>
         </Center>
       )}
     </CardWrapper>

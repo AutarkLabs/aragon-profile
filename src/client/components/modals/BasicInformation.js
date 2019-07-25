@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Field, TextInput } from '@aragon/ui'
 import PropTypes from 'prop-types'
-import { ModalWrapper, TwoColumnsRow, DisplayErrors } from './ModalWrapper'
+import { ModalWrapper, DisplayErrors } from './ModalWrapper'
 import {
   TextInputWithValidation,
   TextMultilineWithValidation,
@@ -37,23 +37,14 @@ const BasicInformation = ({
     <ModalWrapper title="Edit Basic Information">
       <form onSubmit={validateAndSave}>
         <DisplayErrors errors={{ ...validationErrors, ...savingError }} />
-        <TwoColumnsRow>
-          <Field label="Name">
-            <TextInputWithValidation
-              wide
-              onChange={e => onChange(e.target.value, 'name')}
-              value={getFormValue('name')}
-              error={validationErrors['name']}
-            />
-          </Field>
-          <Field label="Location">
-            <TextInput
-              wide
-              onChange={e => onChange(e.target.value, 'location')}
-              value={getFormValue('location')}
-            />
-          </Field>
-        </TwoColumnsRow>
+        <Field label="Name">
+          <TextInputWithValidation
+            wide
+            onChange={e => onChange(e.target.value, 'name')}
+            value={getFormValue('name')}
+            error={validationErrors['name']}
+          />
+        </Field>
 
         <Field label="Bio">
           <TextMultilineWithValidation
@@ -62,6 +53,15 @@ const BasicInformation = ({
             onChange={e => onChange(e.target.value, 'description')}
           />
         </Field>
+
+        <Field label="Location">
+          <TextInput
+            wide
+            onChange={e => onChange(e.target.value, 'location')}
+            value={getFormValue('location')}
+          />
+        </Field>
+
         <Field label="Website">
           <TextInputWithValidation
             wide

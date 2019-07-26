@@ -23,7 +23,7 @@ const Profile = () => (
         Membership Panel.
       <OrganizationPanel />
       */}
-      <WorkHistoryPanel css="grid-row: span 20" />
+      <WorkHistoryPanel css="grid-row: span 2" />
       <EducationPanel />
     </Grid>
   </React.Fragment>
@@ -34,7 +34,10 @@ const Grid = styled(ContentWrap)`
   grid-column-gap: 26px;
   ${breakpoint(
     'small',
-    'grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));'
+    `
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      grid-template-rows: auto 1fr;
+    `
   )};
   ${breakpoint('large', 'grid-template-columns: 2fr 3fr')};
 `

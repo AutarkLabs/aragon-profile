@@ -1,6 +1,6 @@
 {
   "name": "@openworklabs/aragon-profile",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "a single profile component for the Aragon Client",
   "author": "Schwartz10",
   "license": "MIT",
@@ -35,7 +35,7 @@
     "web3-utils": "1.0.0-beta.33"
   },
   "dependencies": {
-    "3box": "1.10.1",
+    "3box": "1.10.5",
     "ajv": "^6.10.0",
     "dayjs": "^1.8.14",
     "husky": "^3.0.1",

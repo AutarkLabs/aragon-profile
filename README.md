@@ -17,7 +17,12 @@ import React from 'react'
 import { Profile } from '@openworklabs/aragon-profile'
 
 const Example = () => (
-  <Profile onSignatures={onSignatures} ethereumAddress={ethereumAddress} />
+  <Profile
+    account={account}
+    enableWallet={enableWallet}
+    onSignatures={onSignatures}
+    parts={locator.parts}
+  />
 )
 ```
 

@@ -5,7 +5,6 @@ import styled from 'styled-components'
 
 // import { EthereumAddressType } from '../../../prop-types'
 import { BoxWrapper } from './wrappers/box'
-import AppContainer from './wrappers/styleWrappers/AppContainer'
 import LoadAndErrorWrapper from './wrappers/loadAndErrorWrapper'
 import Profile from './components/Profile'
 import { ModalWrapper } from './wrappers/modal'
@@ -24,19 +23,17 @@ const App = ({ account, enableWallet, onSignatures, parts }) => (
         onSignatures={onSignatures}
       >
         <DragWrapper>
-          <AppContainer>
-            <BaseLayout>
-              <LoadAndErrorWrapper
+          <BaseLayout>
+            <LoadAndErrorWrapper
+              ethereumAddress={determineAddress(account, parts)}
+              enableWallet={enableWallet}
+            >
+              <Profile
                 ethereumAddress={determineAddress(account, parts)}
-                enableWallet={enableWallet}
-              >
-                <Profile
-                  ethereumAddress={determineAddress(account, parts)}
-                  onSignatures={onSignatures}
-                />
-              </LoadAndErrorWrapper>
-            </BaseLayout>
-          </AppContainer>
+                onSignatures={onSignatures}
+              />
+            </LoadAndErrorWrapper>
+          </BaseLayout>
         </DragWrapper>
       </ModalWrapper>
     </BoxWrapper>

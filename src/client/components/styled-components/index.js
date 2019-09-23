@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { DateDropDown, EditTextField } from '../readOrEditFields'
-import { Button, TextInput, SafeLink, theme, Text } from '@aragon/ui'
+import { ButtonBase, TextInput, SafeLink, theme, Text } from '@aragon/ui'
 import editImage from '../../../../assets/pencil-black-tool-interface-symbol.png'
 
 export const CheckWrapper = styled.div`
@@ -42,12 +42,13 @@ const linkStyles = {
 export const Link = styled(SafeLink).attrs({ target: '_blank' })(linkStyles)
 
 // a Button styled to look like a Link
-Link.Button = styled(Button).attrs({
-  mode: 'text',
-})({
-  ...linkStyles,
-  padding: 0,
-})
+Link.Button = ButtonBase
+// .attrs({
+//   mode: 'text',
+// })({
+//   ...linkStyles,
+//   padding: 0,
+// })
 
 export const EditIcon = styled.img.attrs({ src: editImage })`
   width: 25px;
@@ -67,7 +68,7 @@ export const FlexDirectionCol = styled.div`
   flex-direction: column;
 `
 
-export const FullWidthButton = styled(Button)`
+export const FullWidthButton = styled(ButtonBase)`
   width: 100%;
 `
 

@@ -42,13 +42,12 @@ const linkStyles = {
 export const Link = styled(SafeLink).attrs({ target: '_blank' })(linkStyles)
 
 // a Button styled to look like a Link
-Link.Button = ButtonBase
-// .attrs({
-//   mode: 'text',
-// })({
-//   ...linkStyles,
-//   padding: 0,
-// })
+Link.Button = styled(ButtonBase).attrs({
+  mode: 'text',
+})({
+  ...linkStyles,
+  padding: 0,
+})
 
 export const EditIcon = styled.img.attrs({ src: editImage })`
   width: 25px;

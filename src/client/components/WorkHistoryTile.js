@@ -33,6 +33,7 @@ const WorkHistoryTile = ({
 )
 
 const SingleWorkItem = styled.div`
+  width: 100%;
   display: flex;
   > :not(:last-child) {
     margin-bottom: 5px;

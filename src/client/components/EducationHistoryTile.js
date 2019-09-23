@@ -37,6 +37,7 @@ const EducationHistoryTile = ({
 )
 
 const SingleEducationItem = styled.div`
+  width: 100%;
   position: relative;
 `
 const Icons = styled.div`

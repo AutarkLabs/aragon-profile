@@ -2,7 +2,7 @@ import React, { useState, useContext, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useDropzone } from 'react-dropzone'
-import { ipfsGateway } from '../../ipfs'
+import { ipfs } from '../../ipfs'
 import { removeItem } from '../stateManagers/modal'
 import { BoxContext } from '../wrappers/box'
 import { ModalContext } from '../wrappers/modal'
@@ -58,7 +58,7 @@ const ImageMenu = ({
           )
 
           if (unlockedBox) {
-            const result = await ipfsGateway.add(file)
+            const result = await ipfs.add(file)
             dispatch(uploadedImage(ethereumAddress, imageTag, result[0].hash))
 
             try {

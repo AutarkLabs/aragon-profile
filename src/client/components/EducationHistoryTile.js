@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { Button as AragonButton, Text, theme } from '@aragon/ui'
+import { Text, theme } from '@aragon/ui'
 import { IconPencil, IconTrash, TileHeader } from './styled-components'
 import { displayStartEndDates } from '../utils'
 
@@ -25,12 +25,8 @@ const EducationHistoryTile = ({
     </div>
     {!viewMode && (
       <Icons>
-        <Button onClick={openModal}>
-          <IconPencil width="16px" height="16px" color={theme.accent} />
-        </Button>
-        <Button onClick={removeItem}>
-          <IconTrash width="16px" height="16px" color={theme.accent} />
-        </Button>
+        <IconPencil color={theme.accent} width="16px" onClick={openModal} />
+        <IconTrash color={theme.accent} width="16px" onClick={removeItem} />
       </Icons>
     )}
   </SingleEducationItem>
@@ -51,16 +47,7 @@ const Icons = styled.div`
     visibility: visible;
   }
 `
-const Button = styled(AragonButton).attrs({ mode: 'text' })`
-  background: rgba(255, 255, 255, 0.9);
-  box-sizing: content-box;
-  height: 16px;
-  overflow: hidden;
-  padding: 4px;
-  &:not(:last-child) {
-    margin-bottom: 4px;
-  }
-`
+
 const Dates = styled(Text.Block).attrs({ size: 'xsmall' })`
   color: ${theme.textTertiary};
   margin-top: 2px;

@@ -58,7 +58,7 @@ Go back for a moment to aragon-profile and run again:<br />
 `npm run prepare-local-dev`
 
 Start the app:<br />
-`npm run start:with:profiles`
+`npm run start`
 
 ## Running DAO on Rinkeby (default)
 

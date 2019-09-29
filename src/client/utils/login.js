@@ -20,12 +20,13 @@ export const unlockAndCreateBoxIfRequired = async (
   dispatch,
   dispatchModal,
   ethereumAddress,
-  onSignatures
+  onSignatures,
+  web3Provider
 ) => {
   const unlockProfile = async () => {
     let profile
     try {
-      profile = new Profile(ethereumAddress, onSignatures)
+      profile = new Profile(ethereumAddress, onSignatures, web3Provider)
       await profile.unlock()
       dispatch(profileOpenSuccess(ethereumAddress, profile))
     } catch (error) {
@@ -56,7 +57,11 @@ export const unlockAndCreateBoxIfRequired = async (
   }
 
   const hasProfile = () => {
-    const { hasProfile } = new Profile(ethereumAddress, onSignatures)
+    const { hasProfile } = new Profile(
+      ethereumAddress,
+      onSignatures,
+      web3Provider
+    )
     return hasProfile()
   }
 

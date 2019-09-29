@@ -22,6 +22,7 @@ const Example = () => (
     enableWallet={enableWallet}
     onSignatures={onSignatures}
     parts={locator.parts}
+    web3Provider={window.web3.currentProvider}
   />
 )
 ```

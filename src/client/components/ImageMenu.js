@@ -30,7 +30,7 @@ const ImageMenu = ({
   onSignatures,
 }) => {
   const [active, setActive] = useState(false)
-  const { boxes, dispatch } = useContext(BoxContext)
+  const { boxes, dispatch, web3Provider } = useContext(BoxContext)
   const { dispatchModal } = useContext(ModalContext)
   const { dragState } = useContext(DragContext)
 
@@ -54,7 +54,8 @@ const ImageMenu = ({
             dispatch,
             dispatchModal,
             ethereumAddress,
-            onSignatures
+            onSignatures,
+            web3Provider
           )
 
           if (unlockedBox) {
@@ -83,7 +84,15 @@ const ImageMenu = ({
 
       acceptedFiles.forEach(file => reader.readAsArrayBuffer(file))
     },
-    [boxes, dispatch, dispatchModal, ethereumAddress, imageTag, onSignatures]
+    [
+      boxes,
+      dispatch,
+      dispatchModal,
+      ethereumAddress,
+      imageTag,
+      onSignatures,
+      web3Provider,
+    ]
   )
 
   const {

@@ -1,24 +1,18 @@
 import Box from '3box'
 
-const supportedJsonRPCMethods = new Set(['personal_sign'])
-const supportedJsonRPCVersions = new Set(['2.0'])
-
-const supportedMethod = (method, jsonRPCVersion) => {
-  return (
-    supportedJsonRPCVersions.has(jsonRPCVersion) &&
-    supportedJsonRPCMethods.has(method)
-  )
-}
-
 class BoxAragonBridge {
-  constructor(ethereumAddress, onSignatures) {
+  constructor(ethereumAddress, onSignatures, web3Provider) {
     this.ethereumAddress = ethereumAddress
     this.onSignatures = onSignatures
+    this.web3Provider = web3Provider
   }
 
-  getMethod = method => {
-    const methods = {
-      personal_sign: async ([message], callback) => {
+  sendAsync = ({ fromAddress, method, params, jsonrpc }, callback) => {
+    const overridenMethods = {
+      personal_sign: ([message], callback) => {
+        if (fromAddress.toLowerCase() !== this.ethereumAddress.toLowerCase()) {
+          throw new Error('Address mismatch')
+        }
         const signatureBag = {
           message,
           requestingApp: '3Box-Aragon Profile',
@@ -26,31 +20,34 @@ class BoxAragonBridge {
             callback(null, { result: signature, error: null }),
           reject: error => callback(error, { error }),
         }
-        await this.onSignatures(signatureBag)
+        return this.onSignatures(signatureBag)
       },
     }
 
-    return methods[method]
-  }
-
-  sendAsync = async ({ fromAddress, method, params, jsonrpc }, callback) => {
-    if (!supportedMethod(method, jsonrpc)) {
-      throw new Error('Unsupported sendAsync json rpc method or version')
+    // if we want to override a default web3 behavior (like personal_sign), we return the overriden method here
+    if (overridenMethods[method]) {
+      return overridenMethods[method](params, callback)
     }
-
-    if (fromAddress.toLowerCase() !== this.ethereumAddress.toLowerCase()) {
-      throw new Error('Address mismatch')
-    }
-
-    const handler = this.getMethod(method)
-    handler(params, callback)
+    return this.web3Provider.sendAsync(
+      {
+        fromAddress,
+        method,
+        params,
+        jsonrpc,
+      },
+      callback
+    )
   }
 }
 
 export class Profile {
-  constructor(ethereumAddress, onSignatures) {
+  constructor(ethereumAddress, onSignatures, web3Provider) {
     this.ethereumAddress = ethereumAddress
-    this.boxAragonBridge = new BoxAragonBridge(ethereumAddress, onSignatures)
+    this.boxAragonBridge = new BoxAragonBridge(
+      ethereumAddress,
+      onSignatures,
+      web3Provider
+    )
     this.boxState = {
       opened: false,
       errorFetchingBox: false,

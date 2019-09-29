@@ -13,7 +13,7 @@ import {
   noPublicProfileFound,
 } from '../stateManagers/box'
 
-const use3Box = (account, onSignatures) => {
+const use3Box = (account, onSignatures, web3Provider) => {
   const [boxes, dispatch] = useReducer(boxReducer, initialState)
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const use3Box = (account, onSignatures) => {
       if (account && onSignatures) {
         dispatch(fetchingProfile(account))
         try {
-          const profile = new Profile(account, onSignatures)
+          const profile = new Profile(account, onSignatures, web3Provider)
           const publicProfile = await profile.getPublic()
           if (Object.keys(publicProfile).length > 0) {
             dispatch(fetchedPublicProfile(account, publicProfile))
@@ -50,7 +50,7 @@ const use3Box = (account, onSignatures) => {
     }
 
     getBox()
-  }, [account, onSignatures])
+  }, [account, onSignatures, web3Provider])
 
   return { boxes, dispatch }
 }

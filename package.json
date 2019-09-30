@@ -25,14 +25,14 @@
     }
   },
   "peerDependencies": {
-    "@aragon/ui": "^0.40.2",
+    "@aragon/ui": "^1.0.0-alpha.26",
     "prop-types": "^15.6.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-onclickout": "^2.0.8",
     "react-spring": "^7.2.10",
     "styled-components": "^4.2.1",
-    "web3-utils": "1.0.0-beta.33"
+    "web3-utils": "^1.2.1"
   },
   "dependencies": {
     "3box": "1.11.0",

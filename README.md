@@ -22,6 +22,7 @@ const Example = () => (
     enableWallet={enableWallet}
     onSignatures={onSignatures}
     parts={locator.parts}
+    web3Provider={window.web3.currentProvider}
   />
 )
 ```
@@ -30,7 +31,7 @@ const Example = () => (
 
 ## Developing locally
 
-This repo has to be run with https://github.com/openworklabs/aragon
+This repo has to be run with https://github.com/openworklabs/aragon on the `experimental-oe` branch.
 
 #### Clone this repo, install dependencies, link, and build<br />
 `git clone git@github.com:AutarkLabs/aragon-profile.git`<br />
@@ -57,8 +58,8 @@ NOTE: anytime you want to see your changes on the aragon-client, you have to re-
 #### Go to aragon-profile and run again<br />
 `npm run prepare-local-dev`
 
-#### Start the app<br />
-`npm run start:with:profiles`
+Start the app:<br />
+`npm run start`
 
 ## Running DAO on Rinkeby (default)
 

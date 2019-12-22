@@ -65,14 +65,14 @@ import {
 } from './states'
 
 const logStateUpdate = (action, prevState, nextState) => {
-  // console.log(
-  //   'ACTION: ',
-  //   action,
-  //   'PREV STATE: ',
-  //   prevState,
-  //   'NEXT STATE:',
-  //   nextState
-  // )
+  console.log(
+    'ACTION: ',
+    action,
+    'PREV STATE: ',
+    prevState,
+    'NEXT STATE:',
+    nextState
+  )
 }
 
 const boxReducer = (prevState, action) => {

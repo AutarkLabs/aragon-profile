@@ -37,7 +37,7 @@ export const unlockAndCreateBoxIfRequired = async (
     dispatch(profileSyncRequest(ethereumAddress, profile))
     try {
       await profile.sync()
-      dispatch(profileSyncSuccess(ethereumAddress))
+      dispatch(profileSyncSuccess(ethereumAddress, profile))
       return profile
     } catch (error) {
       dispatch(profileSyncFailure(ethereumAddress, error))
@@ -90,11 +90,19 @@ export const unlockAndCreateBoxIfRequired = async (
   try {
     const profileExists = await hasProfile()
     // no signature required, return the box
-    if (box.unlockedProfSuccess && profileExists) return box.unlockedBox
+    if (box.unlockedProfSuccess && profileExists) {
+      return box.unlockedBox
+    }
     // only create profile signature required, return box once finished
-    if (box.unlockedProfSuccess) return createProfSig(box.unlockedBox)
+    if (box.unlockedProfSuccess) {
+      return createProfSig(box.unlockedBox)
+    }
     // open box signature only, return box once finished
-    if (!box.unlockedProfSuccess && profileExists) return openBoxSig()
+    if (!box.unlockedProfSuccess && profileExists) {
+      return openBoxSig()
+    }
+
+    console.log('need both')
     // both signatures, return box once finished
     return invokeBothSigs()
   } catch (error) {

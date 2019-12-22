@@ -31,7 +31,7 @@ const Example = () => (
 
 ## Developing locally
 
-This repo has to be run with https://github.com/openworklabs/aragon
+This repo has to be run with https://github.com/openworklabs/aragon on the `experimental-oe` branch.
 
 Clone this repo, install dependencies, link, and build:<br />
 `git clone git@github.com:AutarkLabs/aragon-profile.git`<br />

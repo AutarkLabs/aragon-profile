@@ -5,38 +5,36 @@ import styled from 'styled-components'
 
 // import { EthereumAddressType } from '../../../prop-types'
 import { BoxWrapper } from './wrappers/box'
-import AppContainer from './wrappers/styleWrappers/AppContainer'
 import LoadAndErrorWrapper from './wrappers/loadAndErrorWrapper'
 import Profile from './components/Profile'
 import { ModalWrapper } from './wrappers/modal'
 import { DragWrapper } from './wrappers/drag'
 import { determineAddress, isViewMode } from './utils'
 
-const App = ({ account, enableWallet, onSignatures, parts }) => (
+const App = ({ account, enableWallet, onSignatures, parts, web3Provider }) => (
   <Main>
     <BoxWrapper
       isViewMode={isViewMode(account, parts)}
       ethereumAddress={determineAddress(account, parts)}
       onSignatures={onSignatures}
+      web3Provider={web3Provider}
     >
       <ModalWrapper
         ethereumAddress={determineAddress(account, parts)}
         onSignatures={onSignatures}
       >
         <DragWrapper>
-          <AppContainer>
-            <BaseLayout>
-              <LoadAndErrorWrapper
+          <BaseLayout>
+            <LoadAndErrorWrapper
+              ethereumAddress={determineAddress(account, parts)}
+              enableWallet={enableWallet}
+            >
+              <Profile
                 ethereumAddress={determineAddress(account, parts)}
-                enableWallet={enableWallet}
-              >
-                <Profile
-                  ethereumAddress={determineAddress(account, parts)}
-                  onSignatures={onSignatures}
-                />
-              </LoadAndErrorWrapper>
-            </BaseLayout>
-          </AppContainer>
+                onSignatures={onSignatures}
+              />
+            </LoadAndErrorWrapper>
+          </BaseLayout>
         </DragWrapper>
       </ModalWrapper>
     </BoxWrapper>
@@ -48,6 +46,7 @@ App.propTypes = {
   enableWallet: PropTypes.func.isRequired,
   onSignatures: PropTypes.func.isRequired,
   parts: PropTypes.array,
+  web3Provider: PropTypes.object.isRequired,
 }
 
 App.defaultProps = { parts: [] }

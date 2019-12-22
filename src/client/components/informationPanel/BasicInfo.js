@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Text, theme, Button } from '@aragon/ui'
+import { Text, theme, ButtonBase } from '@aragon/ui'
 import { Social, Link, IconLocation, IconGlobe } from '../styled-components'
 
 export const Name = ({ name, handleOpenEdit }) => {
@@ -9,11 +9,11 @@ export const Name = ({ name, handleOpenEdit }) => {
     <Text.Block size="xxlarge">{name}</Text.Block>
   ) : (
     <Center>
-      <Button onClick={handleOpenEdit}>
+      <ButtonBase onClick={handleOpenEdit}>
         <Text size="large" color={theme.accent}>
           Add name
         </Text>
-      </Button>
+      </ButtonBase>
     </Center>
   )
 }
@@ -48,7 +48,12 @@ export const Website = ({ website }) =>
   website && (
     <Social>
       <IconGlobe width="13px" height="13px" color={theme.textPrimary} />
-      <Link href={website} placeholder="website" size="small">
+      <Link
+        href={website}
+        css={{ textAlign: 'left' }}
+        placeholder="website"
+        size="small"
+      >
         {website}
       </Link>
     </Social>
@@ -61,11 +66,11 @@ export const Empty = ({ handleOpenEdit }) => (
     <Text.Block css="text-align: center" size="xlarge">
       You have no name, bio or location
     </Text.Block>
-    <Button onClick={handleOpenEdit} css="padding: 0">
+    <ButtonBase large onClick={handleOpenEdit} css="padding: 0">
       <Text size="small" color={theme.accent}>
         Add basic information
       </Text>
-    </Button>
+    </ButtonBase>
   </Center>
 )
 

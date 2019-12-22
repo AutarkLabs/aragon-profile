@@ -1,24 +1,18 @@
 import Box from '3box'
 
-const supportedJsonRPCMethods = new Set(['personal_sign'])
-const supportedJsonRPCVersions = new Set(['2.0'])
-
-const supportedMethod = (method, jsonRPCVersion) => {
-  return (
-    supportedJsonRPCVersions.has(jsonRPCVersion) &&
-    supportedJsonRPCMethods.has(method)
-  )
-}
-
-class BoxAragonBridge {
-  constructor(ethereumAddress, onSignatures) {
+class Web3ProviderProxy {
+  constructor(ethereumAddress, onSignatures, web3Provider) {
     this.ethereumAddress = ethereumAddress
     this.onSignatures = onSignatures
+    this.web3Provider = web3Provider
   }
 
-  getMethod = method => {
-    const methods = {
-      personal_sign: async ([message], callback) => {
+  sendAsync = ({ fromAddress, method, params, jsonrpc }, callback) => {
+    const overridenMethods = {
+      personal_sign: ([message], callback) => {
+        if (fromAddress.toLowerCase() !== this.ethereumAddress.toLowerCase()) {
+          throw new Error('Address mismatch')
+        }
         const signatureBag = {
           message,
           requestingApp: '3Box-Aragon Profile',
@@ -26,31 +20,34 @@ class BoxAragonBridge {
             callback(null, { result: signature, error: null }),
           reject: error => callback(error, { error }),
         }
-        await this.onSignatures(signatureBag)
+        return this.onSignatures(signatureBag)
       },
     }
 
-    return methods[method]
-  }
-
-  sendAsync = async ({ fromAddress, method, params, jsonrpc }, callback) => {
-    if (!supportedMethod(method, jsonrpc)) {
-      throw new Error('Unsupported sendAsync json rpc method or version')
+    // if we want to override a default web3 behavior (like personal_sign), we return the overriden method here
+    if (overridenMethods[method]) {
+      return overridenMethods[method](params, callback)
     }
-
-    if (fromAddress.toLowerCase() !== this.ethereumAddress.toLowerCase()) {
-      throw new Error('Address mismatch')
-    }
-
-    const handler = this.getMethod(method)
-    handler(params, callback)
+    return this.web3Provider.sendAsync(
+      {
+        fromAddress,
+        method,
+        params,
+        jsonrpc,
+      },
+      callback
+    )
   }
 }
 
 export class Profile {
-  constructor(ethereumAddress, onSignatures) {
+  constructor(ethereumAddress, onSignatures, web3Provider) {
     this.ethereumAddress = ethereumAddress
-    this.boxAragonBridge = new BoxAragonBridge(ethereumAddress, onSignatures)
+    this.web3ProviderProxy = new Web3ProviderProxy(
+      ethereumAddress,
+      onSignatures,
+      web3Provider
+    )
     this.boxState = {
       opened: false,
       errorFetchingBox: false,
@@ -82,7 +79,7 @@ export class Profile {
   unlock = async () => {
     const openedBox = await Box.openBox(
       this.ethereumAddress,
-      this.boxAragonBridge
+      this.web3ProviderProxy
     )
     this.boxState = { opened: true, synced: false }
     this.unlockedBox = openedBox
@@ -90,46 +87,30 @@ export class Profile {
   }
 
   sync = () =>
-    new Promise((resolve, reject) => {
+    new Promise(async (resolve, reject) => {
       if (this.boxState.opened) {
-        this.unlockedBox.onSyncDone(() => {
-          try {
-            this.boxState = { opened: true, synced: true }
-            return resolve(this.unlockedBox)
-          } catch (err) {
-            this.boxState = { opened: true, synced: false }
-            return reject(err)
-          }
-        })
+        try {
+          await this.unlockedBox.syncDone
+          this.boxState = { opened: true, synced: true }
+          resolve(this.unlockedBox)
+        } catch (err) {
+          this.boxState = { opened: true, synced: false }
+          return reject(err)
+        }
       } else
         reject(new Error('Box needs to be unlocked before it can be synced'))
     })
 
-  unlockAndSync = () =>
-    new Promise(async (resolve, reject) => {
-      let openedBox
-      try {
-        openedBox = await Box.openBox(
-          this.ethereumAddress,
-          this.boxAragonBridge
-        )
-      } catch (err) {
-        return reject(err)
-      }
+  unlockAndSync = async () => {
+    const openedBox = await Box.openBox(
+      this.ethereumAddress,
+      this.web3ProviderProxy
+    )
 
-      this.boxState = { opened: true, synced: false }
-      this.unlockedBox = openedBox
-
-      openedBox.onSyncDone(() => {
-        try {
-          this.boxState = { opened: true, synced: true }
-          return resolve(openedBox)
-        } catch (err) {
-          this.boxState = { opened: false, synced: false }
-          return reject(err)
-        }
-      })
-    })
+    this.boxState = { opened: true, synced: false }
+    this.unlockedBox = openedBox
+    return this.sync()
+  }
 
   createProfile = () => this.unlockedBox.linkAddress()
 

@@ -9,8 +9,13 @@ const BoxWrapper = ({
   children,
   onSignatures,
   isViewMode,
+  web3Provider,
 }) => {
-  const { boxes, dispatch } = use3Box(ethereumAddress, onSignatures)
+  const { boxes, dispatch } = use3Box(
+    ethereumAddress,
+    onSignatures,
+    web3Provider
+  )
   useLinkedData(boxes, dispatch, ethereumAddress)
   return (
     <BoxContext.Provider
@@ -20,6 +25,7 @@ const BoxWrapper = ({
         ethereumAddress,
         isViewMode,
         onSignatures,
+        web3Provider,
       }}
     >
       {children}
@@ -32,6 +38,7 @@ BoxWrapper.propTypes = {
   children: PropTypes.node.isRequired,
   onSignatures: PropTypes.func.isRequired,
   isViewMode: PropTypes.bool.isRequired,
+  web3Provider: PropTypes.object.isRequired,
 }
 
 export default BoxWrapper

@@ -83,12 +83,14 @@ const InformationCard = () => {
 }
 
 // used for hover effects in Icons; needs no styling of its own
-const Wrap = styled.div``
+const Wrap = styled.div`
+  position: relative;
+`
 
 const Icons = styled.div`
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: 0px;
+  right: 0px;
   visibility: hidden;
   > * {
     background: white;

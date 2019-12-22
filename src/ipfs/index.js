@@ -1,9 +1,5 @@
-import ipfsClient from 'ipfs-http-client'
+import ipfsClient from 'ipfs-http-client-lite'
 
 export const ipfsAddress = 'ipfs.autark.xyz'
 
-export const ipfsGateway = ipfsClient({
-  host: ipfsAddress,
-  port: '5001',
-  protocol: 'https',
-})
+export const ipfs = ipfsClient('https://ipfs.autark.xyz:5001')

@@ -3,14 +3,14 @@ import { START_DRAG, STOP_DRAG, CANCEL_DRAG } from './actionTypes'
 import { startDrag, stopDrag, cancelDrag } from './states'
 
 const logStateUpdate = (action, prevState, nextState) => {
-  console.log(
-    'ACTION: ',
-    action,
-    'PREV STATE: ',
-    prevState,
-    'NEXT STATE:',
-    nextState
-  )
+  // console.log(
+  //   'ACTION: ',
+  //   action,
+  //   'PREV STATE: ',
+  //   prevState,
+  //   'NEXT STATE:',
+  //   nextState
+  // )
 }
 
 const dragReducer = (prevState, action) => {

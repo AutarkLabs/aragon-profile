@@ -2,7 +2,7 @@ import React, { useState, useContext, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useDropzone } from 'react-dropzone'
-import { ipfsGateway } from '../../ipfs'
+import { ipfs } from '../../ipfs'
 import { removeItem } from '../stateManagers/modal'
 import { BoxContext } from '../wrappers/box'
 import { ModalContext } from '../wrappers/modal'
@@ -30,7 +30,7 @@ const ImageMenu = ({
   onSignatures,
 }) => {
   const [active, setActive] = useState(false)
-  const { boxes, dispatch } = useContext(BoxContext)
+  const { boxes, dispatch, web3Provider } = useContext(BoxContext)
   const { dispatchModal } = useContext(ModalContext)
   const { dragState } = useContext(DragContext)
 
@@ -54,11 +54,12 @@ const ImageMenu = ({
             dispatch,
             dispatchModal,
             ethereumAddress,
-            onSignatures
+            onSignatures,
+            web3Provider
           )
 
           if (unlockedBox) {
-            const result = await ipfsGateway.add(file)
+            const result = await ipfs.add(file)
             dispatch(uploadedImage(ethereumAddress, imageTag, result[0].hash))
 
             try {
@@ -83,7 +84,15 @@ const ImageMenu = ({
 
       acceptedFiles.forEach(file => reader.readAsArrayBuffer(file))
     },
-    [boxes, dispatch, dispatchModal, ethereumAddress, imageTag, onSignatures]
+    [
+      boxes,
+      dispatch,
+      dispatchModal,
+      ethereumAddress,
+      imageTag,
+      onSignatures,
+      web3Provider,
+    ]
   )
 
   const {

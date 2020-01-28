@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Main } from '@aragon/ui'
 import styled from 'styled-components'
 
 // import { EthereumAddressType } from '../../../prop-types'
@@ -12,33 +11,31 @@ import { DragWrapper } from './wrappers/drag'
 import { determineAddress, isViewMode } from './utils'
 
 const App = ({ account, enableWallet, onSignatures, parts, web3Provider }) => (
-  <Main>
-    <BoxWrapper
-      isViewMode={isViewMode(account, parts)}
+  <BoxWrapper
+    isViewMode={isViewMode(account, parts)}
+    ethereumAddress={determineAddress(account, parts)}
+    onSignatures={onSignatures}
+    web3Provider={web3Provider}
+  >
+    <ModalWrapper
       ethereumAddress={determineAddress(account, parts)}
       onSignatures={onSignatures}
-      web3Provider={web3Provider}
     >
-      <ModalWrapper
-        ethereumAddress={determineAddress(account, parts)}
-        onSignatures={onSignatures}
-      >
-        <DragWrapper>
-          <BaseLayout>
-            <LoadAndErrorWrapper
+      <DragWrapper>
+        <BaseLayout>
+          <LoadAndErrorWrapper
+            ethereumAddress={determineAddress(account, parts)}
+            enableWallet={enableWallet}
+          >
+            <Profile
               ethereumAddress={determineAddress(account, parts)}
-              enableWallet={enableWallet}
-            >
-              <Profile
-                ethereumAddress={determineAddress(account, parts)}
-                onSignatures={onSignatures}
-              />
-            </LoadAndErrorWrapper>
-          </BaseLayout>
-        </DragWrapper>
-      </ModalWrapper>
-    </BoxWrapper>
-  </Main>
+              onSignatures={onSignatures}
+            />
+          </LoadAndErrorWrapper>
+        </BaseLayout>
+      </DragWrapper>
+    </ModalWrapper>
+  </BoxWrapper>
 )
 
 App.propTypes = {

@@ -3,13 +3,7 @@ import PropTypes from 'prop-types'
 
 const IconGlobe = props => (
   <svg width="19px" height="19px" viewBox="0 0 19 19" {...props}>
-    <g
-      stroke="none"
-      strokeWidth="1"
-      fill="none"
-      fillRule="evenodd"
-      opacity="0.3"
-    >
+    <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
       <g transform="translate(-77.000000, -556.000000)" fill={props.color}>
         <g transform="translate(77.000000, 556.000000)">
           <g>

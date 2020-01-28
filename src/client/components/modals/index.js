@@ -220,7 +220,7 @@ const UserInfoModal = ({ ethereumAddress, onSignatures }) => {
 }
 
 UserInfoModal.propTypes = {
-  ethereumAddress: PropTypes.string.isRequired,
+  ethereumAddress: PropTypes.string,
   onSignatures: PropTypes.func.isRequired,
 }
 

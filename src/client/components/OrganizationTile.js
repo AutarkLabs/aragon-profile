@@ -2,21 +2,28 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { Button as AragonButton, Text, theme } from '@aragon/ui'
+import { Button as AragonButton, Text, useTheme } from '@aragon/ui'
 import { IconTrash } from './styled-components'
 
-const OrganizationTile = ({ organizationData, removeItem, viewMode }) => (
-  <OrganizationItem>
-    <Text.Block size="large">{organizationData.address}</Text.Block>
-    {!viewMode && (
-      <Icons>
-        <Button onClick={removeItem}>
-          <IconTrash width="16px" height="16px" color={theme.accent} />
-        </Button>
-      </Icons>
-    )}
-  </OrganizationItem>
-)
+const OrganizationTile = ({ organizationData, removeItem, viewMode }) => {
+  const theme = useTheme()
+  return (
+    <OrganizationItem>
+      <Text.Block size="large">{organizationData.address}</Text.Block>
+      {!viewMode && (
+        <Icons>
+          <Button onClick={removeItem}>
+            <IconTrash
+              width="16px"
+              height="16px"
+              color={theme.accent.toString()}
+            />
+          </Button>
+        </Icons>
+      )}
+    </OrganizationItem>
+  )
+}
 const OrganizationItem = styled.div`
   position: relative;
 `

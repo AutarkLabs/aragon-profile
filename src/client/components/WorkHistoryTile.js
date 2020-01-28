@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { Text, theme } from '@aragon/ui'
+import { Text, useTheme } from '@aragon/ui'
 import { IconPencil, IconTrash, TileHeader } from './styled-components'
 import { displayStartEndDates } from '../utils'
 
@@ -11,27 +11,41 @@ const WorkHistoryTile = ({
   openModal,
   removeItem,
   viewMode,
-}) => (
-  <SingleWorkItem>
-    <Details>
-      <TileHeader>{workHistoryData.workPlace}</TileHeader>
-      <Text.Block size="large">
-        {workHistoryData.jobTitle}
-        <Text color={theme.textTertiary} size="xsmall" css="margin-left: 13px">
-          {displayStartEndDates(workHistoryData)}
-        </Text>
-      </Text.Block>
-      <Text.Block size="small">{workHistoryData.description}</Text.Block>
-    </Details>
-    {!viewMode && (
-      <Icons>
-        <IconPencil color={theme.accent} width="16px" onClick={openModal} />
-        <IconTrash color={theme.accent} width="16px" onClick={removeItem} />
-      </Icons>
-    )}
-  </SingleWorkItem>
-)
-
+}) => {
+  const theme = useTheme()
+  return (
+    <SingleWorkItem>
+      <Details>
+        <TileHeader>{workHistoryData.workPlace}</TileHeader>
+        <Text.Block size="large">
+          {workHistoryData.jobTitle}
+          <Text
+            color={theme.contentSecondary.toString()}
+            size="xsmall"
+            css="margin-left: 13px"
+          >
+            {displayStartEndDates(workHistoryData)}
+          </Text>
+        </Text.Block>
+        <Text.Block size="small">{workHistoryData.description}</Text.Block>
+      </Details>
+      {!viewMode && (
+        <Icons>
+          <IconPencil
+            color={theme.accent.toString()}
+            width="16px"
+            onClick={openModal}
+          />
+          <IconTrash
+            color={theme.accent.toString()}
+            width="16px"
+            onClick={removeItem}
+          />
+        </Icons>
+      )}
+    </SingleWorkItem>
+  )
+}
 const SingleWorkItem = styled.div`
   width: 100%;
   display: flex;
@@ -64,7 +78,7 @@ WorkHistoryTile.propTypes = {
   workHistoryData: PropTypes.shape({
     workPlace: PropTypes.string.isRequired,
     jobTitle: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    description: PropTypes.string,
     startDate: PropTypes.number,
     endDate: PropTypes.number,
   }).isRequired,

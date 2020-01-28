@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { Text, theme } from '@aragon/ui'
+import { Text, useTheme } from '@aragon/ui'
 import { IconPencil, IconTrash, TileHeader } from './styled-components'
 import { displayStartEndDates } from '../utils'
 
@@ -11,26 +11,39 @@ const EducationHistoryTile = ({
   openModal,
   removeItem,
   viewMode,
-}) => (
-  <SingleEducationItem>
-    <div>
-      <TileHeader>{educationHistoryData.organization}</TileHeader>
-      <Text.Block size="normal" css="line-height: 1.8">
-        {educationHistoryData.degree}
-        {educationHistoryData.fieldOfStudy
-          ? ', ' + educationHistoryData.fieldOfStudy
-          : ''}
-      </Text.Block>
-      <Dates>{displayStartEndDates(educationHistoryData)}</Dates>
-    </div>
-    {!viewMode && (
-      <Icons>
-        <IconPencil color={theme.accent} width="16px" onClick={openModal} />
-        <IconTrash color={theme.accent} width="16px" onClick={removeItem} />
-      </Icons>
-    )}
-  </SingleEducationItem>
-)
+}) => {
+  const theme = useTheme()
+  return (
+    <SingleEducationItem>
+      <div>
+        <TileHeader>{educationHistoryData.organization}</TileHeader>
+        <Text.Block size="normal" css="line-height: 1.8">
+          {educationHistoryData.degree}
+          {educationHistoryData.fieldOfStudy
+            ? ', ' + educationHistoryData.fieldOfStudy
+            : ''}
+        </Text.Block>
+        <Dates theme={theme}>
+          {displayStartEndDates(educationHistoryData)}
+        </Dates>
+      </div>
+      {!viewMode && (
+        <Icons>
+          <IconPencil
+            color={theme.accent.toString()}
+            width="16px"
+            onClick={openModal}
+          />
+          <IconTrash
+            color={theme.accent.toString()}
+            width="16px"
+            onClick={removeItem}
+          />
+        </Icons>
+      )}
+    </SingleEducationItem>
+  )
+}
 
 const SingleEducationItem = styled.div`
   width: 100%;
@@ -49,7 +62,7 @@ const Icons = styled.div`
 `
 
 const Dates = styled(Text.Block).attrs({ size: 'xsmall' })`
-  color: ${theme.textTertiary};
+  color: ${({ theme }) => theme.contentSecondary};
   margin-top: 2px;
 `
 

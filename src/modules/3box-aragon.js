@@ -9,8 +9,8 @@ class Web3ProviderProxy {
 
   sendAsync = ({ fromAddress, method, params, jsonrpc }, callback) => {
     const overridenMethods = {
-      personal_sign: ([message], callback) => {
-        if (fromAddress.toLowerCase() !== this.ethereumAddress.toLowerCase()) {
+      personal_sign: ([message, address], callback) => {
+        if (address.toLowerCase() !== this.ethereumAddress.toLowerCase()) {
           throw new Error('Address mismatch')
         }
         const signatureBag = {

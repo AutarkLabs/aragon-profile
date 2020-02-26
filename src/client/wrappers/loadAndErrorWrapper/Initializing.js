@@ -1,17 +1,19 @@
 import React from 'react'
-import { AnimationLoading } from '../../components/styled-components'
+import { LoadingAnimation } from '../../components/styled-components'
 
 const Initializing = () => (
   <div
     css={`
-      margin-top: 40px;
       display: flex;
-      flex-direction: column;
       justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
     `}
   >
     <div css="text-align: center">
-      <AnimationLoading />
+      <LoadingAnimation />
     </div>
 
     <div css="margin-top: 13px">Initializing</div>

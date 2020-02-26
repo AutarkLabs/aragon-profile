@@ -9,8 +9,6 @@ import { close } from '../../stateManagers/modal'
 const CONTENT_PADDING = 30
 
 const ModalWrapper = ({ children, title }) => {
-  const { dispatchModal } = useContext(ModalContext)
-
   return (
     <Fragment>
       <PanelHeader>
@@ -19,9 +17,6 @@ const ModalWrapper = ({ children, title }) => {
             <Text size="xxlarge">{title}</Text>
           </h1>
         )}
-        <PanelCloseButton type="button" onClick={() => dispatchModal(close())}>
-          <IconClose />
-        </PanelCloseButton>
       </PanelHeader>
       <PanelScrollView>
         <PanelContent>{children}</PanelContent>
@@ -61,10 +56,8 @@ DisplayErrors.defaultProps = {
 
 const PanelHeader = styled.header`
   position: relative;
-  padding-top: 15px;
-  padding-left: ${CONTENT_PADDING}px;
-  padding-right: 20px;
-  padding-bottom: 15px;
+  margin: 15px 0;
+  padding: 0 ${CONTENT_PADDING}px;
   ${unselectable()};
   flex-shrink: 0;
 `

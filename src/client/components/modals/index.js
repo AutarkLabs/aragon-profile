@@ -213,8 +213,8 @@ const UserInfoModal = ({ ethereumAddress, onSignatures }) => {
   }
 
   return (
-    <Modal visible={!!modal.type} onClick={() => dispatchModal(close())}>
-      {modal.type && modals[modal.type]}
+    <Modal visible={!!modal.type} onClose={() => dispatchModal(close())}>
+      {modal.type ? modals[modal.type] : ''}
     </Modal>
   )
 }

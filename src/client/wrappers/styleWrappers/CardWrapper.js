@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Card, Text } from '@aragon/ui'
+import { Card, Text, useTheme } from '@aragon/ui'
 import styled from 'styled-components'
 import { Link } from '../../components/styled-components'
 
@@ -11,23 +11,28 @@ const CardWrapper = ({
   addMore,
   addSeparators,
   viewMode,
-}) => (
-  <div css="margin-top: 15px" className={className}>
-    {title && (
-      <Text css="padding-bottom: 3px; display: inline-block;" size="xlarge">
-        {title}
-      </Text>
-    )}
-    {addMore && !viewMode && (
-      <Link.Button size="tiny" onClick={addMore} css="padding-left: 13px">
-        Add more
-      </Link.Button>
-    )}
-    {children && (
-      <StyledCard addSeparators={addSeparators}>{children}</StyledCard>
-    )}
-  </div>
-)
+}) => {
+  const theme = useTheme()
+  return (
+    <div css="margin-top: 15px" className={className}>
+      {title && (
+        <Text css="padding-bottom: 3px; display: inline-block;" size="xlarge">
+          {title}
+        </Text>
+      )}
+      {addMore && !viewMode && (
+        <Link.Button size="tiny" onClick={addMore} css="padding-left: 13px">
+          Add more
+        </Link.Button>
+      )}
+      {children && (
+        <StyledCard theme={theme} addSeparators={addSeparators}>
+          {children}
+        </StyledCard>
+      )}
+    </div>
+  )
+}
 
 CardWrapper.defaultProps = {
   addSeparators: false,
@@ -49,8 +54,8 @@ const StyledCard = styled(Card).attrs({ width: '100%', height: 'auto' })`
   > :not(:last-child) {
     margin-bottom: 13px;
     padding-bottom: 13px;
-    border-bottom: ${({ addSeparators }) =>
-      addSeparators ? '1px solid #EEE' : '0'};
+    border-bottom: ${({ theme, addSeparators }) =>
+      addSeparators ? `1px solid ${theme.border}` : '0'};
   }
 `
 

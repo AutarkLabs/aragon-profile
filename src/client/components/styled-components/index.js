@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { DateDropDown, EditTextField } from '../readOrEditFields'
-import { Button, TextInput, SafeLink, theme, Text } from '@aragon/ui'
+import { ButtonBase, TextInput, SafeLink, theme, Text } from '@aragon/ui'
 import editImage from '../../../../assets/pencil-black-tool-interface-symbol.png'
 
 export const CheckWrapper = styled.div`
@@ -42,7 +42,7 @@ const linkStyles = {
 export const Link = styled(SafeLink).attrs({ target: '_blank' })(linkStyles)
 
 // a Button styled to look like a Link
-Link.Button = styled(Button).attrs({
+Link.Button = styled(ButtonBase).attrs({
   mode: 'text',
 })({
   ...linkStyles,
@@ -67,7 +67,7 @@ export const FlexDirectionCol = styled.div`
   flex-direction: column;
 `
 
-export const FullWidthButton = styled(Button)`
+export const FullWidthButton = styled(ButtonBase)`
   width: 100%;
 `
 
@@ -131,7 +131,7 @@ export { default as IconTwitter } from './IconTwitter'
 export { default as IconEthereum } from './IconEthereum'
 export { default as IconLocation } from './IconLocation'
 export { default as IconVerified } from './IconVerified'
-export { default as AnimationLoading } from './AnimationLoading'
+export { default as LoadingAnimation } from './LoadingAnimation'
 export { default as IconGlobe } from './IconGlobe'
 export { default as IconCamera } from './IconCamera'
 export { default as AnimationLoadingCircle } from './AnimationLoadingCircle'

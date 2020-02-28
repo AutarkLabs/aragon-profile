@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Text, Card, theme, Button, IconClose } from '@aragon/ui'
+import { Text, Card, Button, IconClose, useTheme } from '@aragon/ui'
 import {
   Social,
   Link,
@@ -39,31 +39,38 @@ VerifySocial.propTypes = {
   setPopover: PropTypes.func.isRequired,
 }
 
-export const GitHub = ({ github: { username }, activePopover, setPopover }) => (
-  <Social>
-    <IconGitHub width="13px" height="13px" color={theme.textTertiary} />
-    {username ? (
-      <div>
-        <Link href={`https://github.com/${username}`}>{username}</Link>
-        <Verified />
-      </div>
-    ) : (
-      <div>
-        <Button
-          compact
-          mode="outline"
-          css="position: relative"
-          onClick={() => setPopover('github')}
-        >
-          Verify my GitHub account
-        </Button>
-        {activePopover === 'github' && (
-          <VerifySocial social="GitHub" setPopover={setPopover} />
-        )}
-      </div>
-    )}
-  </Social>
-)
+export const GitHub = ({ github: { username }, activePopover, setPopover }) => {
+  const theme = useTheme()
+  return (
+    <Social>
+      <IconGitHub
+        width="13px"
+        height="13px"
+        color={theme.contentSecondary.toString()}
+      />
+      {username ? (
+        <div>
+          <Link href={`https://github.com/${username}`}>{username}</Link>
+          <Verified />
+        </div>
+      ) : (
+        <div>
+          <Button
+            compact
+            mode="outline"
+            css="position: relative"
+            onClick={() => setPopover('github')}
+          >
+            Verify my GitHub account
+          </Button>
+          {activePopover === 'github' && (
+            <VerifySocial social="GitHub" setPopover={setPopover} />
+          )}
+        </div>
+      )}
+    </Social>
+  )
+}
 
 GitHub.propTypes = {
   github: PropTypes.object.isRequired,
@@ -75,32 +82,39 @@ export const Twitter = ({
   twitter: { username },
   activePopover,
   setPopover,
-}) => (
-  <Social>
-    <IconTwitter width="13px" height="13px" color={theme.textTertiary} />
-    {username ? (
-      <div>
-        <Link href={`https://twitter.com/${username}`}>{username}</Link>
-        <Verified />
-      </div>
-    ) : (
-      <div>
-        <Button
-          compact
-          mode="outline"
-          css="position: relative"
-          onClick={() => setPopover('twitter')}
-        >
-          Verify my Twitter account
-        </Button>
+}) => {
+  const theme = useTheme()
+  return (
+    <Social>
+      <IconTwitter
+        width="13px"
+        height="13px"
+        color={theme.contentSecondary.toString()}
+      />
+      {username ? (
+        <div>
+          <Link href={`https://twitter.com/${username}`}>{username}</Link>
+          <Verified />
+        </div>
+      ) : (
+        <div>
+          <Button
+            compact
+            mode="outline"
+            css="position: relative"
+            onClick={() => setPopover('twitter')}
+          >
+            Verify my Twitter account
+          </Button>
 
-        {activePopover === 'twitter' && (
-          <VerifySocial social="Twitter" setPopover={setPopover} />
-        )}
-      </div>
-    )}
-  </Social>
-)
+          {activePopover === 'twitter' && (
+            <VerifySocial social="Twitter" setPopover={setPopover} />
+          )}
+        </div>
+      )}
+    </Social>
+  )
+}
 
 Twitter.propTypes = {
   twitter: PropTypes.object,

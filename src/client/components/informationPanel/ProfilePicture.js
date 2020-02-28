@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { useTheme } from '@aragon/ui'
 
 import ImageMenu from '../ImageMenu'
 import { useProfile } from '../../hooks'
@@ -9,6 +10,7 @@ import { assetsPath } from '../../utils'
 import defaultImage from '../../../../assets/profile_avatar.svg'
 
 const ProfilePicture = () => {
+  const theme = useTheme()
   const {
     imageCid,
     ethereumAddress,
@@ -22,7 +24,7 @@ const ProfilePicture = () => {
   const topMenuPos = hasImage ? 26 : 32
 
   return (
-    <Container className="imageHover" imageCid={imageCid}>
+    <Container theme={theme} className="imageHover" imageCid={imageCid}>
       {userLoaded && !viewMode && (
         <ImageMenu
           ethereumAddress={ethereumAddress}
@@ -41,7 +43,7 @@ const ProfilePicture = () => {
 const Container = styled.div`
   cursor: ${props => props.isEditing && 'pointer'};
   padding: 20px;
-  border: 2px solid #f2f2f2;
+  border: 2px solid ${({ theme }) => theme.surface};
   background-repeat: no-repeat;
   background-position: center;
   transition: border 0.24s ease-in-out;

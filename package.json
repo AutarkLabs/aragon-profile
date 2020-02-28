@@ -1,6 +1,6 @@
 {
   "name": "@openworklabs/aragon-profile",
-  "version": "0.1.17",
+  "version": "0.1.20",
   "description": "a single profile component for the Aragon Client",
   "author": "Schwartz10",
   "license": "MIT",
@@ -13,7 +13,7 @@
   "scripts": {
     "build": "./node_modules/.bin/babel src --out-dir dist",
     "clean": "rm -rf ./dist",
-    "lint": "eslint --ext .js src/",
+    "lint": "eslint --ext .js src/ --fix",
     "prepublishOnly": "npm run build",
     "prepare-local-dev": "cd ./node_modules && rm -rf react && rm -rf react-dom && rm -rf styled-components && rm -rf web3-utils && rm -rf @aragon/ui && cd ../",
     "test": "cross-env CI=1 react-scripts test --env=jsdom",
@@ -25,22 +25,23 @@
     }
   },
   "peerDependencies": {
-    "@aragon/ui": "^0.40.1",
+    "@aragon/ui": "^1.2.1",
     "prop-types": "^15.6.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-onclickout": "^2.0.8",
     "react-spring": "^7.2.10",
     "styled-components": "^4.2.1",
-    "web3-utils": "1.0.0-beta.33"
+    "web3-utils": "^1.2.1"
   },
   "dependencies": {
-    "3box": "1.10.5",
+    "3box": "^1.16.2",
     "ajv": "^6.10.0",
     "dayjs": "^1.8.14",
     "husky": "^3.0.1",
-    "ipfs-http-client": "^32.0.1",
+    "ipfs-http-client-lite": "^0.3.0",
     "lodash.clonedeep": "^4.5.0",
+    "multicodec": "^1.0.0",
     "react-dropzone": "10.1.5",
     "uuid": "^3.3.2"
   },

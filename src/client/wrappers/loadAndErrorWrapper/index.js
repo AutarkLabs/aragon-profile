@@ -35,7 +35,7 @@ const LoadAndErrorWrapper = ({ children, enableWallet, ethereumAddress }) => {
 LoadAndErrorWrapper.propTypes = {
   children: PropTypes.node.isRequired,
   enableWallet: PropTypes.func.isRequired,
-  ethereumAddress: PropTypes.string.isRequired,
+  ethereumAddress: PropTypes.string,
 }
 
 export default LoadAndErrorWrapper

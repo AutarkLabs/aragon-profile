@@ -1,16 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { EmptyStateCard, IconIdentity } from '@aragon/ui'
+import { Button, EmptyStateCard, IconIdentity, Text } from '@aragon/ui'
 
 const EnableMetamask = ({ enableWallet }) => (
   <EmptyWrapper>
     <EmptyStateCard
-      title="You haven't enabled your account"
-      text="Get started now by creating a new account."
-      icon={<IconIdentity />}
-      actionText="Enable account"
-      onActivate={enableWallet}
+      text={<Text>Get started now by creating a new account.</Text>}
+      illustration={<IconIdentity size="large" />}
+      action={
+        <Button wide onClick={enableWallet}>
+          Enable wallet
+        </Button>
+      }
     />
   </EmptyWrapper>
 )

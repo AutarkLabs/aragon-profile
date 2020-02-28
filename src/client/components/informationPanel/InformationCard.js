@@ -1,6 +1,6 @@
 import React, { Fragment, useContext, useState } from 'react'
 import styled from 'styled-components'
-import { theme } from '@aragon/ui'
+import { useTheme } from '@aragon/ui'
 
 import { ModalContext } from '../../wrappers/modal'
 import { useProfile } from '../../hooks'
@@ -11,6 +11,7 @@ import { GitHub, Twitter } from './SocialInfo'
 import { Name, Description, Location, Website, Empty } from './BasicInfo'
 
 const InformationCard = () => {
+  const theme = useTheme()
   const {
     ethereumAddress,
     description,
@@ -47,7 +48,9 @@ const InformationCard = () => {
             </Fragment>
           )}
           <Website website={website} />
-          {(!viewMode || twitter.username || github.username) && <Separator />}
+          {(!viewMode || twitter.username || github.username) && (
+            <Separator theme={theme} />
+          )}
           {(!viewMode || twitter.username) && (
             <Twitter
               twitter={twitter}
@@ -62,17 +65,21 @@ const InformationCard = () => {
               setPopover={setPopover}
             />
           )}
-          <Separator />
+          <Separator theme={theme} />
           <Social>
-            <IconEthereum width="13px" height="13px" />
-            <EthAddr>{ethereumAddress}</EthAddr>
+            <IconEthereum
+              width="13px"
+              height="13px"
+              color={theme.contentSecondary.toString()}
+            />
+            <EthAddr theme={theme}>{ethereumAddress}</EthAddr>
           </Social>
         </Details>
         {!viewMode && (
           <Icons>
             <IconPencil
               width="16px"
-              color={theme.accent}
+              color={theme.accent.toString()}
               onClick={handleOpenEdit}
             />
           </Icons>
@@ -83,15 +90,16 @@ const InformationCard = () => {
 }
 
 // used for hover effects in Icons; needs no styling of its own
-const Wrap = styled.div``
+const Wrap = styled.div`
+  position: relative;
+`
 
 const Icons = styled.div`
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: 0px;
+  right: 0px;
   visibility: hidden;
   > * {
-    background: white;
     box-sizing: content-box;
     padding: 4px;
     cursor: pointer;
@@ -110,8 +118,8 @@ const Separator = styled.hr`
   height: 1px;
   border: 0;
   width: 100%;
-  margin: 13px 0 !important; // override Details > :not(:last-child)
-  background: ${theme.contentBorder};
+  margin: 13px 0 !important; /*override Details > :not(:last-child)*/
+  background: ${({ theme }) => theme.border};
 `
 
 export default InformationCard

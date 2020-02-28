@@ -20,7 +20,7 @@ const ModalWrapper = ({ children, ethereumAddress, onSignatures }) => {
 
 ModalWrapper.propTypes = {
   children: PropTypes.node.isRequired,
-  ethereumAddress: PropTypes.string.isRequired,
+  ethereumAddress: PropTypes.string,
   onSignatures: PropTypes.func.isRequired,
 }
 

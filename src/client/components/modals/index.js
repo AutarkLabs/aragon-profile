@@ -36,7 +36,7 @@ import {
 } from '../../stateManagers/modal/types'
 
 const UserInfoModal = ({ ethereumAddress, onSignatures }) => {
-  const { boxes, dispatch } = useContext(BoxContext)
+  const { boxes, dispatch, web3Provider } = useContext(BoxContext)
   const { modal, dispatchModal } = useContext(ModalContext)
   const [key, setKey] = useState(uuidv1())
 
@@ -90,7 +90,8 @@ const UserInfoModal = ({ ethereumAddress, onSignatures }) => {
         dispatch,
         dispatchModal,
         ethereumAddress,
-        onSignatures
+        onSignatures,
+        web3Provider
       )
       if (unlockedBox) {
         await unlockedBox.setPublicFields(changed, changedValues)
@@ -122,7 +123,8 @@ const UserInfoModal = ({ ethereumAddress, onSignatures }) => {
         dispatch,
         dispatchModal,
         ethereumAddress,
-        onSignatures
+        onSignatures,
+        web3Provider
       )
       if (unlockedBox) {
         if (itemType === 'image' || itemType === 'coverPhoto') {
@@ -211,14 +213,14 @@ const UserInfoModal = ({ ethereumAddress, onSignatures }) => {
   }
 
   return (
-    <Modal visible={!!modal.type} padding="0">
-      <div css="position: relative">{modal.type && modals[modal.type]}</div>
+    <Modal visible={!!modal.type} onClose={() => dispatchModal(close())}>
+      {modal.type ? modals[modal.type] : ''}
     </Modal>
   )
 }
 
 UserInfoModal.propTypes = {
-  ethereumAddress: PropTypes.string.isRequired,
+  ethereumAddress: PropTypes.string,
   onSignatures: PropTypes.func.isRequired,
 }
 

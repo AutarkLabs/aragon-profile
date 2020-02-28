@@ -4,10 +4,11 @@ import { useProfile } from '../hooks'
 import { ModalContext } from '../wrappers/modal'
 import OrganizationTile from './OrganizationTile'
 import { open, removeItem } from '../stateManagers/modal'
-import { Text, theme, Button } from '@aragon/ui'
+import { Text, Button, useTheme } from '@aragon/ui'
 import styled from 'styled-components'
 
 const OrganizationPanel = () => {
+  const theme = useTheme()
   const { organizations, viewMode } = useProfile()
   const { dispatchModal } = useContext(ModalContext)
 
@@ -42,7 +43,7 @@ const OrganizationPanel = () => {
               size="small"
               onClick={() => dispatchModal(open('organization'))}
             >
-              <Text color={theme.accent} size="small">
+              <Text color={theme.accent.toString()} size="small">
                 Add organisation
               </Text>
             </Button>

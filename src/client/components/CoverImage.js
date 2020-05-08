@@ -29,7 +29,7 @@ const CoverImage = () => {
           imageExists={!!hasImage}
           open={open}
           imageTag="coverPhoto"
-          imageTitle="Cover"
+          imageTitle="cover"
           onSignatures={onSignatures}
         />
       )}

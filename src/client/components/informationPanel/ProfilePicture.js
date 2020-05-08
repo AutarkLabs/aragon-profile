@@ -32,7 +32,7 @@ const ProfilePicture = () => {
           right={-12}
           imageExists={!!hasImage}
           imageTag="image"
-          imageTitle="Profile"
+          imageTitle="profile"
           onSignatures={onSignatures}
         />
       )}

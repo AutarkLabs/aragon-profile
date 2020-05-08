@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Card, Text, useTheme } from '@aragon/ui'
 import styled from 'styled-components'
-import { Link } from '../../components/styled-components'
+import { LinkButton } from '../../components/styled-components'
 
 const CardWrapper = ({
   children,
@@ -21,9 +21,9 @@ const CardWrapper = ({
         </Text>
       )}
       {addMore && !viewMode && (
-        <Link.Button size="tiny" onClick={addMore} css="padding-left: 13px">
+        <LinkButton size="tiny" onClick={addMore} css="padding-left: 13px">
           Add more
-        </Link.Button>
+        </LinkButton>
       )}
       {children && (
         <StyledCard theme={theme} addSeparators={addSeparators}>

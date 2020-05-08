@@ -2,8 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { Button as AragonButton, Text, useTheme } from '@aragon/ui'
-import { IconTrash } from './styled-components'
+import { Button as AragonButton, IconTrash, Text, useTheme } from '@aragon/ui'
 
 const OrganizationTile = ({ organizationData, removeItem, viewMode }) => {
   const theme = useTheme()
@@ -11,13 +10,13 @@ const OrganizationTile = ({ organizationData, removeItem, viewMode }) => {
     <OrganizationItem>
       <Text.Block size="large">{organizationData.address}</Text.Block>
       {!viewMode && (
-        <Icons>
+        <Icons
+          css={`
+            color: ${theme.accent};
+          `}
+        >
           <Button onClick={removeItem}>
-            <IconTrash
-              width="16px"
-              height="16px"
-              color={theme.accent.toString()}
-            />
+            <IconTrash />
           </Button>
         </Icons>
       )}
@@ -42,6 +41,7 @@ const Button = styled(AragonButton).attrs({ mode: 'text' })`
   background: rgba(255, 255, 255, 0.9);
   box-sizing: content-box;
   height: 16px;
+  width: 16px;
   overflow: hidden;
   padding: 4px;
   &:not(:last-child) {

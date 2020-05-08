@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { Text, useTheme } from '@aragon/ui'
-import { IconPencil, IconTrash, TileHeader } from './styled-components'
+import { ButtonBase, IconEdit, IconTrash, Text, useTheme } from '@aragon/ui'
+import { TileHeader } from './styled-components'
 import { displayStartEndDates } from '../utils'
 
 const EducationHistoryTile = ({
@@ -28,17 +28,17 @@ const EducationHistoryTile = ({
         </Dates>
       </div>
       {!viewMode && (
-        <Icons>
-          <IconPencil
-            color={theme.accent.toString()}
-            width="16px"
-            onClick={openModal}
-          />
-          <IconTrash
-            color={theme.accent.toString()}
-            width="16px"
-            onClick={removeItem}
-          />
+        <Icons
+          css={`
+            color: ${theme.accent};
+          `}
+        >
+          <ButtonBase width="16px" onClick={openModal}>
+            <IconEdit />
+          </ButtonBase>
+          <ButtonBase width="16px" onClick={removeItem}>
+            <IconTrash />
+          </ButtonBase>
         </Icons>
       )}
     </SingleEducationItem>

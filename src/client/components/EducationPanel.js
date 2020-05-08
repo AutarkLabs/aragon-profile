@@ -6,7 +6,7 @@ import EducationHistoryTile from './EducationHistoryTile'
 import { open, removeItem } from '../stateManagers/modal'
 import { Text } from '@aragon/ui'
 import styled from 'styled-components'
-import { Link } from './styled-components'
+import { LinkButton } from './styled-components'
 import { sortHistory } from '../utils'
 
 const EducationPanel = () => {
@@ -43,12 +43,12 @@ const EducationPanel = () => {
       ) : (
         <Center>
           <Text size="normal">No education added</Text>
-          <Link.Button
+          <LinkButton
             onClick={() => dispatchModal(open('educationHistory'))}
             size="small"
           >
             Add education
-          </Link.Button>
+          </LinkButton>
         </Center>
       )}
     </CardWrapper>

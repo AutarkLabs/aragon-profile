@@ -7,7 +7,7 @@ import WorkHistoryTile from './WorkHistoryTile'
 import { open, removeItem } from '../stateManagers/modal'
 import { Text } from '@aragon/ui'
 import styled from 'styled-components'
-import { Link } from './styled-components'
+import { LinkButton } from './styled-components'
 import { sortHistory } from '../utils'
 
 const WorkHistoryPanel = ({ className }) => {
@@ -41,12 +41,12 @@ const WorkHistoryPanel = ({ className }) => {
       ) : (
         <Center>
           <Text size="normal">No work history added</Text>
-          <Link.Button
+          <LinkButton
             onClick={() => dispatchModal(open('workHistory'))}
             size="small"
           >
             Add work
-          </Link.Button>
+          </LinkButton>
         </Center>
       )}
     </CardWrapper>

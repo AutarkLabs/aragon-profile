@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { DateDropDown, EditTextField } from '../readOrEditFields'
-import { ButtonBase, TextInput, SafeLink, theme, Text } from '@aragon/ui'
+import { ButtonBase, TextInput, SafeLink, Text, useTheme } from '@aragon/ui'
 import editImage from '../../../../assets/pencil-black-tool-interface-symbol.png'
 
 export const CheckWrapper = styled.div`
@@ -31,23 +31,53 @@ export const Social = styled.div`
   }
 `
 
-const linkStyles = {
-  color: theme.accent,
-  'text-decoration': 'none',
-  '&:hover, &:focus': {
-    'text-decoration': 'underline',
-  },
+export const Link = props => {
+  const theme = useTheme()
+  return (
+    <SafeLink
+      css={`
+        color: ${theme.accent};
+        text-decoration: none;
+        &:hover,
+        &:focus {
+          text-decoration: underline;
+        }
+      `}
+      {...props}
+    >
+      {props.children}
+    </SafeLink>
+  )
 }
 
-export const Link = styled(SafeLink).attrs({ target: '_blank' })(linkStyles)
+Link.propTypes = {
+  children: PropTypes.node,
+}
 
 // a Button styled to look like a Link
-Link.Button = styled(ButtonBase).attrs({
-  mode: 'text',
-})({
-  ...linkStyles,
-  padding: 0,
-})
+export const LinkButton = props => {
+  const theme = useTheme()
+  return (
+    <ButtonBase
+      css={`
+        padding: 0;
+        color: ${theme.accent};
+        text-decoration: none;
+        &:hover,
+        &:focus {
+          text-decoration: underline;
+        }
+      `}
+      {...props}
+    >
+      {props.children}
+    </ButtonBase>
+  )
+}
+
+LinkButton.propTypes = {
+  children: PropTypes.node,
+}
 
 export const EditIcon = styled.img.attrs({ src: editImage })`
   width: 25px;

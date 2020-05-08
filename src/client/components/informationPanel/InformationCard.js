@@ -1,11 +1,11 @@
 import React, { Fragment, useContext, useState } from 'react'
 import styled from 'styled-components'
-import { useTheme } from '@aragon/ui'
+import { ButtonBase, IconEdit, useTheme } from '@aragon/ui'
 
 import { ModalContext } from '../../wrappers/modal'
 import { useProfile } from '../../hooks'
 import { open } from '../../stateManagers/modal'
-import { EthAddr, Social, IconPencil, IconEthereum } from '../styled-components'
+import { EthAddr, Social, IconEthereum } from '../styled-components'
 
 import { GitHub, Twitter } from './SocialInfo'
 import { Name, Description, Location, Website, Empty } from './BasicInfo'
@@ -76,12 +76,14 @@ const InformationCard = () => {
           </Social>
         </Details>
         {!viewMode && (
-          <Icons>
-            <IconPencil
-              width="16px"
-              color={theme.accent.toString()}
-              onClick={handleOpenEdit}
-            />
+          <Icons
+            css={`
+              color: ${theme.accent};
+            `}
+          >
+            <ButtonBase width="16px" onClick={handleOpenEdit}>
+              <IconEdit />
+            </ButtonBase>
           </Icons>
         )}
       </div>

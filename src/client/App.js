@@ -10,7 +10,14 @@ import { ModalWrapper } from './wrappers/modal'
 import { DragWrapper } from './wrappers/drag'
 import { determineAddress, isViewMode } from './utils'
 
-const App = ({ account, enableWallet, onSignatures, parts, web3Provider }) => (
+const App = ({
+  account,
+  appWidth,
+  enableWallet,
+  onSignatures,
+  parts,
+  web3Provider,
+}) => (
   <BoxWrapper
     isViewMode={isViewMode(account, parts)}
     ethereumAddress={determineAddress(account, parts)}
@@ -27,10 +34,7 @@ const App = ({ account, enableWallet, onSignatures, parts, web3Provider }) => (
             ethereumAddress={determineAddress(account, parts)}
             enableWallet={enableWallet}
           >
-            <Profile
-              ethereumAddress={determineAddress(account, parts)}
-              onSignatures={onSignatures}
-            />
+            <Profile appWidth={appWidth} />
           </LoadAndErrorWrapper>
         </BaseLayout>
       </DragWrapper>
@@ -40,6 +44,7 @@ const App = ({ account, enableWallet, onSignatures, parts, web3Provider }) => (
 
 App.propTypes = {
   account: PropTypes.string,
+  appWidth: PropTypes.number.isRequired,
   enableWallet: PropTypes.func.isRequired,
   onSignatures: PropTypes.func.isRequired,
   parts: PropTypes.array,
